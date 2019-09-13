@@ -52,7 +52,7 @@ const stackDefaultNavigatorOptions = {
         [isLarge && 'paddingLeft']: 190,
     },
     headerTitleContainerStyle: {
-        [isLarge && 'paddingLeft']: 190,
+        [isLarge && 'display']: 'none',
     },
     headerStyle: {
         [isLarge && 'backgroundColor']: "#ddd",

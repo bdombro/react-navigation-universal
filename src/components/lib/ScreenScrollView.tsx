@@ -14,17 +14,7 @@ import {FooterSection} from "../sections/Footer.section";
 import {Helmet} from "./Helmet";
 import {withNavigationFocus} from "./Routing";
 
-let scrollOffsetGlobal = 0;
-let titleGlobal = "";
-
 class ScreenScrollViewBase extends React.Component<ScrollViewProps & NavigationInjectedProps> {
-    scrollView;
-    componentDidFocusSubscription;
-
-    constructor(props) {
-        super(props);
-        this.scrollView = React.createRef();
-    };
 
     // componentDidMount(): void {
     //     // titleGlobal = this.props.title;
@@ -69,18 +59,24 @@ class ScreenScrollViewBase extends React.Component<ScrollViewProps & NavigationI
 
     render() {
         const {children, ...props} = this.props;
-        titleGlobal = this.props.title;
+
+        const isLarge = Dimensions.get('window').width > 720;
+        let scrollViewOnScrollProps = {};
+        if (!isLarge) scrollViewOnScrollProps = {
+            scrollEventThrottle: 1,
+            onScroll: this._onScroll,
+        };
+
         return <>
             <Helmet title={this.props.title}/>
             <ScrollView
-                ref={ref => this.scrollView = ref}
                 contentInsetAdjustmentBehavior="automatic"
-                scrollEventThrottle={1}
+
                 style={{
                     [Platform.OS === 'web' && 'height']: "calc( 100vh - 44px )"
                 }}
                 {...props}
-                onScroll={this._onScroll}
+                {...scrollViewOnScrollProps}
             >
                 {children}
                 <FooterSection/>
@@ -92,7 +88,7 @@ class ScreenScrollViewBase extends React.Component<ScrollViewProps & NavigationI
 export const ScreenScrollView = withNavigationFocus(withNavigation(ScreenScrollViewBase));
 
 export function ScreenScrollViewNavigationOptions({navigation}: any) {
-    const scrollOffset = navigation.getParam("scrollOffset", titleGlobal);
+    const scrollOffset = navigation.getParam("scrollOffset", 0);
 
     let opacity = 1;
     // console.dir(scrollOffset);
@@ -109,7 +105,6 @@ export function ScreenScrollViewNavigationOptions({navigation}: any) {
 
     if (navigation.getParam('headerTitleStyle', {opacity: null}).opacity === opacity) return {};
     return {
-        title: titleGlobal,
         headerTitleStyle: {
             opacity,
         },
