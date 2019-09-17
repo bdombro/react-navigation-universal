@@ -1,32 +1,35 @@
 import React, {useEffect, useState} from "react";
-import {Text} from "react-native-elements";
-import {Lorem} from "../lib/Lorem";
-import {ScreenScrollView, ScreenScrollViewNavigationOptions} from "../lib/ScreenScrollView";
 import {useNavigation} from "react-navigation-hooks";
+import {Platform} from "react-native";
+import {Lorem} from "../lib/Lorem";
+import {ScreenView, ScreenViewNavigationOptions} from "../lib/ScreenView";
+import {Title} from "../elements";
 
 export const HomeInner = () => {
     const {getParam, setParams} = useNavigation();
     const slug = getParam('slug');
     const [state, setState] = useState({
-        title: "",
+        seo: {
+            title: "",
+            description: "",
+        }
     });
 
     const fetchData = () => {
-        setState({...state, title: slug});
-        setParams({});
+        setState({...state, seo: {title: slug, description: slug}});
+        if(Platform.OS !== 'web') setParams({title: slug});
     };
 
     useEffect(fetchData, []);
     useEffect(fetchData, [slug]);
 
     return (
-        <ScreenScrollView title={state.title}>
-            <Text h1>URL Param: {state.title}</Text>
+        <ScreenView pageMeta={state.seo}>
+            <Title>URL Param: {slug}</Title>
             <Lorem/>
-        </ScreenScrollView>
+        </ScreenView>
     );
 };
 HomeInner.navigationOptions = ({navigation}) => ({
-    title: "HomeInner",
-    ...ScreenScrollViewNavigationOptions({navigation}),
+    ...ScreenViewNavigationOptions({navigation}),
 });

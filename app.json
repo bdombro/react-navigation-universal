@@ -2,6 +2,7 @@
   "expo": {
     "name": "React Navigation Universal",
     "slug": "react-navigation-universal",
+    "description": "A react-navigation demo for native AND web.",
     "privacy": "public",
     "sdkVersion": "34.0.0",
     "platforms": [

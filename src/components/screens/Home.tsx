@@ -1,21 +1,23 @@
 import React from "react";
-import {Text} from "react-native-elements";
 import {Lorem} from "../lib/Lorem";
-import {ScreenScrollView, ScreenScrollViewNavigationOptions} from "../lib/ScreenScrollView";
-import {ButtonLink, TextLink} from "../lib/Routing";
+import {ScreenView, ScreenViewNavigationOptions} from "../lib/ScreenView";
+import {ButtonLink, TextLink, Paragraph, Text, Title} from "../elements";
 
 export const Home = () => {
-    const title = "Home";
+    const PageMeta = {
+        title: "Home"
+    };
+
     return <>
-        <ScreenScrollView title={title}>
-            <Text h1>{title}</Text>
+        <ScreenView pageMeta={PageMeta}>
+            <Title>{PageMeta.title}</Title>
             <Lorem/>
-            <Text><TextLink to="HomeInner" params={{slug: "inner"}}>This</TextLink><Text> is a textlink</Text></Text>
-            <ButtonLink to="HomeInner" params={{slug: "inner"}} title="Goto Home Inner" />
-        </ScreenScrollView>
+            <Paragraph><TextLink to="HomeInner" params={{slug: "inner"}}>This</TextLink><Text> is a
+                TextLink</Text></Paragraph>
+            <ButtonLink to="HomeInner" params={{slug: "inner"}} mode="contained">Goto Home Inner</ButtonLink>
+        </ScreenView>
     </>;
 };
 Home.navigationOptions = ({navigation}) => ({
-    ...ScreenScrollViewNavigationOptions({navigation}),
-    title: "Home"
+    ...ScreenViewNavigationOptions({navigation}),
 });

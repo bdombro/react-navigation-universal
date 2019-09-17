@@ -1,7 +1,6 @@
 import React from "react";
 import {View} from "react-native";
-import {Text} from "react-native-elements";
-import {Link} from "../lib/Routing";
+import {Text, Link} from "../elements";
 
 export const SidebarModule = () => (
     <View>

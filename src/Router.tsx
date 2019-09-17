@@ -1,21 +1,29 @@
+/**
+ * This files declares the routes/navigators for the application
+ *
+ * Tip: We currently employ persistent caching of the nav state. If you make
+ * changes, you need to clear the cache by uncommenting a line in
+ * loadNavigationState
+ */
 import React from "react";
 import {Home} from "./components/screens/Home";
 import {Home2} from "./components/screens/Home2";
 import {HomeInner} from "./components/screens/HomeInner";
 import {
     createAppContainer,
-    createBottomTabNavigator,
+    createMaterialBottomTabNavigator,
     createNavigator,
-    createStackNavigator, Link,
-    SwitchRouter
+    createStackNavigator, SwitchRouter
 } from "./components/lib/Routing";
 import {MaterialIcons} from '@expo/vector-icons';
 import {Blank} from "./components/screens/Blank";
 import {AsyncStorage, Dimensions, Platform, View} from "react-native";
-import {Avatar} from "react-native-elements";
+import {Avatar} from "react-native-paper";
 import {AppLayout} from "./components/lib/AppLayout";
+import {Link} from "./components/elements/links/Link";
 // import {fromRight} from "react-navigation-transitions";
 
+// TODO: Consider watching isLarge instead of only at start.
 const isLarge = Dimensions.get('window').width > 720;
 
 const stackDefaultNavigatorOptions = {
@@ -41,10 +49,10 @@ const stackDefaultNavigatorOptions = {
             </View>
         </Link>
         <Link to="Blank">
-            <Avatar
-                title="BD"
-                rounded
-                containerStyle={{marginLeft: 10}}
+            <Avatar.Text
+                size={32}
+                label="BD"
+                style={{marginLeft: 10}}
             />
         </Link>
     </>,
@@ -64,18 +72,13 @@ const stackConfigDefault = {
     // transitionConfig: () => fromRight(),
     headerBackTitleVisible: false,
     // headerLayoutPreset: "center",
+    headerMode: "none",
 };
 
 const HomeStack = {
     path: "home",
     navigationOptions: {
-        title: "Home",
-        tabBarIcon: ({tintColor}) => (
-            <MaterialIcons name="home" size={25} color={tintColor}/>
-        ),
-        drawerIcon: ({tintColor}) => (
-            <MaterialIcons name="home" size={25} color={tintColor}/>
-        ),
+        tabBarIcon: ({tintColor}) => <MaterialIcons name="home" size={25} color={tintColor}/>,
     },
     screen: createStackNavigator({
         Home: {screen: Home, path: ""},
@@ -86,32 +89,28 @@ const HomeStack = {
 const Home2Stack = {
     path: "home2",
     navigationOptions: {
-        title: "Home2",
-        tabBarIcon: ({tintColor}) => (
-            <MaterialIcons name="home" size={25} color={tintColor}/>
-        ),
-        drawerIcon: ({tintColor}) => (
-            <MaterialIcons name="home" size={25} color={tintColor}/>
-        ),
+        tabBarIcon: ({tintColor}) => <MaterialIcons name="home" size={25} color={tintColor}/>,
     },
     screen: createStackNavigator({
         Home2: {screen: Home2, path: ""}
     }, stackConfigDefault)
 };
 
-const FooterNavigator = createBottomTabNavigator({
+const FooterNavigator = createMaterialBottomTabNavigator({
     HomeStack,
     Home2Stack,
+    Blank,
+    Blank2: Blank,
+    Blank3: Blank,
 }, {
-    // @ts-ignore
-    // tabBarOptions: {activeTintColor: 'tomato', inactiveTintColor: 'gray',},
-    lazy: true,
+    lazy: Platform.OS === 'web',
+    labeled: false,
     defaultNavigationOptions: {
         [isLarge && 'tabBarVisible']: false,
     },
 });
 
-
+// TODO: 404 handling
 const RouterBase = createAppContainer(createNavigator(
     AppLayout,
     SwitchRouter({
@@ -119,7 +118,7 @@ const RouterBase = createAppContainer(createNavigator(
             path: "",
             screen: FooterNavigator,
         },
-        Blank: {screen: Blank, path: "blank"},
+        // Blank,
     }),
     {}
 ));
@@ -133,6 +132,7 @@ const persistNavigationState = async (navState) => {
     }
 };
 const loadNavigationState = async () => {
+    await AsyncStorage.removeItem("router"); // resets the state
     if (Platform.OS === 'web') return;
     return JSON.parse(await AsyncStorage.getItem("router"));
 };

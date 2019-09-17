@@ -1,23 +1,27 @@
 import React from "react";
-import {Text} from "react-native-elements";
+import {MaterialIcons} from '@expo/vector-icons';
+import {ButtonLink, Title} from "../elements";
 import {Lorem} from "../lib/Lorem";
-import {ButtonLink} from "../lib/Routing";
-import {Helmet} from "../lib/Helmet";
-import {ScreenScrollView, ScreenScrollViewNavigationOptions} from "../lib/ScreenScrollView";
+import {ScreenView, ScreenViewNavigationOptions} from "../lib/ScreenView";
 
 export const Blank = () => {
-    const title = "Blank";
+    const PageMeta = {
+        title: "Blank",
+        description: "This is a blank page with no sidebar or header",
+    };
 
     return <>
-        {/*<Helmet title={title}/>*/}
-        <ScreenScrollView title={title}>
-            <Text h1>{title}</Text>
-            <ButtonLink to="Home" title="Go Home"/>
+        <ScreenView pageMeta={PageMeta}>
+            <Title>{PageMeta.title}</Title>
+            <ButtonLink to="Home" mode="contained">Go Home</ButtonLink>
             <Lorem/>
-        </ScreenScrollView>
+        </ScreenView>
     </>;
 };
 Blank.navigationOptions = ({navigation}) => ({
-    ...ScreenScrollViewNavigationOptions({navigation}),
-    title: "Blank",
+    ...ScreenViewNavigationOptions({navigation}),
+    path: "blank",
+    tabBarIcon: ({tintColor}) => (
+        <MaterialIcons name="check-box-outline-blank" size={25} color={tintColor}/>
+    ),
 });

@@ -1,20 +1,22 @@
 import React from "react";
-import {Text} from "react-native-elements";
+import {Title} from "../elements";
 import {Lorem} from "../lib/Lorem";
-import {ScreenScrollView, ScreenScrollViewNavigationOptions} from "../lib/ScreenScrollView";
-import {Helmet} from "../lib/Helmet";
+import {ScreenView, ScreenViewNavigationOptions} from "../lib/ScreenView";
+
 
 export const Home2 = () => {
-    const title = "Home2";
+    const PageMeta = {
+        title: "Home2",
+        description: "This is Home2.",
+    };
+
     return <>
-        {/*<Helmet title={title}/>*/}
-        <ScreenScrollView title={title}>
-            <Text h1>{title}</Text>
+        <ScreenView pageMeta={PageMeta}>
+            <Title>{PageMeta.title}</Title>
             <Lorem/>
-        </ScreenScrollView>
+        </ScreenView>
     </>;
 };
 Home2.navigationOptions = ({navigation}) => ({
-    ...ScreenScrollViewNavigationOptions({navigation}),
-    title: "Home2"
+    ...ScreenViewNavigationOptions({navigation}),
 });
