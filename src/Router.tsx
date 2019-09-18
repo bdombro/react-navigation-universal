@@ -27,51 +27,11 @@ import {Link} from "./components/elements/links/Link";
 const isLarge = Dimensions.get('window').width > 720;
 
 const stackDefaultNavigatorOptions = {
-    [isLarge && 'headerRight']: <>
-        <Link to="Blank">
-            <View style={{marginLeft: 10}}>
-                <MaterialIcons name="notifications-none" size={22} color="#999"/>
-                {/*<MaterialIcons name="notifications-active" size={22} color="rgba(200,0,0,.8)"/>*/}
-                {/*{!notificationQuery.loading && !!notificationQuery.data.length && (*/}
-                <MaterialIcons
-                    name="broken-image"
-                    size={10}
-                    color="red"
-                    style={{
-                        width: 10,
-                        height: 10,
-                        position: 'relative',
-                        top: -22,
-                        left: 12,
-                        marginBottom: -8
-                    }}
-                />
-            </View>
-        </Link>
-        <Link to="Blank">
-            <Avatar.Text
-                size={32}
-                label="BD"
-                style={{marginLeft: 10}}
-            />
-        </Link>
-    </>,
-    headerLeftContainerStyle: {
-        [isLarge && 'paddingLeft']: 190,
-    },
-    headerTitleContainerStyle: {
-        [isLarge && 'display']: 'none',
-    },
-    headerStyle: {
-        [isLarge && 'backgroundColor']: "#ddd",
-    },
 };
 
 const stackConfigDefault = {
     defaultNavigationOptions: stackDefaultNavigatorOptions,
     // transitionConfig: () => fromRight(),
-    headerBackTitleVisible: false,
-    // headerLayoutPreset: "center",
     headerMode: "none",
 };
 

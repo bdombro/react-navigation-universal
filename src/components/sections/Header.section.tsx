@@ -5,9 +5,8 @@ import {MaterialIcons} from '@expo/vector-icons';
 import {Platform, View} from "react-native";
 import {GlobalState} from "../../GlobalState";
 import {Appbar, Avatar, IconButtonLink, Link, useTheme} from '../elements';
-import {IconButton} from "react-native-paper";
 
-export const HeaderSection = observer(() => {
+export const HeaderSection = observer(function HeaderSection () {
     const {goBack, state} = useNavigation();
     const theme = useTheme();
     console.dir(theme);

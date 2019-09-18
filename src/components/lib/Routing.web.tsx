@@ -1,7 +1,5 @@
 import React from "react";
-
 export {createBrowserApp as createAppContainer} from '@react-navigation/web';
-
 export {
     createNavigator,
     createSwitchNavigator,
@@ -10,7 +8,7 @@ export {
     SwitchRouter,
     withNavigation,
     withNavigationFocus,
-} from "@react-navigation/core";
+} from "react-navigation";
 export {ScrollView} from "react-native";
 
 export {createStackNavigator} from 'react-navigation-stack';
