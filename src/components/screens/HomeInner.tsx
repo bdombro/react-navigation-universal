@@ -5,7 +5,7 @@ import {Lorem} from "../lib/Lorem";
 import {ScreenView, ScreenViewNavigationOptions} from "../lib/ScreenView";
 import {Title} from "../elements";
 
-export const HomeInner = () => {
+export function HomeInner () {
     const {getParam, setParams} = useNavigation();
     const slug = getParam('slug');
     const [state, setState] = useState({
@@ -29,7 +29,7 @@ export const HomeInner = () => {
             <Lorem/>
         </ScreenView>
     );
-};
+}
 HomeInner.navigationOptions = ({navigation}) => ({
     ...ScreenViewNavigationOptions({navigation}),
 });

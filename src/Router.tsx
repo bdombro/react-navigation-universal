@@ -6,33 +6,40 @@
  * loadNavigationState
  */
 import React from "react";
+import {MaterialIcons} from '@expo/vector-icons';
+
+import {createBrowserApp as createAppContainerWeb} from '@react-navigation/web';
+import {createAppContainer as createAppContainerNative} from "react-navigation";
+import {
+    createNavigator,
+    SwitchRouter,
+} from "react-navigation";
+import {createStackNavigator} from 'react-navigation-stack';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+
 import {Home} from "./components/screens/Home";
 import {Home2} from "./components/screens/Home2";
 import {HomeInner} from "./components/screens/HomeInner";
-import {
-    createAppContainer,
-    createMaterialBottomTabNavigator,
-    createNavigator,
-    createStackNavigator, SwitchRouter
-} from "./components/lib/Routing";
-import {MaterialIcons} from '@expo/vector-icons';
 import {Blank} from "./components/screens/Blank";
 import {AsyncStorage, Dimensions, Platform, View} from "react-native";
-import {Avatar} from "react-native-paper";
-import {AppLayout} from "./components/lib/AppLayout";
-import {Link} from "./components/elements/links/Link";
+import {DefaultLayout} from "./components/lib/DefaultLayout";
+import {HeaderDefaultSection} from "./components/sections/HeaderDefault.section";
+
 // import {fromRight} from "react-navigation-transitions";
+
+const createAppContainer = Platform.OS === 'web' ? createAppContainerWeb : createAppContainerNative;
 
 // TODO: Consider watching isLarge instead of only at start.
 const isLarge = Dimensions.get('window').width > 720;
 
 const stackDefaultNavigatorOptions = {
+    // header: headerProps => <HeaderDefaultSection {...headerProps}/>,
 };
 
 const stackConfigDefault = {
     defaultNavigationOptions: stackDefaultNavigatorOptions,
     // transitionConfig: () => fromRight(),
-    headerMode: "none",
+    headerMode: "screen",
 };
 
 const HomeStack = {
@@ -63,8 +70,8 @@ const FooterNavigator = createMaterialBottomTabNavigator({
     Blank2: Blank,
     Blank3: Blank,
 }, {
-    lazy: Platform.OS === 'web',
     labeled: false,
+    shifting: false,
     defaultNavigationOptions: {
         [isLarge && 'tabBarVisible']: false,
     },
@@ -72,7 +79,7 @@ const FooterNavigator = createMaterialBottomTabNavigator({
 
 // TODO: 404 handling
 const RouterBase = createAppContainer(createNavigator(
-    AppLayout,
+    DefaultLayout,
     SwitchRouter({
         Tabs: {
             path: "",

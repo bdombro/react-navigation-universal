@@ -1,40 +1,42 @@
 import React from "react";
-import {useNavigation} from "react-navigation-hooks";
 import {observer} from "mobx-react-lite";
 import {MaterialIcons} from '@expo/vector-icons';
 import {Platform, View} from "react-native";
 import {GlobalState} from "../../GlobalState";
 import {Appbar, Avatar, IconButtonLink, Link, useTheme} from '../elements';
+import {HeaderProps} from "react-navigation-stack";
+import {NavigationStackProp} from "react-navigation-stack/src/types";
 
-export const HeaderSection = observer(function HeaderSection () {
-    const {goBack, state} = useNavigation();
+export const HeaderDefaultSection = observer(function HeaderDefaultSection(
+    {
+        headerProps,
+        screenNavigation,
+    } : {
+        headerProps: HeaderProps,
+        screenNavigation: NavigationStackProp,
+    }
+) {
     const theme = useTheme();
-    console.dir(theme);
 
     // Determine if the current route is within a stack and NOT the top of stack
-    let isStackInnerPage;
-    let currentRoute = state.routes[state.index];
-    if (currentRoute.routeName === "Tabs")
-        currentRoute = currentRoute.routes[currentRoute.index];
-    if (currentRoute.routes)
-        isStackInnerPage = currentRoute.index > 0;
-
-    let titleOpacity = 0;
-    let backgroundLightness =  GlobalState.viewportInfo.isLarge ? 87.5 : 100;
-    if (GlobalState.currentPageScrollOffset !== null) {
-        if (GlobalState.currentPageScrollOffset <= 120) {
-            titleOpacity = GlobalState.currentPageScrollOffset / 120;
-            backgroundLightness = GlobalState.viewportInfo.isLarge ? 87.5 : 100*(1-titleOpacity/8);
-        } else {
-            titleOpacity = 1;
-            backgroundLightness = 87.5;
-        }
-    }
+    // let isStackInnerPage;
+    // let currentRoute = screenNavigation.state.routes[screenNavigation.state.index];
+    // if (currentRoute.routeName === "Tabs")
+    //     currentRoute = currentRoute.routes[currentRoute.index];
+    // if (currentRoute.routes)
+    //     isStackInnerPage = currentRoute.index > 0;
 
     return (
-        <Appbar.Header theme={{colors: {primary: `hsl(0,0%,${backgroundLightness}%)`}}} >
-            {isStackInnerPage && <Appbar.BackAction onPress={() => goBack()}/>}
-            <Appbar.Content style={{opacity: titleOpacity}} title={GlobalState.currentPageTitle}/>
+        <Appbar.Header
+            theme={{colors: {primary: "#ddd"}}}
+            style={{
+            }}
+        >
+            {!screenNavigation.isFirstRouteInParent() && <Appbar.BackAction onPress={() => screenNavigation.goBack()}/>}
+            <Appbar.Content title={
+                GlobalState.viewportInfo.isSmall
+                && GlobalState.currentPage.title
+            }/>
 
 
             {GlobalState.viewportInfo.isLarge && <>

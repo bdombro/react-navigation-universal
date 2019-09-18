@@ -1,10 +1,8 @@
 import React from 'react'
 import {
-    NativeSyntheticEvent,
-    NativeScrollEvent,
     ScrollView,
     ScrollViewProps,
-    Platform, Dimensions,
+    Dimensions, Platform, NativeSyntheticEvent, NativeScrollEvent,
 } from 'react-native';
 import {
     withNavigation,
@@ -13,29 +11,33 @@ import {
 import {FooterSection} from "../sections/Footer.section";
 import {setWebPageMeta, WebPageMeta} from "../../lib/Polyfills";
 import {GlobalState} from "../../GlobalState";
+import {HeaderHomeSection} from "../sections/HeaderHome.section";
+import {HeaderDefaultSection} from "../sections/HeaderDefault.section";
 
-
-
-
-class ScreenViewBase extends React.Component<NavigationInjectedProps & {scrollViewProps?: ScrollViewProps, pageMeta: Partial<WebPageMeta>}> {
+class ScreenViewBase extends React.Component<NavigationInjectedProps & {
+    scrollViewProps?: ScrollViewProps,
+    pageMeta: Partial<WebPageMeta>,
+}> {
     scrollViewRef;
     componentDidFocusSubscription: any;
 
     componentDidMount() {
         this.componentDidFocusSubscription = this.props.navigation.addListener('willFocus', () => {
             setWebPageMeta(this.props.pageMeta);
-            GlobalState.currentPageTitle = this.props.pageMeta.title;
-
-            // RN scrolls automatically in the UX, but does not handle scrolling on initial page load in web.
-            if (Platform.OS === "web") {
-                let scrollOffset = this.props.navigation.getParam('scrollOffset');
-                if (scrollOffset) this.scrollViewRef.scrollTo({x: 0, y: scrollOffset, animated: false});
-            }
+            GlobalState.currentPage = {
+                ...this.props.pageMeta,
+            };
         });
+
+        // RN scrolls automatically in the UX, but does not handle scrolling on initial page load in web.
+        // if (Platform.OS === "web") {
+        //     let scrollOffset = this.props.navigation.getParam('scrollOffset');
+        //     if (scrollOffset) this.scrollViewRef.scrollTo({x: 0, y: scrollOffset, animated: false});
+        // }
     }
     componentDidUpdate() {
         setWebPageMeta(this.props.pageMeta);
-        GlobalState.currentPageTitle = this.props.pageMeta.title;
+        GlobalState.currentPage.title = this.props.pageMeta.title;
     }
     componentWillUnmount(): void {
         this.componentDidFocusSubscription.remove();
@@ -47,6 +49,9 @@ class ScreenViewBase extends React.Component<NavigationInjectedProps & {scrollVi
         if (scrollOffsetNext !== scrollOffset) {
             this.props.navigation.setParams({
                 scrollOffset: scrollOffsetNext,
+                scrollUpOffset: scrollOffsetNext < scrollOffset
+                    ? this.props.navigation.getParam('scrollUpOffset') + scrollOffset - scrollOffsetNext
+                    : 0
             });
         }
 
@@ -69,6 +74,9 @@ class ScreenViewBase extends React.Component<NavigationInjectedProps & {scrollVi
             <ScrollView
                 contentInsetAdjustmentBehavior="automatic"
                 ref={ref => this.scrollViewRef = ref}
+                style={{
+                    [Platform.OS === 'web' && 'height']: "calc( 100vh - 44px )"
+                }}
                 {...scrollViewProps}
                 {...scrollViewOnScrollProps}
             >
@@ -82,9 +90,9 @@ class ScreenViewBase extends React.Component<NavigationInjectedProps & {scrollVi
 export const ScreenView = withNavigation(ScreenViewBase);
 
 export function ScreenViewNavigationOptions({navigation}: any) {
-    GlobalState.currentPageScrollOffset = navigation.getParam("scrollOffset", null);
+    // GlobalState.currentPageScrollOffset = navigation.getParam("scrollOffset", null);
 
     return {
-
+        header: headerProps => <HeaderDefaultSection headerProps={headerProps} screenNavigation={navigation} />,
     }
 }
