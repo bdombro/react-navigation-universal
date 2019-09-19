@@ -1,22 +1,19 @@
 import React from "react";
 import {Title} from "../elements";
 import {Lorem} from "../lib/Lorem";
-import {ScreenView, ScreenViewNavigationOptions} from "../lib/ScreenView";
+import {ScreenDefaultLayout} from "../lib/ScreenDefaultLayout";
 
 
 export function Home2 () {
-    const PageMeta = {
+    const pageMeta = {
         title: "Home2",
         description: "This is Home2.",
     };
 
     return (
-        <ScreenView pageMeta={PageMeta}>
-            <Title>{PageMeta.title}</Title>
+        <ScreenDefaultLayout pageMeta={pageMeta}>
+            <Title>{pageMeta.title}</Title>
             <Lorem/>
-        </ScreenView>
+        </ScreenDefaultLayout>
     );
 }
-Home2.navigationOptions = ({navigation}) => ({
-    ...ScreenViewNavigationOptions({navigation}),
-});

@@ -24,12 +24,6 @@ class GlobalStateClass {
   };
 
   @observable
-  currentPage = {
-    title: '',
-    isFullScreen: false,
-  };
-
-  @observable
   sidebarToggled = true;
   @observable
   sidebarComponent = null;

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useNavigation} from "react-navigation-hooks";
 import {Platform} from "react-native";
 import {Lorem} from "../lib/Lorem";
-import {ScreenView, ScreenViewNavigationOptions} from "../lib/ScreenView";
+import {ScreenDefaultLayout} from "../lib/ScreenDefaultLayout";
 import {Title} from "../elements";
 
 export function HomeInner () {
@@ -24,12 +24,9 @@ export function HomeInner () {
     useEffect(fetchData, [slug]);
 
     return (
-        <ScreenView pageMeta={state.seo}>
+        <ScreenDefaultLayout pageMeta={state.seo}>
             <Title>URL Param: {slug}</Title>
             <Lorem/>
-        </ScreenView>
+        </ScreenDefaultLayout>
     );
 }
-HomeInner.navigationOptions = ({navigation}) => ({
-    ...ScreenViewNavigationOptions({navigation}),
-});

@@ -1,42 +1,48 @@
-import React from "react";
+import React, {useState} from "react";
 import {observer} from "mobx-react-lite";
 import {MaterialIcons} from '@expo/vector-icons';
-import {Platform, View} from "react-native";
+import {Animated, Platform, View} from "react-native";
 import {GlobalState} from "../../GlobalState";
-import {Appbar, Avatar, IconButtonLink, Link, useTheme} from '../elements';
+import {Appbar, Avatar, IconButtonLink, Link, Text, useTheme} from '../elements';
 import {HeaderProps} from "react-navigation-stack";
 import {NavigationStackProp} from "react-navigation-stack/src/types";
 
 export const HeaderDefaultSection = observer(function HeaderDefaultSection(
     {
-        headerProps,
-        screenNavigation,
-    } : {
-        headerProps: HeaderProps,
-        screenNavigation: NavigationStackProp,
+        navigation,
+        title,
+        scrollOffset,
+        scrollUpOffset,
+    }: {
+        navigation: NavigationStackProp,
+        title: string,
+        scrollOffset: number,
+        scrollUpOffset: number,
     }
 ) {
     const theme = useTheme();
 
-    // Determine if the current route is within a stack and NOT the top of stack
-    // let isStackInnerPage;
-    // let currentRoute = screenNavigation.state.routes[screenNavigation.state.index];
-    // if (currentRoute.routeName === "Tabs")
-    //     currentRoute = currentRoute.routes[currentRoute.index];
-    // if (currentRoute.routes)
-    //     isStackInnerPage = currentRoute.index > 0;
+    const [titleOpacity] = useState(new Animated.Value(0));
+    React.useEffect(() => {
+        if (GlobalState.viewportInfo.isSmall) titleOpacity.setValue(1);
+        else titleOpacity.setValue(
+            Math.min(Math.max(scrollOffset/80 - .5, 0), 1)
+        );
+    }, [scrollOffset]);
 
     return (
         <Appbar.Header
             theme={{colors: {primary: "#ddd"}}}
-            style={{
-            }}
+            style={{}}
         >
-            {!screenNavigation.isFirstRouteInParent() && <Appbar.BackAction onPress={() => screenNavigation.goBack()}/>}
-            <Appbar.Content title={
-                GlobalState.viewportInfo.isSmall
-                && GlobalState.currentPage.title
-            }/>
+            {!navigation.isFirstRouteInParent() && <Appbar.BackAction onPress={() => navigation.goBack()}/>}
+            <Appbar.Content
+                title={
+                    <Animated.Text style={{
+                        opacity: titleOpacity
+                    }}>{title}</Animated.Text>
+                }
+            />
 
 
             {GlobalState.viewportInfo.isLarge && <>

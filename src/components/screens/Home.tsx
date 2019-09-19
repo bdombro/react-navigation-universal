@@ -1,30 +1,33 @@
 import React from "react";
 import {Lorem} from "../lib/Lorem";
-import {ScreenView, ScreenViewNavigationOptions} from "../lib/ScreenView";
+import {ScreenDefaultLayout} from "../lib/ScreenDefaultLayout";
 import {ButtonLink, TextLink, Paragraph, Text, Title} from "../elements";
 import {HeaderHomeSection} from "../sections/HeaderHome.section";
 import {GlobalState} from "../../GlobalState";
 import {observer} from "mobx-react-lite";
 
 export const Home = observer(function Home () {
-    const PageMeta = {
-        title: "Home"
+    const pageMeta = {
+        title: "Home",
+        headerTitle: "RNav Universal",
     };
 
     return (
-        <ScreenView pageMeta={PageMeta} scrollViewProps={{style: {
-            [GlobalState.viewportInfo.isSmall && 'paddingTop']: 54,
-        }}}>
+        <ScreenDefaultLayout
+            header={HeaderHomeSection} pageMeta={pageMeta}
+            scrollViewProps={{
+                style: {
+                    ...GlobalState.viewportInfo.isSmall && {'paddingTop': 54},
+                }
+            }}
+        >
+            {GlobalState.viewportInfo.isLarge && <Title>{pageMeta.headerTitle}</Title>}
             <Lorem/>
             <Paragraph>
                 <TextLink to="HomeInner" params={{slug: "inner"}}>This</TextLink><Text> is a
                 TextLink</Text>
             </Paragraph>
             <ButtonLink to="HomeInner" params={{slug: "inner"}} mode="contained">Goto Home Inner</ButtonLink>
-        </ScreenView>
+        </ScreenDefaultLayout>
     );
-});
-Home.navigationOptions = ({navigation}) =>({
-    ...ScreenViewNavigationOptions({navigation}),
-    header: headerProps => <HeaderHomeSection headerProps={headerProps} screenNavigation={navigation} />,
 });

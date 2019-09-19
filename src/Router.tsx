@@ -21,11 +21,10 @@ import {Home} from "./components/screens/Home";
 import {Home2} from "./components/screens/Home2";
 import {HomeInner} from "./components/screens/HomeInner";
 import {Blank} from "./components/screens/Blank";
-import {AsyncStorage, Dimensions, Platform, View} from "react-native";
+import {AsyncStorage, Dimensions, Platform} from "react-native";
 import {DefaultLayout} from "./components/lib/DefaultLayout";
-import {HeaderDefaultSection} from "./components/sections/HeaderDefault.section";
 
-// import {fromRight} from "react-navigation-transitions";
+import {fadeIn} from "react-navigation-transitions";
 
 const createAppContainer = Platform.OS === 'web' ? createAppContainerWeb : createAppContainerNative;
 
@@ -38,8 +37,9 @@ const stackDefaultNavigatorOptions = {
 
 const stackConfigDefault = {
     defaultNavigationOptions: stackDefaultNavigatorOptions,
-    // transitionConfig: () => fromRight(),
-    headerMode: "screen",
+    ...isLarge && {transitionConfig: () => fadeIn()},
+    // headerMode: "screen",
+    headerMode: "none",
 };
 
 const HomeStack = {
@@ -73,7 +73,7 @@ const FooterNavigator = createMaterialBottomTabNavigator({
     labeled: false,
     shifting: false,
     defaultNavigationOptions: {
-        [isLarge && 'tabBarVisible']: false,
+        ...isLarge && {'tabBarVisible': false},
     },
 });
 
