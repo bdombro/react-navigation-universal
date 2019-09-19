@@ -10,12 +10,12 @@ export function Home2 () {
         description: "This is Home2.",
     };
 
-    return <>
+    return (
         <ScreenView pageMeta={PageMeta}>
             <Title>{PageMeta.title}</Title>
             <Lorem/>
         </ScreenView>
-    </>;
+    );
 }
 Home2.navigationOptions = ({navigation}) => ({
     ...ScreenViewNavigationOptions({navigation}),

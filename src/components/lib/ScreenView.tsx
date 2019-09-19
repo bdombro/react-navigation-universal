@@ -11,8 +11,8 @@ import {
 import {FooterSection} from "../sections/Footer.section";
 import {setWebPageMeta, WebPageMeta} from "../../lib/Polyfills";
 import {GlobalState} from "../../GlobalState";
-import {HeaderHomeSection} from "../sections/HeaderHome.section";
 import {HeaderDefaultSection} from "../sections/HeaderDefault.section";
+import {SafeAreaView} from "react-navigation";
 
 class ScreenViewBase extends React.Component<NavigationInjectedProps & {
     scrollViewProps?: ScrollViewProps,
@@ -20,6 +20,7 @@ class ScreenViewBase extends React.Component<NavigationInjectedProps & {
 }> {
     scrollViewRef;
     componentDidFocusSubscription: any;
+
 
     componentDidMount() {
         this.componentDidFocusSubscription = this.props.navigation.addListener('willFocus', () => {
@@ -35,10 +36,12 @@ class ScreenViewBase extends React.Component<NavigationInjectedProps & {
         //     if (scrollOffset) this.scrollViewRef.scrollTo({x: 0, y: scrollOffset, animated: false});
         // }
     }
+
     componentDidUpdate() {
         setWebPageMeta(this.props.pageMeta);
         GlobalState.currentPage.title = this.props.pageMeta.title;
     }
+
     componentWillUnmount(): void {
         this.componentDidFocusSubscription.remove();
     }
@@ -70,20 +73,23 @@ class ScreenViewBase extends React.Component<NavigationInjectedProps & {
             onScroll: this._onScroll,
         };
 
-        return <>
-            <ScrollView
-                contentInsetAdjustmentBehavior="automatic"
-                ref={ref => this.scrollViewRef = ref}
-                style={{
-                    [Platform.OS === 'web' && 'height']: "calc( 100vh - 44px )"
-                }}
-                {...scrollViewProps}
-                {...scrollViewOnScrollProps}
-            >
-                {children}
-                <FooterSection/>
-            </ScrollView>
-        </>;
+        return (
+            <SafeAreaView>
+                <ScrollView
+                    contentInsetAdjustmentBehavior="automatic"
+                    ref={ref => this.scrollViewRef = ref}
+                    {...scrollViewProps}
+                    {...scrollViewOnScrollProps}
+                    style={{
+                        ...(scrollViewProps && scrollViewProps.style || {}),
+                        [Platform.OS === 'web' && 'height']: "calc( 100vh - 44px )"
+                    }}
+                >
+                    {children}
+                    <FooterSection/>
+                </ScrollView>
+            </SafeAreaView>
+        );
     }
 }
 
@@ -93,6 +99,6 @@ export function ScreenViewNavigationOptions({navigation}: any) {
     // GlobalState.currentPageScrollOffset = navigation.getParam("scrollOffset", null);
 
     return {
-        header: headerProps => <HeaderDefaultSection headerProps={headerProps} screenNavigation={navigation} />,
+        header: headerProps => <HeaderDefaultSection headerProps={headerProps} screenNavigation={navigation}/>,
     }
 }

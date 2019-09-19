@@ -10,13 +10,13 @@ export const Blank = () => {
         description: "This is a blank page with no sidebar or header",
     };
 
-    return <>
+    return (
         <ScreenView pageMeta={PageMeta}>
             <Title>{PageMeta.title}</Title>
             <ButtonLink to="Home" mode="contained">Go Home</ButtonLink>
             <Lorem/>
         </ScreenView>
-    </>;
+    );
 };
 Blank.navigationOptions = ({navigation}) => ({
     ...ScreenViewNavigationOptions({navigation}),
