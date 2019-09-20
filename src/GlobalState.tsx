@@ -1,6 +1,7 @@
 import { action, observable, set } from 'mobx';
 import { Dimensions } from 'react-native';
 import { getViewportInfo } from './lib/getViewportInfo';
+import {ThemeConfig} from "./config/Theme.config";
 // import { MobxPersistClass } from './lib/MobxPersistClass';
 
 class GlobalStateClass {
@@ -22,6 +23,16 @@ class GlobalStateClass {
       roles: []
     };
   };
+
+  @observable
+  theme = ThemeConfig.light;
+  @action
+  toggleTheme = () => set(this.theme, this.theme.dark ? ThemeConfig.light : ThemeConfig.dark);
+
+  @observable
+  forceRenderCount = 0;
+  @action
+  forceRender = () => ++this.forceRenderCount;
 
   @observable
   sidebarToggled = true;

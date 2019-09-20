@@ -32,7 +32,7 @@ export const DefaultLayout = observer(function AppLayout(
                     // @ts-ignore: ignore untyped position fixed
                     style={{
                         position: "fixed", top: 0, left: 0, bottom: 0, width: 200, zIndex: 9999,
-                        backgroundColor: "rgb(100,100,255)"
+                        backgroundColor: GlobalState.theme.dark ? "#242424" : GlobalState.theme.colors.primaryDark,
                     }}
                 >
                     <SidebarModule/>

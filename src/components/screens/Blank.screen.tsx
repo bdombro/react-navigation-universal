@@ -4,7 +4,7 @@ import {ButtonLink, Title} from "../elements/paper";
 import {Lorem} from "../lib/Lorem";
 import {ScreenDefaultLayout} from "../lib/ScreenDefaultLayout";
 
-export const Blank = () => {
+export function Blank () {
     const pageMeta = {
         title: "Blank",
         description: "This is a blank page with no sidebar or header",
@@ -17,10 +17,16 @@ export const Blank = () => {
             <Lorem/>
         </ScreenDefaultLayout>
     );
-};
-Blank.navigationOptions = ({navigation}) => ({
-    path: "blank",
-    tabBarIcon: ({tintColor}) => (
-        <MaterialIcons name="check-box-outline-blank" size={25} color={tintColor}/>
-    ),
-});
+}
+
+// Wrap screens in class components so that HMR reloads the screen instead of the navigator.
+// Ref: https://github.com/facebook/react-native/issues/13240#issuecomment-291246975
+export class BlankScreen extends React.PureComponent {
+    static navigationOptions = ({navigation}) => ({
+        path: "blank",
+        tabBarIcon: ({tintColor}) => (
+            <MaterialIcons name="check-box-outline-blank" size={25} color={tintColor}/>
+        ),
+    });
+    render () { return <Blank />}
+}

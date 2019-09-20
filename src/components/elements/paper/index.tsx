@@ -10,7 +10,6 @@ export {
     Paragraph,
     Text,
     Title,
-    useTheme,
     withTheme
 } from "react-native-paper";
 

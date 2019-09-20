@@ -3,7 +3,7 @@ import {observer} from "mobx-react-lite";
 import {MaterialIcons} from '@expo/vector-icons';
 import {Animated, Platform, View} from "react-native";
 import {GlobalState} from "../../GlobalState";
-import {Appbar, Avatar, IconButtonLink, Link, useTheme} from '../elements/paper';
+import {Appbar, Avatar, IconButtonLink, Link} from '../elements/paper';
 import {NavigationStackProp} from "react-navigation-stack/src/types";
 import {ThemeConfig} from "../../config/Theme.config";
 
@@ -20,7 +20,6 @@ export const HeaderDefaultSection = observer(function HeaderDefaultSection(
         scrollUpOffset: number,
     }
 ) {
-    const theme = useTheme() as typeof ThemeConfig;
 
     const [titleOpacity] = useState(new Animated.Value(0));
     React.useEffect(() => {
@@ -33,7 +32,7 @@ export const HeaderDefaultSection = observer(function HeaderDefaultSection(
     return (
         <Appbar.Header
             style={{
-                backgroundColor: theme.colors.primaryLightest,
+                backgroundColor: GlobalState.theme.colors.background,
                 elevation: 0,
                 ...GlobalState.viewportInfo.isLarge && {height: 46}
             }}
@@ -49,9 +48,9 @@ export const HeaderDefaultSection = observer(function HeaderDefaultSection(
 
 
             {GlobalState.viewportInfo.isLarge && <>
-                <IconButtonLink icon="magnify" to="Blank" size={22} color="#999"/>
+                <IconButtonLink icon="magnify" to="Blank" size={22} color={GlobalState.theme.colors.text}/>
                 <View>
-                    <IconButtonLink icon="bell-outline" to="Blank" size={22} color="#999"/>
+                    <IconButtonLink icon="bell-outline" to="Blank" size={22} color={GlobalState.theme.colors.text}/>
                     {/*{!notificationQuery.loading && !!notificationQuery.data.length && (*/}
                     <MaterialIcons
                         name="broken-image"
@@ -78,8 +77,9 @@ export const HeaderDefaultSection = observer(function HeaderDefaultSection(
                     // icon={{source: () => <MaterialIcons name="more-vert" size={22} color="#999"/>}}
                     icon={Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical'}
                     onPress={() => console.log("More")}
-                    style={{marginLeft: -5}}
-                    color="#999"/>
+                    style={{marginLeft: -5, marginRight: -10}}
+                    color={GlobalState.theme.colors.text}
+                />
             </>}
 
 

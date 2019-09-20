@@ -85,7 +85,7 @@ class ScreenViewBase extends React.Component<NavigationInjectedProps & {
         };
 
 
-        return <>
+        return <View style={{backgroundColor: GlobalState.theme.dark ? "#333" : "white",}}>
             {this.props.header
                 ? <this.props.header {...headerProps}/>
                 : <HeaderDefaultSection {...headerProps}/>
@@ -100,7 +100,6 @@ class ScreenViewBase extends React.Component<NavigationInjectedProps & {
                     style={{
                         ...this.props.scrollViewProps && this.props.scrollViewProps.style,
                         ...Platform.OS === 'web' && {height: "calc( 100vh - 44px )"},
-
                     }}
                 >
                     {this.props.children}
@@ -110,7 +109,7 @@ class ScreenViewBase extends React.Component<NavigationInjectedProps & {
                     }}/>
                 </ScrollView>
             </SafeAreaView>
-        </>;
+        </View>;
     }
 }
 

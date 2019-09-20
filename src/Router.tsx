@@ -17,19 +17,19 @@ import {
 import {createStackNavigator} from 'react-navigation-stack';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
-import {Home} from "./components/screens/Home";
-import {Home2} from "./components/screens/Home2";
+import {IndexScreen} from "./components/screens/Index.screen";
+import {HomeScreen} from "./components/screens/Home.screen";
+import {Home2Screen} from "./components/screens/Home2.screen";
 import {HomeInner} from "./components/screens/HomeInner";
-import {Blank} from "./components/screens/Blank";
+import {BlankScreen} from "./components/screens/Blank.screen";
 import {AsyncStorage, Dimensions, Platform} from "react-native";
-import {DefaultLayout} from "./components/lib/DefaultLayout";
 
+import {DefaultLayout} from "./components/lib/DefaultLayout";
 import {fadeIn} from "react-navigation-transitions";
-import {ErrorNotFound} from "./components/screens/ErrorNotFound";
+import {ThemeConfig} from "./config/Theme.config";
+import {GlobalState} from "./GlobalState";
 
 const createAppContainer = Platform.OS === 'web' ? createAppContainerWeb : createAppContainerNative;
-
-// TODO: Consider watching isLarge instead of only at start.
 const isLarge = Dimensions.get('window').width > 720;
 
 const stackDefaultNavigatorOptions = {
@@ -39,7 +39,6 @@ const stackDefaultNavigatorOptions = {
 const stackConfigDefault = {
     defaultNavigationOptions: stackDefaultNavigatorOptions,
     ...isLarge && {transitionConfig: () => fadeIn()},
-    // headerMode: "screen",
     headerMode: "none",
 };
 
@@ -49,7 +48,7 @@ const HomeStack = {
         tabBarIcon: ({tintColor}) => <MaterialIcons name="home" size={25} color={tintColor}/>,
     },
     screen: createStackNavigator({
-        Home: {screen: Home, path: ""},
+        Home: {screen: HomeScreen, path: ""},
         HomeInner: {screen: HomeInner, path: ":slug"},
     }, stackConfigDefault)
 };
@@ -60,51 +59,56 @@ const Home2Stack = {
         tabBarIcon: ({tintColor}) => <MaterialIcons name="home" size={25} color={tintColor}/>,
     },
     screen: createStackNavigator({
-        Home2: {screen: Home2, path: ""}
+        Home2: {screen: Home2Screen, path: ""}
     }, stackConfigDefault)
 };
 
-const FooterNavigator = createMaterialBottomTabNavigator({
+const CreateFooterNavigator = (backgroundColor: string) => createMaterialBottomTabNavigator({
     HomeStack,
     Home2Stack,
-    Blank,
-    Blank2: Blank,
-    Blank3: Blank,
+    Blank: BlankScreen,
+    Blank2: BlankScreen,
+    Blank3: BlankScreen,
 }, {
     labeled: false,
     shifting: false,
+    barStyle: { backgroundColor },
     defaultNavigationOptions: {
         ...isLarge && {'tabBarVisible': false},
     },
 });
 
-const RouterBase = createAppContainer(createNavigator(
-    DefaultLayout,
-    SwitchRouter({
-        ErrorNotFound,
-        Tabs: {
-            path: "",
-            screen: FooterNavigator,
-        },
-    }),
-    {}
-));
+export function Router ({tabBackgroundColor}) {
 
-// const persistNavigationState = async (navState) => {
-//     if (Platform.OS === 'web') return;
-//     try {
-//         await AsyncStorage.setItem("router", JSON.stringify(navState))
-//     } catch (err) {
-//         // handle the error according to your needs
-//     }
-// };
-// const loadNavigationState = async () => {
-//     await AsyncStorage.removeItem("router"); // resets the state
-//     if (Platform.OS === 'web') return;
-//     return JSON.parse(await AsyncStorage.getItem("router"));
-// };
-//
-// export const Router = () => <RouterBase persistNavigationState={persistNavigationState}
-//                                         loadNavigationState={loadNavigationState}/>;
+    const RouterApp = createAppContainer(createNavigator(
+        DefaultLayout,
+        SwitchRouter({
+            IndexScreen: {screen: IndexScreen, path: ""},
+            Tabs: {
+                path: "",
+                screen: CreateFooterNavigator(tabBackgroundColor),
+            },
+        }),
+        {}
+    ));
 
-export const Router = RouterBase;
+    // The following will persist the nav state to localstorage
+    // const persistNavigationState = async (navState) => {
+    //     if (Platform.OS === 'web') return;
+    //     try {
+    //         await AsyncStorage.setItem("router", JSON.stringify(navState))
+    //     } catch (err) {
+    //         // handle the error according to your needs
+    //     }
+    // };
+    // const loadNavigationState = async () => {
+    //     await AsyncStorage.removeItem("router"); // resets the state
+    //     if (Platform.OS === 'web') return;
+    //     return JSON.parse(await AsyncStorage.getItem("router"));
+    // };
+    //
+    // return <RouterApp persistNavigationState={persistNavigationState}
+    //                                         loadNavigationState={loadNavigationState}/>;
+
+    return <RouterApp />;
+};
