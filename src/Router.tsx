@@ -25,6 +25,7 @@ import {AsyncStorage, Dimensions, Platform} from "react-native";
 import {DefaultLayout} from "./components/lib/DefaultLayout";
 
 import {fadeIn} from "react-navigation-transitions";
+import {ErrorNotFound} from "./components/screens/ErrorNotFound";
 
 const createAppContainer = Platform.OS === 'web' ? createAppContainerWeb : createAppContainerNative;
 
@@ -77,34 +78,33 @@ const FooterNavigator = createMaterialBottomTabNavigator({
     },
 });
 
-// TODO: 404 handling
 const RouterBase = createAppContainer(createNavigator(
     DefaultLayout,
     SwitchRouter({
+        ErrorNotFound,
         Tabs: {
             path: "",
             screen: FooterNavigator,
         },
-        // Blank,
     }),
     {}
 ));
 
-const persistNavigationState = async (navState) => {
-    if (Platform.OS === 'web') return;
-    try {
-        await AsyncStorage.setItem("router", JSON.stringify(navState))
-    } catch (err) {
-        // handle the error according to your needs
-    }
-};
-const loadNavigationState = async () => {
-    await AsyncStorage.removeItem("router"); // resets the state
-    if (Platform.OS === 'web') return;
-    return JSON.parse(await AsyncStorage.getItem("router"));
-};
+// const persistNavigationState = async (navState) => {
+//     if (Platform.OS === 'web') return;
+//     try {
+//         await AsyncStorage.setItem("router", JSON.stringify(navState))
+//     } catch (err) {
+//         // handle the error according to your needs
+//     }
+// };
+// const loadNavigationState = async () => {
+//     await AsyncStorage.removeItem("router"); // resets the state
+//     if (Platform.OS === 'web') return;
+//     return JSON.parse(await AsyncStorage.getItem("router"));
+// };
+//
+// export const Router = () => <RouterBase persistNavigationState={persistNavigationState}
+//                                         loadNavigationState={loadNavigationState}/>;
 
-export const Router = () => <RouterBase persistNavigationState={persistNavigationState}
-                                        loadNavigationState={loadNavigationState}/>;
-
-// export const Router = createAppContainer(FooterNavigator);
+export const Router = RouterBase;
