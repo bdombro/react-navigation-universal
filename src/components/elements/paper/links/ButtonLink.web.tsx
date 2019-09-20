@@ -1,22 +1,21 @@
-import {IconButton, IconButtonProps} from "react-native-paper";
+import {Button as PButton} from "react-native-paper";
 import React from "react";
 import {Link} from "./Link";
 
-export const IconButtonLink = (
+export const ButtonLink = (
     {
         to,
         params = {},
         onPress,
         ...props
-    }: IconButtonProps & {
+    }: React.ComponentProps<typeof PButton> & {
         to: string,
         params?: any,
-        onPress?: () => any,
     }
 ) => {
     return (
         <Link to={to} params={params} onPress={onPress}>
-            <IconButton {...props} />
+            <PButton {...props} />
         </Link>
     );
 };

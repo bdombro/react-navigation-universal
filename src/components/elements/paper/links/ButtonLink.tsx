@@ -1,24 +1,23 @@
-import {IconButton, IconButtonProps} from "react-native-paper";
+import {Button as PButton} from "react-native-paper";
 import {useNavigation} from "react-navigation-hooks";
 import {Linking} from "expo";
 import React from "react";
 
-export const IconButtonLink = (
+export const ButtonLink = (
     {
         to,
         params = {},
         onPress,
         ...props
-    }: IconButtonProps & {
+    }: React.ComponentProps<typeof PButton> & {
         to: string,
         params?: any,
-        onPress?: (event: any) => any,
     }
 ) => {
     const {navigate} = useNavigation();
 
     return (
-        <IconButton
+        <PButton
             onPress={async e => {
                 if (onPress) await onPress(e);
                 if (to === '#') void 0;

@@ -1,7 +1,7 @@
 import React from "react";
 import {Lorem} from "../lib/Lorem";
 import {ScreenDefaultLayout} from "../lib/ScreenDefaultLayout";
-import {ButtonLink, TextLink, Paragraph, Text, Title} from "../elements";
+import {ButtonLink, TextLink, Paragraph, Text, Title} from "../elements/paper";
 import {HeaderHomeSection} from "../sections/HeaderHome.section";
 import {GlobalState} from "../../GlobalState";
 import {observer} from "mobx-react-lite";
@@ -9,7 +9,6 @@ import {observer} from "mobx-react-lite";
 export const Home = observer(function Home () {
     const pageMeta = {
         title: "Home",
-        headerTitle: "RNav Universal",
     };
 
     return (
@@ -21,7 +20,7 @@ export const Home = observer(function Home () {
                 }
             }}
         >
-            {GlobalState.viewportInfo.isLarge && <Title>{pageMeta.headerTitle}</Title>}
+            {GlobalState.viewportInfo.isLarge && <Title>RNav Universal</Title>}
             <Lorem/>
             <Paragraph>
                 <TextLink to="HomeInner" params={{slug: "inner"}}>This</TextLink><Text> is a

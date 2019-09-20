@@ -1,6 +1,6 @@
 import React from "react";
 import {Dimensions, View} from "react-native";
-import {Text} from "../elements";
+import {Text} from "../elements/paper";
 
 export const FooterSection = () => {
     const isLarge = Dimensions.get('window').width > 720;

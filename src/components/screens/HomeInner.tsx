@@ -3,7 +3,7 @@ import {useNavigation} from "react-navigation-hooks";
 import {Platform} from "react-native";
 import {Lorem} from "../lib/Lorem";
 import {ScreenDefaultLayout} from "../lib/ScreenDefaultLayout";
-import {Title} from "../elements";
+import {Title} from "../elements/paper";
 
 export function HomeInner () {
     const {getParam, setParams} = useNavigation();

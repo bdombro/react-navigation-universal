@@ -1,6 +1,6 @@
 import React from "react";
 import {MaterialIcons} from '@expo/vector-icons';
-import {ButtonLink, Title} from "../elements";
+import {ButtonLink, Title} from "../elements/paper";
 import {Lorem} from "../lib/Lorem";
 import {ScreenDefaultLayout} from "../lib/ScreenDefaultLayout";
 

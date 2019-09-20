@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import {observer} from "mobx-react-lite";
-import {Appbar, IconButtonLink, Title, useTheme} from '../elements';
+import {Appbar, IconButtonLink, Title, useTheme} from '../elements/paper';
 import {NavigationStackProp} from "react-navigation-stack/src/types";
 import {Animated} from "react-native";
 import {GlobalState} from "../../GlobalState";
 import {HeaderDefaultSection} from "./HeaderDefault.section";
+import {ThemeConfig} from "../../config/Theme.config";
 
 export const HeaderHomeSection = observer(function HeaderHomeSection(
     {
@@ -19,7 +20,7 @@ export const HeaderHomeSection = observer(function HeaderHomeSection(
         scrollUpOffset: number,
     }
 ) {
-    const theme = useTheme();
+    const theme = useTheme() as typeof ThemeConfig;
 
     const [translateY] = useState(new Animated.Value(0));
     React.useEffect(() => {
@@ -46,7 +47,13 @@ export const HeaderHomeSection = observer(function HeaderHomeSection(
                 transform: [{translateY,}],
             }}
         >
-            <Appbar.Header theme={{colors: {primary: "#ddd"}}}>
+            <Appbar.Header
+                style={{
+                    backgroundColor: theme.colors.primaryLightest,
+                    elevation: 0,
+                    ...GlobalState.viewportInfo.isLarge && {height: 46}
+                }}
+            >
                 <Title>{title}</Title>
                 <Appbar.Content title=""/>
                 <IconButtonLink icon="magnify" to="Blank" size={22} color="black"/>

@@ -1,5 +1,5 @@
 import React from "react";
-import {Title} from "../elements";
+import {Title} from "../elements/paper";
 import {Lorem} from "../lib/Lorem";
 import {ScreenDefaultLayout} from "../lib/ScreenDefaultLayout";
 

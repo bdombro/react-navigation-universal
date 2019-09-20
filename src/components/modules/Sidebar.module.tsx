@@ -1,6 +1,6 @@
 import React from "react";
 import {View} from "react-native";
-import {Text, Link} from "../elements";
+import {Text, Link} from "../elements/paper";
 
 export const SidebarModule = () => (
     <View>

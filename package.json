@@ -44,6 +44,7 @@
     "@expo/webpack-config": "^0.7.4",
     "@types/react": "^16.8.23",
     "@types/react-native": "^0.57.65",
+    "@types/styled-jsx": "^2.2.8",
     "babel-preset-expo": "^6.0.0",
     "copy-webpack-plugin": "^5.0.4",
     "express": "^4.17.1",
