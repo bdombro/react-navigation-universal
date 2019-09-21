@@ -1,11 +1,10 @@
 import React, {useState} from "react";
 import {observer} from "mobx-react-lite";
-import {MaterialIcons} from '@expo/vector-icons';
-import {Animated, Platform, View} from "react-native";
-import {GlobalState} from "../../GlobalState";
-import {Appbar, Avatar, IconButtonLink, Link} from '../elements/paper';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
+import {Animated, View} from "react-native";
 import {NavigationStackProp} from "react-navigation-stack/src/types";
-import {ThemeConfig} from "../../config/Theme.config";
+import {GlobalState} from "../../GlobalState";
+import {Appbar, Avatar, IconButton, Link} from '../elements';
 
 export const HeaderDefaultSection = observer(function HeaderDefaultSection(
     {
@@ -21,13 +20,17 @@ export const HeaderDefaultSection = observer(function HeaderDefaultSection(
     }
 ) {
 
-    const [titleOpacity] = useState(new Animated.Value(0));
+
     React.useEffect(() => {
         if (GlobalState.viewportInfo.isSmall) titleOpacity.setValue(1);
         else titleOpacity.setValue(
             Math.min(Math.max(scrollOffset/80 - .5, 0), 1)
         );
     }, [scrollOffset]);
+
+
+    const [titleOpacity] = useState(new Animated.Value(0));
+    const [menuIsOpen, setMenuIsOpen] = useState(false);
 
     return (
         <Appbar.Header
@@ -48,12 +51,12 @@ export const HeaderDefaultSection = observer(function HeaderDefaultSection(
 
 
             {GlobalState.viewportInfo.isLarge && <>
-                <IconButtonLink icon="magnify" to="Blank" size={22} color={GlobalState.theme.colors.text}/>
+                <IconButton icon="magnify" to="BlankScreen" size={22} color={GlobalState.theme.colors.text}/>
                 <View>
-                    <IconButtonLink icon="bell-outline" to="Blank" size={22} color={GlobalState.theme.colors.text}/>
+                    <IconButton icon="bell-outline" to="BlankScreen" size={22} color={GlobalState.theme.colors.text}/>
                     {/*{!notificationQuery.loading && !!notificationQuery.data.length && (*/}
-                    <MaterialIcons
-                        name="broken-image"
+                    <MaterialCommunityIcons
+                        name="alert-box"
                         size={10}
                         color="red"
                         style={{
@@ -61,24 +64,24 @@ export const HeaderDefaultSection = observer(function HeaderDefaultSection(
                             height: 10,
                             position: 'relative',
                             top: -34,
-                            left: 25,
+                            left: 23,
                             marginBottom: -10
                         }}
                     />
                 </View>
-                <Link to="Blank">
+                <Link to="BlankScreen">
                     <Avatar.Text
                         size={32}
                         label="BD"
                         style={{marginLeft: 10}}
                     />
                 </Link>
-                <Appbar.Action
-                    // icon={{source: () => <MaterialIcons name="more-vert" size={22} color="#999"/>}}
-                    icon={Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical'}
-                    onPress={() => console.log("More")}
-                    style={{marginLeft: -5, marginRight: -10}}
+                <IconButton
+                    icon="dots-vertical"
+                    to="BlankScreen"
+                    size={22}
                     color={GlobalState.theme.colors.text}
+                    style={{marginLeft: -5, marginRight: -12}}
                 />
             </>}
 

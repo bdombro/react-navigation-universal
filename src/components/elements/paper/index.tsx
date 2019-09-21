@@ -5,12 +5,14 @@
 export {
     Appbar,
     Avatar,
-    Button,
-    IconButton,
+    Divider,
+    Menu,
     Paragraph,
-    Text,
     Title,
     withTheme
 } from "react-native-paper";
 
-export * from "./links";
+export {Button} from "./Button";
+export {IconButton} from "./IconButton";
+export {Link} from "./Link";
+export {Text} from "./Text";

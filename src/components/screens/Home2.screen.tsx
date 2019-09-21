@@ -1,14 +1,13 @@
 import React from "react";
-import {Title} from "../elements/paper";
+import {Title} from "../elements";
 import {Lorem} from "../lib/Lorem";
-import {ScreenDefaultLayout} from "../lib/ScreenDefaultLayout";
+import {ScreenDefaultLayout} from "../layout/ScreenDefault.layout";
 
 export function Home2() {
     const pageMeta = {
         title: "Home2",
         description: "This is Home2.",
     };
-    console.log("Rendering");
 
     return (
         <ScreenDefaultLayout pageMeta={pageMeta}>

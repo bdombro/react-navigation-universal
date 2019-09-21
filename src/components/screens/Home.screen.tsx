@@ -1,8 +1,8 @@
 import React from "react";
 import {observer} from "mobx-react-lite";
 import {Lorem} from "../lib/Lorem";
-import {ScreenDefaultLayout} from "../lib/ScreenDefaultLayout";
-import {Button, ButtonLink, TextLink, Paragraph, Text, Title} from "../elements/paper";
+import {ScreenDefaultLayout} from "../layout/ScreenDefault.layout";
+import {Button, Paragraph, Text, Title} from "../elements";
 import {HeaderHomeSection} from "../sections/HeaderHome.section";
 import {GlobalState} from "../../GlobalState";
 
@@ -23,11 +23,10 @@ export const Home = observer(function Home () {
             {GlobalState.viewportInfo.isLarge && <Title>RNav Universal</Title>}
             <Lorem/>
             <Paragraph>
-                <TextLink to="HomeInner" params={{slug: "inner"}}>This</TextLink><Text> is a
-                TextLink</Text>
+                <Text to="HomeInner" params={{slug: "inner"}}>This</Text><Text> is a
+                Text</Text>
             </Paragraph>
-            <Button onPress={GlobalState.toggleTheme}>Click to Toggle Theme</Button>
-            <ButtonLink to="HomeInner" params={{slug: "inner"}} mode="contained">Goto Home Inner</ButtonLink>
+            <Button to="HomeInner" params={{slug: "inner"}} mode="contained">Goto Home Inner</Button>
         </ScreenDefaultLayout>
     );
 });

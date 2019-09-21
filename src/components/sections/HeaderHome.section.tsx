@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {observer} from "mobx-react-lite";
-import {Appbar, IconButtonLink, Title} from '../elements/paper';
+import {Appbar, IconButton, Title} from '../elements';
 import {NavigationStackProp} from "react-navigation-stack/src/types";
 import {Animated} from "react-native";
 import {GlobalState} from "../../GlobalState";
@@ -73,7 +73,7 @@ export const HeaderHomeSection = observer(function HeaderHomeSection(
                         }),
                     }}
                 >
-                    <IconButtonLink icon="magnify" to="Blank" size={22} color={GlobalState.theme.colors.text}/>
+                    <IconButton icon="magnify" to="Blank" size={22} color={GlobalState.theme.colors.text}/>
                 </Animated.View>
             </Appbar.Header>
         </Animated.View>

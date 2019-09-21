@@ -1,21 +1,27 @@
-import {IconButton as PIconButton} from "react-native-paper";
+/**
+ * IconButton has been extended to support nav linking
+ */
 import React from "react";
+import {IconButton as PIconButton} from "react-native-paper";
 import {Link} from "./Link";
 
-export const IconButtonLink = (
+export const IconButton = (
     {
         to,
         params = {},
         onPress,
         ...props
     }: React.ComponentProps<typeof PIconButton> & {
-        to: string,
+        to?: string,
         params?: any,
     }
 ) => {
-    return (
+    const buttonJsx = <PIconButton {...props} />;
+
+    if (to) return (
         <Link to={to} params={params} onPress={onPress}>
-            <PIconButton {...props} />
+            {buttonJsx}
         </Link>
     );
+    else return buttonJsx;
 };

@@ -6,7 +6,7 @@ export const ThemeConfig = {
     light: {
         ...DefaultTheme,
         dark: false,
-        // roundness: 2,
+        roundness: 30,
         colors: {
             ...DefaultTheme.colors,
             primary: `hsl(${primaryHue},93%,40%)`,

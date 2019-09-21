@@ -2,13 +2,12 @@ import {Dimensions, View} from "react-native";
 import {SceneView} from "react-navigation";
 import React from "react";
 import {SidebarModule} from "../modules/Sidebar.module";
-import {HeaderDefaultSection} from "../sections/HeaderDefault.section";
 import {GlobalState} from "../../GlobalState";
 import {observer} from "mobx-react-lite";
 
 const isLarge = Dimensions.get('window').width > 720;
 
-export const DefaultLayout = observer(function AppLayout(
+export const TabLayout = observer(function TabLayout(
     {
         descriptors,
         navigation
@@ -17,8 +16,7 @@ export const DefaultLayout = observer(function AppLayout(
     const activeKey = navigation.state.routes[navigation.state.index].key;
     const descriptor = descriptors[activeKey];
 
-    return (
-        <View style={{flex: 1, width: '100%', overflow: 'hidden'}}>
+    return <>
             <View style={{flex: 1, flexDirection: "row"}}>
                 <View style={{width: isLarge ? 200 : 0}}/>
                 <View style={{flex: 1}}>
@@ -38,6 +36,5 @@ export const DefaultLayout = observer(function AppLayout(
                     <SidebarModule/>
                 </View>
             )}
-        </View>
-    );
+    </>;
 });

@@ -1,21 +1,20 @@
 import React from "react";
-import {MaterialIcons} from '@expo/vector-icons';
-import {ButtonLink, Title} from "../elements/paper";
+import {Button, Title} from "../elements";
 import {Lorem} from "../lib/Lorem";
-import {ScreenDefaultLayout} from "../lib/ScreenDefaultLayout";
+import {ScreenBlankLayout} from "../layout/ScreenBlank.layout";
 
 export function Blank () {
     const pageMeta = {
-        title: "Blank",
+        title: "Blank Layout",
         description: "This is a blank page with no sidebar or header",
     };
 
     return (
-        <ScreenDefaultLayout pageMeta={pageMeta}>
+        <ScreenBlankLayout pageMeta={pageMeta}>
             <Title>{pageMeta.title}</Title>
-            <ButtonLink to="Home" mode="contained">Go Home</ButtonLink>
+            <Button to="Home" mode="contained">Go Home</Button>
             <Lorem/>
-        </ScreenDefaultLayout>
+        </ScreenBlankLayout>
     );
 }
 
@@ -24,9 +23,6 @@ export function Blank () {
 export class BlankScreen extends React.PureComponent {
     static navigationOptions = ({navigation}) => ({
         path: "blank",
-        tabBarIcon: ({tintColor}) => (
-            <MaterialIcons name="check-box-outline-blank" size={25} color={tintColor}/>
-        ),
     });
     render () { return <Blank />}
 }

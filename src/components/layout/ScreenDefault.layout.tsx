@@ -14,9 +14,9 @@ import {HeaderDefaultSection} from "../sections/HeaderDefault.section";
 import {SafeAreaView} from "react-navigation";
 import {GlobalState} from "../../GlobalState";
 
-class ScreenViewBase extends React.Component<NavigationInjectedProps & {
+class ScreenDefaultLayoutBase extends React.Component<NavigationInjectedProps & {
     pageMeta: Partial<WebPageMeta>,
-    header?: any,
+    header?: React.ReactNode,
     scrollViewProps?: ScrollViewProps,
 }, {
     scrollOffset: number,
@@ -69,10 +69,7 @@ class ScreenViewBase extends React.Component<NavigationInjectedProps & {
     };
 
     render() {
-
-        const isLarge = Dimensions.get('window').width > 720;
-        let scrollViewOnScrollProps = {};
-        if (!isLarge || true) scrollViewOnScrollProps = {
+        const scrollViewOnScrollProps = {
             scrollEventThrottle: 100,
             onScroll: this._onScroll,
         };
@@ -113,5 +110,5 @@ class ScreenViewBase extends React.Component<NavigationInjectedProps & {
     }
 }
 
-export const ScreenDefaultLayout = withNavigation(ScreenViewBase);
+export const ScreenDefaultLayout = withNavigation(ScreenDefaultLayoutBase);
 

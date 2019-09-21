@@ -1,9 +1,12 @@
+/**
+ * Text has been extended to support nav linking
+ */
+import React from "react";
 import {Text as PText} from "react-native-paper";
 import {useNavigation} from "react-navigation-hooks";
 import {Linking} from "expo";
-import React from "react";
 
-export const TextLink = (
+export const Text = (
     {
         to,
         params = {},
@@ -11,7 +14,7 @@ export const TextLink = (
         style = {},
         ...props
     }: React.ComponentProps<typeof PText> & {
-        to: string,
+        to?: string,
         params?: any,
         onPress?: (event: any) => any,
     }
@@ -22,15 +25,18 @@ export const TextLink = (
         <PText
             onPress={async e => {
                 if (onPress) await onPress(e);
-                if (to === '#') void 0;
-                else if (to.startsWith("http")) Linking.openURL(to);
-                else navigate(to as string, params);
+                if (to) {
+                    if (to === '#') void 0;
+                    else if (to.startsWith("http")) Linking.openURL(to);
+                    else navigate(to as string, params);
+                }
             }}
             style={{
-                color: "#aaa",
-                textDecorationLine: "underline",
-                textDecorationColor: "#aaa",
-                // @ts-ignore: spread on unknown
+                ...to && {
+                    color: "#aaa",
+                    textDecorationLine: "underline",
+                    textDecorationColor: "#aaa",
+                },
                 ...style
             }}
             {...props}

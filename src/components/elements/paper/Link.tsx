@@ -1,30 +1,36 @@
-import {Button as PButton} from "react-native-paper";
+/**
+ * Link allows us to easily make elements clickable and nav link
+ */
+import React from "react";
+import {TouchableRipple} from "react-native-paper";
 import {useNavigation} from "react-navigation-hooks";
 import {Linking} from "expo";
-import React from "react";
 
-export const ButtonLink = (
+export const Link = (
     {
         to,
         params = {},
         onPress,
-        ...props
-    }: React.ComponentProps<typeof PButton> & {
+        children
+    }
+        : {
         to: string,
         params?: any,
+        onPress?: (event: any) => any,
+        children: any,
     }
 ) => {
     const {navigate} = useNavigation();
-
     return (
-        <PButton
+        <TouchableRipple
             onPress={async e => {
                 if (onPress) await onPress(e);
                 if (to === '#') void 0;
                 else if (to.startsWith("http")) Linking.openURL(to);
                 else navigate(to as string, params);
             }}
-            {...props}
-        />
+        >
+            {children}
+        </TouchableRipple>
     );
 };

@@ -2,8 +2,8 @@ import React, {useEffect, useState} from "react";
 import {useNavigation} from "react-navigation-hooks";
 import {Platform} from "react-native";
 import {Lorem} from "../lib/Lorem";
-import {ScreenDefaultLayout} from "../lib/ScreenDefaultLayout";
-import {Title} from "../elements/paper";
+import {ScreenDefaultLayout} from "../layout/ScreenDefault.layout";
+import {Title} from "../elements";
 
 export function HomeInner () {
     const {getParam, setParams} = useNavigation();
@@ -29,4 +29,12 @@ export function HomeInner () {
             <Lorem/>
         </ScreenDefaultLayout>
     );
+}
+
+// Wrap screens in class components so that HMR reloads the screen instead of the navigator.
+// Ref: https://github.com/facebook/react-native/issues/13240#issuecomment-291246975
+export class HomeInnerScreen extends React.PureComponent {
+    render() {
+        return <HomeInner/>
+    }
 }

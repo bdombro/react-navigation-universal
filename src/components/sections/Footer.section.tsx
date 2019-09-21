@@ -1,6 +1,6 @@
 import React from "react";
 import {Dimensions, View} from "react-native";
-import {Text} from "../elements/paper";
+import {Text} from "../elements";
 import {GlobalState} from "../../GlobalState";
 import {observer} from "mobx-react-lite";
 
