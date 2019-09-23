@@ -8,7 +8,7 @@ app.use(logger('dev'));
 
 app.use(shrinkRay());
 
-app.use(express.static('web-build', { index: 'index.html' }));
+app.use(express.static('web-build', { index: 'blankScreen.tsx.html' }));
 
 // Handle 404
 app.use(function(req, res) {

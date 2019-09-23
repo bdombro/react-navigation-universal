@@ -7,84 +7,86 @@
  */
 import React from "react";
 import {MaterialCommunityIcons} from '@expo/vector-icons';
-import {AsyncStorage, Dimensions, Platform} from "react-native";
+import {Platform} from "react-native";
 import {createBrowserApp as createAppContainerWeb} from '@react-navigation/web';
-import {createAppContainer as createAppContainerNative, createSwitchNavigator} from "react-navigation";
+import {createAppContainer as createAppContainerNative} from "react-navigation";
 import {createNavigator, SwitchRouter} from "react-navigation";
-import {createStackNavigator} from 'react-navigation-stack';
+import {createStackNavigator, NavigationStackConfig} from 'react-navigation-stack';
 import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
 import {fadeIn} from "react-navigation-transitions";
-import {TabLayout} from "./components/layout/Tab.layout";
-import {IndexScreen} from "./components/screens/Index.screen";
-import {HomeScreen} from "./components/screens/Home.screen";
-import {Home2Screen} from "./components/screens/Home2.screen";
-import {HomeInnerScreen} from "./components/screens/HomeInner.screen";
-import {BlankScreen} from "./components/screens/Blank.screen";
-import {GlobalLayout} from "./components/layout/Global.layout";
+import {TabLayout} from "./components/layouts/Tab.layout";
+import {GlobalLayout} from "./components/layouts/Global.layout";
+import {IndexScreen} from "./components/screens/index";
+import {HomeScreen} from "./components/screens/home";
+import {Home2Screen} from "./components/screens/home2";
+import {HomeInnerScreen} from "./components/screens/home-inner";
+import {BlankScreen} from "./components/screens/blank";
+import {GlobalState} from "./GlobalState";
+import {ThemeConfig} from "./config/Theme.config";
 
 const createAppContainer = Platform.OS === 'web' ? createAppContainerWeb : createAppContainerNative;
-const isLarge = Dimensions.get('window').width > 720;
 
-const stackDefaultNavigatorOptions = {
-    // header: headerProps => <HeaderDefaultSection {...headerProps}/>,
+export type RouterProps = {
+    theme: typeof ThemeConfig.light
 };
 
-const stackConfigDefault = {
-    defaultNavigationOptions: stackDefaultNavigatorOptions,
-    ...isLarge && {transitionConfig: () => fadeIn()},
-    headerMode: "none",
-};
-
-const HomeStack = {
-    path: "home",
-    navigationOptions: {
-        tabBarIcon: ({tintColor}) => <MaterialCommunityIcons name="home" size={25} color={tintColor}/>,
-    },
-    screen: createStackNavigator({
-        Home: {screen: HomeScreen, path: ""},
-        HomeInner: {screen: HomeInnerScreen, path: ":slug"},
-    }, stackConfigDefault)
-};
-
-const Home2Stack = {
-    path: "home2",
-    navigationOptions: {
-        tabBarIcon: ({tintColor}) => <MaterialCommunityIcons name="home" size={25} color={tintColor}/>,
-    },
-    screen: createStackNavigator({
-        Home2: {screen: Home2Screen, path: ""}
-    }, stackConfigDefault)
-};
-
-const CreateDefaultLayoutRoutes = (footerColor: string) => createNavigator(
-    TabLayout,
-    SwitchRouter({
-        Tabs: {
-            path: '',
-            screen: createMaterialBottomTabNavigator({
-                HomeStack,
-                Home2Stack
-            }, {
-                labeled: false,
-                shifting: false,
-                barStyle: {backgroundColor: footerColor},
-                defaultNavigationOptions: {
-                    ...isLarge && {'tabBarVisible': false},
-                },
-            }),
-        },
-    }),
-    {}
-);
-
-export function Router({footerColor}) {
+// TODO: Route permissions
+// TODO: Testing
+// TODO: Storybook
+export function Router({theme}: RouterProps) {
+    const stackConfigDefault: NavigationStackConfig = {
+        ...GlobalState.viewportInfo.isLarge && {transitionConfig: () => fadeIn()},
+        headerMode: "none",
+    };
 
     const RouterApp = createAppContainer(
         createNavigator(
             GlobalLayout,
             SwitchRouter({
+
                 IndexScreen: {screen: IndexScreen, path: ''},
-                DefaultLayout: {path: '', screen: CreateDefaultLayoutRoutes(footerColor)},
+
+                TabNavigator: {
+                    path: '',
+                    screen: createNavigator(
+                        TabLayout,
+                        SwitchRouter({
+                            Tabs: {
+                                path: '',
+                                screen: createMaterialBottomTabNavigator({
+                                    HomeStack: {
+                                        path: "home",
+                                        navigationOptions: {
+                                            tabBarIcon: ({tintColor}) => <MaterialCommunityIcons name="home" size={25} color={tintColor}/>,
+                                        },
+                                        screen: createStackNavigator({
+                                            Home: {screen: HomeScreen, path: ""},
+                                            HomeInner: {screen: HomeInnerScreen, path: ":slug"},
+                                        }, stackConfigDefault)
+                                    },
+                                    Home2Stack: {
+                                        path: "home2",
+                                        navigationOptions: {
+                                            tabBarIcon: ({tintColor}) => <MaterialCommunityIcons name="home" size={25} color={tintColor}/>,
+                                        },
+                                        screen: createStackNavigator({
+                                            Home2: {screen: Home2Screen, path: ""}
+                                        }, stackConfigDefault)
+                                    },
+                                }, {
+                                    labeled: false,
+                                    shifting: false,
+                                    barStyle: {backgroundColor: theme.colors.background},
+                                    defaultNavigationOptions: {
+                                        ...GlobalState.viewportInfo.isLarge && {'tabBarVisible': false},
+                                    },
+                                }),
+                            },
+                        }),
+                        {}
+                    )
+                },
+
                 BlankScreen: {path: "blank", screen: BlankScreen},
             }),
             {}
@@ -110,4 +112,4 @@ export function Router({footerColor}) {
     //                                         loadNavigationState={loadNavigationState}/>;
 
     return <RouterApp/>;
-};
+}

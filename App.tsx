@@ -2,11 +2,15 @@ import React from "react";
 import {hot} from 'react-hot-loader';
 import {Platform} from "react-native";
 import {Provider as PaperProvider} from 'react-native-paper';
-import {Router} from "./src/Router";
 import {Observer} from "mobx-react-lite";
-import {GlobalState} from "./src/GlobalState";
 import {reaction, toJS} from "mobx";
-import {StackActions} from "react-navigation";
+import "./src/lib/filterConsole";
+import {Router} from "./src/Router";
+import {GlobalState} from "./src/GlobalState";
+
+if(__DEV__) {
+    import('./src/config/Reactotron.config').then(() => console.log('Reactotron Configured'))
+}
 
 class App extends React.PureComponent {
     render() {
@@ -18,7 +22,7 @@ class App extends React.PureComponent {
                 });
                 return (
                     <PaperProvider theme={toJS(GlobalState.theme)}>
-                        <Router tabBackgroundColor={GlobalState.theme.colors.background}/>
+                        <Router theme={GlobalState.theme}/>
                     </PaperProvider>
                 )
             }}</Observer>

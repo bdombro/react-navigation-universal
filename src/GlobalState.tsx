@@ -17,6 +17,7 @@ class GlobalStateClass {
 
   @action
   logout = async () => {
+    // May need to wrap this in set
     this.user = {
       id: '',
       token: '',
@@ -27,7 +28,7 @@ class GlobalStateClass {
   @observable
   theme = ThemeConfig.light;
   @action
-  toggleTheme = () => set(this.theme, this.theme.dark ? ThemeConfig.light : ThemeConfig.dark);
+  toggleTheme = () => this.theme= this.theme.dark ? ThemeConfig.light : ThemeConfig.dark;
 
   @observable
   forceRenderCount = 0;
@@ -45,16 +46,14 @@ class GlobalStateClass {
   @observable
   viewportInfo = getViewportInfo();
   @action
-  refreshViewportInfo = () => {
-    const width = Dimensions.get('window').width;
-    const height = Dimensions.get('window').height;
-    if (width != this.viewportInfo.width || height != this.viewportInfo.height)
-      set(this.viewportInfo, getViewportInfo());
-  };
+  refreshViewportInfo = () => this.viewportInfo = getViewportInfo();
 }
 export const GlobalState = new GlobalStateClass();
 // MobxPersistClass(GlobalState);
 
 setInterval(() => {
-  GlobalState.refreshViewportInfo();
-}, 400);
+  const width = Dimensions.get('window').width;
+  const height = Dimensions.get('window').height;
+  if (width != GlobalState.viewportInfo.width || height != GlobalState.viewportInfo.height)
+    GlobalState.refreshViewportInfo();
+}, 200);
