@@ -1,3 +1,8 @@
+/**
+ * Import this file to filter the console logs.
+ *
+ * Alternatively, we could have used react-native.YellowBox. See Ignite boilerplate for example.
+ */
 const originalWarn = console.warn;
 console.warn = function warn(...args) {
     if (args.length > 0 && typeof args[0] === 'string' && (

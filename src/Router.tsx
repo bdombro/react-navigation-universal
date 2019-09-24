@@ -17,6 +17,7 @@ import {fadeIn} from "react-navigation-transitions";
 import {TabLayout} from "./components/layouts/Tab.layout";
 import {GlobalLayout} from "./components/layouts/Global.layout";
 import {IndexScreen} from "./components/screens/index";
+import {LoginScreen} from "./components/screens/login";
 import {HomeScreen} from "./components/screens/home";
 import {Home2Screen} from "./components/screens/home2";
 import {HomeInnerScreen} from "./components/screens/home-inner";
@@ -30,7 +31,8 @@ export type RouterProps = {
     theme: typeof ThemeConfig.light
 };
 
-// TODO: Route permissions
+// TODO: Update Expo
+// TODO: MST + Navigation integration
 // TODO: Testing
 // TODO: Storybook
 export function Router({theme}: RouterProps) {
@@ -88,6 +90,7 @@ export function Router({theme}: RouterProps) {
                 },
 
                 BlankScreen: {path: "blank", screen: BlankScreen},
+                LoginScreen: {path: "login", screen: LoginScreen},
             }),
             {}
         ),

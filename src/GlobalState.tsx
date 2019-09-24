@@ -37,11 +37,6 @@ class GlobalStateClass {
 
   @observable
   sidebarToggled = true;
-  @observable
-  sidebarComponent = null;
-
-  @observable
-  search: string = '';
 
   @observable
   viewportInfo = getViewportInfo();

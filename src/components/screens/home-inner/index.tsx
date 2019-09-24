@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {useNavigation} from "react-navigation-hooks";
 import {Platform} from "react-native";
+import {usePrivacy} from "../../../hooks/usePrivacy";
 import {ScreenDefaultLayout} from "../../layouts/ScreenDefault.layout";
-import {Paragraph, Title} from "../../modules";
-import {Lorem} from "../../modules";
+import {Lorem, Title} from "../../modules";
 
 export function HomeInner (): React.ReactElement {
+    usePrivacy(["identified"]);
     const {getParam, setParams} = useNavigation();
     const slug = getParam('slug');
     const [state, setState] = useState({

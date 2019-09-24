@@ -1,13 +1,15 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {observer} from "mobx-react-lite";
 import {GlobalState} from "../../../GlobalState";
 import {ScreenDefaultLayout} from "../../layouts/ScreenDefault.layout";
 import {Button, Paragraph, Text, Title} from "../../modules";
 import {HeaderHomeSection} from "./header";
-import {Lorem} from "../../modules";
 import {GlobalStore} from "../../../state/global-store";
+import {usePrivacy} from "../../../hooks/usePrivacy";
+import {Lorem} from "../../modules";
 
 export const Home = observer(function Home (): React.ReactElement {
+    usePrivacy(["identified"]);
     const pageMeta = {
         title: "Home",
     };
@@ -27,9 +29,7 @@ export const Home = observer(function Home (): React.ReactElement {
             </Paragraph>
 
             <Paragraph>
-                UserId: {GlobalStore.user.id || "N/A"}{"\n"}
-                <Text onPress={GlobalStore.user.login}>Login</Text>&nbsp;
-                <Text onPress={GlobalStore.user.logout}>Logout</Text>
+                UserId: {GlobalStore.user.id} <Text onPress={GlobalStore.user.logout} to="LoginScreen">Logout</Text>
             </Paragraph>
 
             <Lorem/>

@@ -1,5 +1,6 @@
 import {onSnapshot, types} from "mobx-state-tree"
 import {Reactotron} from "../config/Reactotron.config";
+import {sleep} from "../lib/sleep";
 
 const UserModel = types
     .model("User", {
@@ -9,12 +10,12 @@ const UserModel = types
         roles: types.string,
     })
     .actions(self => ({
-        login() {
+        async login() {
             self.id = "12345";
             self.token = "1234567890";
             self.roles = "admin,identified";
         },
-        logout() {
+        async logout() {
             self.id = "";
             self.token = "";
             self.roles = "";
@@ -39,6 +40,6 @@ export const GlobalStore = GlobalStoreModel.create({
 Reactotron.trackMstNode(GlobalStore);
 
 // listen to new snapshots
-onSnapshot(GlobalStore, snapshot => {
-    console.dir(snapshot)
-});
+// onSnapshot(GlobalStore, snapshot => {
+//     console.dir(snapshot)
+// });

@@ -8,15 +8,15 @@ export type LinkProps = {
     to: string,
     params?: any,
     onPress?: (event: any) => any,
-    children: any,
+    preventDefault?: boolean,
 };
 
-export function Link ({to, params = {}, onPress, ...props}: LinkProps): React.ReactElement {
+export function Link({to, params = {}, onPress, preventDefault, ...props}: LinkProps): React.ReactElement {
     if (to === '#') {
         return <a href="javascript:void(0);" onClick={onPress} {...props} />;
     } else if (to.startsWith("http")) {
         return <a href={to} target="_blank" onClick={onPress} {...props} />;
     } else {
-        return <RNLink routeName={to} params={params} {...props}/>;
+        return <RNLink routeName={to} params={params} {...props} onClick={onPress} />;
     }
-};
+}

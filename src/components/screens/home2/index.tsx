@@ -1,9 +1,10 @@
 import React from "react";
-import {Paragraph, Title} from "../../modules";
+import {usePrivacy} from "../../../hooks/usePrivacy";
+import {Lorem, Title} from "../../modules";
 import {ScreenDefaultLayout} from "../../layouts/ScreenDefault.layout";
-import {Lorem} from "../../modules";
 
 export function Home2(): React.ReactElement {
+    usePrivacy(["identified"]);
     const pageMeta = {
         title: "Home2",
         description: "This is Home2.",

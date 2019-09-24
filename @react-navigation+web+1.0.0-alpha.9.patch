@@ -1,0 +1,56 @@
+diff --git a/node_modules/@react-navigation/web/dist/Link.js b/node_modules/@react-navigation/web/dist/Link.js
+index 933c29c..b9a2945 100644
+--- a/node_modules/@react-navigation/web/dist/Link.js
++++ b/node_modules/@react-navigation/web/dist/Link.js
+@@ -32,7 +32,8 @@ class LinkWithNavigation extends _react.Component {
+       routeName,
+       routeKey,
+       navigation,
+-      action
++      action,
++      onClick,
+     } = this.props;
+     const topNavigation = getTopNavigation(navigation);
+     const topRouter = topNavigation.router;
+@@ -59,8 +60,13 @@ class LinkWithNavigation extends _react.Component {
+       {
+         href: href,
+         onClick: e => {
+-          navigation.dispatch(navAction);
+           e.preventDefault();
++          let onClickResponse = onClick ? onClick(e) : {};
++          if (onClickResponse && onClickResponse.then) {
++            onClickResponse.then(() => {
++              navigation.dispatch(navAction);
++            })
++          } else navigation.dispatch(navAction);
+         }
+       },
+       children
+diff --git a/node_modules/@react-navigation/web/src/Link.js b/node_modules/@react-navigation/web/src/Link.js
+index 3ec19e0..c107d8c 100644
+--- a/node_modules/@react-navigation/web/src/Link.js
++++ b/node_modules/@react-navigation/web/src/Link.js
+@@ -19,6 +19,7 @@ class LinkWithNavigation extends Component {
+       routeKey,
+       navigation,
+       action,
++      onClick,
+     } = this.props;
+     const topNavigation = getTopNavigation(navigation);
+     const topRouter = topNavigation.router;
+@@ -58,8 +59,13 @@ class LinkWithNavigation extends Component {
+       <a
+         href={href}
+         onClick={e => {
+-          navigation.dispatch(navAction);
+           e.preventDefault();
++          let onClickResponse = onClick ? onClick(e) : {};
++          if (onClickResponse && onClickResponse.then) {
++            onClickResponse.then(() => {
++              navigation.dispatch(navAction);
++            })
++          } else navigation.dispatch(navAction);
+         }}
+       >
+         {children}

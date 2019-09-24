@@ -1,9 +1,10 @@
 import React from "react";
-import {Button, Title} from "../../modules";
+import {usePrivacy} from "../../../hooks/usePrivacy";
 import {ScreenBlankLayout} from "../../layouts/ScreenBlank.layout";
-import {Lorem} from "../../modules";
+import {Button, Lorem, Title} from "../../modules";
 
 export function Blank (): React.ReactElement {
+    usePrivacy(["identified"]);
     const pageMeta = {
         title: "Blank Layout",
         description: "This is a blank page with no sidebar or header",

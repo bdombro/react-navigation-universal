@@ -14,12 +14,13 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@react-navigation/web": "^1.0.0-alpha.9",
+    "@react-navigation/web": "https://github.com/bdombro/web.git",
     "expo": "^34.0.1",
     "mobx": "^5.13.0",
     "mobx-react": "^6.1.3",
     "mobx-state-tree": "^3.14.1",
     "patch-package": "^6.1.4",
+    "query-string": "^6.8.3",
     "ramda": "^0.26.1",
     "react": "16.8.6",
     "react-dom": "npm:@hot-loader/react-dom",
@@ -30,6 +31,7 @@
     "react-native-hooks": "^0.9.0",
     "react-native-paper": "^3.0.0-alpha.5",
     "react-native-reanimated": "~1.1.0",
+    "react-native-safe-area-context": "^0.3.6",
     "react-native-screens": "1.0.0-alpha.22",
     "react-native-web": "^0.11.4",
     "react-navigation": "^4.0.5",
