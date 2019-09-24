@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useNavigation} from "react-navigation-hooks";
+// import {useNavigation} from "react-navigation-hooks";
 import {Platform} from "react-native";
 import {usePrivacy} from "../../../hooks/usePrivacy";
 import {ScreenDefaultLayout} from "../../layouts/ScreenDefault.layout";
@@ -7,8 +7,8 @@ import {Lorem, Title} from "../../modules";
 
 export function HomeInner (): React.ReactElement {
     usePrivacy(["identified"]);
-    const {getParam, setParams} = useNavigation();
-    const slug = getParam('slug');
+    // const {getParam, setParams} = useNavigation();
+    // const slug = getParam('slug');
     const [state, setState] = useState({
         seo: {
             title: "",
@@ -16,17 +16,17 @@ export function HomeInner (): React.ReactElement {
         }
     });
 
-    const fetchData = () => {
-        setState({...state, seo: {title: slug, description: slug}});
-        if(Platform.OS !== 'web') setParams({title: slug});
-    };
+    // const fetchData = () => {
+    //     setState({...state, seo: {title: slug, description: slug}});
+    //     if(Platform.OS !== 'web') setParams({title: slug});
+    // };
 
-    useEffect(fetchData, []);
-    useEffect(fetchData, [slug]);
+    // useEffect(fetchData, []);
+    // useEffect(fetchData, [slug]);
 
     return (
         <ScreenDefaultLayout pageMeta={state.seo}>
-            <Title>URL Param: {slug}</Title>
+            <Title>URL Param: </Title>
             <Lorem/>
         </ScreenDefaultLayout>
     );

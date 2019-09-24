@@ -1,23 +1,23 @@
 import React from "react";
 import {View} from "react-native";
 import {observer} from "mobx-react-lite";
-import {useNavigation} from "react-navigation-hooks";
+// import {useNavigation} from "react-navigation-hooks";
 import {ThemeConfig} from "../../../config/Theme.config";
-import {getBreadcrumbsOfActiveRoute} from "../../../lib/getBreadcrumbsOfActiveRoute";
+// import {getBreadcrumbsOfActiveRoute} from "../../../lib/getBreadcrumbsOfActiveRoute";
 import {GlobalState} from "../../../GlobalState";
 import {Text, Link} from "../";
 
 export const SidebarDefault = observer(function SidebarDefault() {
     const sidebarTheme = ThemeConfig.dark;
-    const breadcrumbs = getBreadcrumbsOfActiveRoute(useNavigation().state);
+    // const breadcrumbs = getBreadcrumbsOfActiveRoute(useNavigation().state);
 
     function SidebarItem({routeName, params = {}, label}: { routeName: string, params?: any, label: string }): React.ReactElement {
         return (
             <Text to={routeName} params={params} theme={sidebarTheme} style={{
-                ...breadcrumbs.includes(routeName) && {
-                    color: "white",
-                    textDecorationColor: "white",
-                }
+                // ...breadcrumbs.includes(routeName) && {
+                //     color: "white",
+                //     textDecorationColor: "white",
+                // }
             }}>
                 {label}
             </Text>

@@ -4,7 +4,7 @@
 import React from "react";
 import {flatten, mergeAll} from "ramda";
 import {Text as PText} from "react-native-paper";
-import {useNavigation} from "react-navigation-hooks";
+// import {useNavigation} from "react-navigation-hooks";
 import {Linking} from "expo";
 import {TextStyle} from "react-native";
 import {GlobalState} from "../../../GlobalState";
@@ -15,7 +15,7 @@ export type TextProps = React.ComponentProps<typeof PText> & {
 };
 
 export function Text ({to, params = {}, onPress, style = {}, ...props}: TextProps): React.ReactElement {
-    const {navigate} = useNavigation();
+    // const {navigate} = useNavigation();
 
     const textStyleBase: TextStyle = {
         ...(to || onPress) && {
@@ -33,7 +33,7 @@ export function Text ({to, params = {}, onPress, style = {}, ...props}: TextProp
                 if (to) {
                     if (to === '#') void 0;
                     else if (to.startsWith("http")) Linking.openURL(to);
-                    else navigate(to as string, params);
+                    // else navigate(to as string, params);
                 }
             }}
             style={textStyle}

@@ -4,7 +4,7 @@
 import React from "react";
 import {flatten, mergeAll} from "ramda";
 import {Button as PButton} from "react-native-paper";
-import {useNavigation} from "react-navigation-hooks";
+// import {useNavigation} from "react-navigation-hooks";
 import {Linking} from "expo";
 import {ViewStyle} from "react-native";
 import {GlobalState} from "../../../GlobalState";
@@ -15,7 +15,7 @@ export type ButtonProps = RequireAtLeastOne<React.ComponentProps<typeof PButton>
 }, 'to' | 'onPress'>;
 
 export function Button ({to, params = {}, style = {}, onPress, ...props}: ButtonProps): React.ReactElement {
-    const {navigate} = useNavigation();
+    // const {navigate} = useNavigation();
 
     const buttonStyleBase: ViewStyle = {
         marginBottom: 10,
@@ -31,7 +31,7 @@ export function Button ({to, params = {}, style = {}, onPress, ...props}: Button
                 if (to) {
                     if (to === '#') void 0;
                     else if (to.startsWith("http")) Linking.openURL(to);
-                    else navigate(to, params);
+                    // else navigate(to, params);
                 }
             }}
             {...props}

@@ -4,7 +4,7 @@ import {GlobalState} from "../../../GlobalState";
 import {ScreenDefaultLayout} from "../../layouts/ScreenDefault.layout";
 import {Button, Paragraph, Text, Title} from "../../modules";
 import {HeaderHomeSection} from "./header";
-import {GlobalStore} from "../../../state/global-store";
+// import {GlobalStore} from "../../../state/global-store";
 import {usePrivacy} from "../../../hooks/usePrivacy";
 import {Lorem} from "../../modules";
 
@@ -29,7 +29,7 @@ export const Home = observer(function Home (): React.ReactElement {
             </Paragraph>
 
             <Paragraph>
-                UserId: {GlobalStore.user.id} <Text onPress={GlobalStore.user.logout} to="LoginScreen">Logout</Text>
+                {/*UserId: {GlobalStore.user.id} <Text onPress={GlobalStore.user.logout} to="LoginScreen">Logout</Text>*/}
             </Paragraph>
 
             <Lorem/>

@@ -35,84 +35,79 @@ export type RouterProps = {
 // TODO: MST + Navigation integration
 // TODO: Testing
 // TODO: Storybook
-export function Router({theme}: RouterProps) {
-    const stackConfigDefault: NavigationStackConfig = {
-        ...GlobalState.viewportInfo.isLarge && {transitionConfig: () => fadeIn()},
-        headerMode: "none",
-    };
+const stackConfigDefault: NavigationStackConfig = {
+    ...GlobalState.viewportInfo.isLarge && {transitionConfig: () => fadeIn()},
+    headerMode: "none",
+};
 
-    const RouterApp = createAppContainer(
-        createNavigator(
-            GlobalLayout,
-            SwitchRouter({
+export const Router =
+    createStackNavigator({
+        IndexScreen: {screen: IndexScreen, path: ''},
 
-                IndexScreen: {screen: IndexScreen, path: ''},
-
-                TabNavigator: {
-                    path: '',
-                    screen: createNavigator(
-                        TabLayout,
-                        SwitchRouter({
-                            Tabs: {
-                                path: '',
-                                screen: createMaterialBottomTabNavigator({
-                                    HomeStack: {
-                                        path: "home",
-                                        navigationOptions: {
-                                            tabBarIcon: ({tintColor}) => <MaterialCommunityIcons name="home" size={25} color={tintColor}/>,
-                                        },
-                                        screen: createStackNavigator({
-                                            Home: {screen: HomeScreen, path: ""},
-                                            HomeInner: {screen: HomeInnerScreen, path: ":slug"},
-                                        }, stackConfigDefault)
-                                    },
-                                    Home2Stack: {
-                                        path: "home2",
-                                        navigationOptions: {
-                                            tabBarIcon: ({tintColor}) => <MaterialCommunityIcons name="home" size={25} color={tintColor}/>,
-                                        },
-                                        screen: createStackNavigator({
-                                            Home2: {screen: Home2Screen, path: ""}
-                                        }, stackConfigDefault)
-                                    },
-                                }, {
-                                    labeled: false,
-                                    shifting: false,
-                                    barStyle: {backgroundColor: theme.colors.background},
-                                    defaultNavigationOptions: {
-                                        ...GlobalState.viewportInfo.isLarge && {'tabBarVisible': false},
-                                    },
-                                }),
+        TabNavigator: {
+            path: '',
+            screen: createNavigator(
+                TabLayout,
+                SwitchRouter({
+                    Tabs: {
+                        path: '',
+                        screen: createMaterialBottomTabNavigator({
+                            HomeStack: {
+                                path: "home",
+                                navigationOptions: {
+                                    tabBarIcon: ({tintColor}) => <MaterialCommunityIcons name="home" size={25}
+                                                                                         color={tintColor}/>,
+                                },
+                                screen: createStackNavigator({
+                                    Home: {screen: HomeScreen, path: ""},
+                                    HomeInner: {screen: HomeInnerScreen, path: ":slug"},
+                                }, stackConfigDefault)
+                            },
+                            Home2Stack: {
+                                path: "home2",
+                                navigationOptions: {
+                                    tabBarIcon: ({tintColor}) => <MaterialCommunityIcons name="home" size={25}
+                                                                                         color={tintColor}/>,
+                                },
+                                screen: createStackNavigator({
+                                    Home2: {screen: Home2Screen, path: ""}
+                                }, stackConfigDefault)
+                            },
+                        }, {
+                            labeled: false,
+                            shifting: false,
+                            // barStyle: {backgroundColor: theme.colors.background},
+                            defaultNavigationOptions: {
+                                ...GlobalState.viewportInfo.isLarge && {'tabBarVisible': false},
                             },
                         }),
-                        {}
-                    )
-                },
+                    },
+                }),
+                {}
+            )
+        },
 
-                BlankScreen: {path: "blank", screen: BlankScreen},
-                LoginScreen: {path: "login", screen: LoginScreen},
-            }),
-            {}
-        ),
-    );
+        BlankScreen: {path: "blank", screen: BlankScreen},
+        LoginScreen: {path: "login", screen: LoginScreen},
+    },
+    {}
+);
 
-    // The following will persist the nav state to localstorage
-    // const persistNavigationState = async (navState) => {
-    //     if (Platform.OS === 'web') return;
-    //     try {
-    //         await AsyncStorage.setItem("router", JSON.stringify(navState))
-    //     } catch (err) {
-    //         // handle the error according to your needs
-    //     }
-    // };
-    // const loadNavigationState = async () => {
-    //     await AsyncStorage.removeItem("router"); // resets the state
-    //     if (Platform.OS === 'web') return;
-    //     return JSON.parse(await AsyncStorage.getItem("router"));
-    // };
-    //
-    // return <RouterApp persistNavigationState={persistNavigationState}
-    //                                         loadNavigationState={loadNavigationState}/>;
+// The following will persist the nav state to localstorage
+// const persistNavigationState = async (navState) => {
+//     if (Platform.OS === 'web') return;
+//     try {
+//         await AsyncStorage.setItem("router", JSON.stringify(navState))
+//     } catch (err) {
+//         // handle the error according to your needs
+//     }
+// };
+// const loadNavigationState = async () => {
+//     await AsyncStorage.removeItem("router"); // resets the state
+//     if (Platform.OS === 'web') return;
+//     return JSON.parse(await AsyncStorage.getItem("router"));
+// };
+//
+// return <RouterApp persistNavigationState={persistNavigationState}
+//                                         loadNavigationState={loadNavigationState}/>;
 
-    return <RouterApp/>;
-}

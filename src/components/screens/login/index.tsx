@@ -1,23 +1,23 @@
 import React from "react";
 import {Button, Title} from "../../modules";
 import {ScreenBlankLayout} from "../../layouts/ScreenBlank.layout";
-import {GlobalStore} from "../../../state/global-store";
-import {useNavigation} from "react-navigation-hooks";
+// import {GlobalStore} from "../../../state/global-store";
+// import {useNavigation} from "react-navigation-hooks";
 import {usePrivacyRedirectFrom} from "../../../hooks/usePrivacy";
 
 export function Login (): React.ReactElement {
     const pageMeta = {
         title: "Login",
     };
-    const {navigate} = useNavigation();
+    // const {navigate} = useNavigation();
 
     return (
         <ScreenBlankLayout pageMeta={pageMeta} scrollViewProps={{style: {paddingTop: 100, maxWidth: 300, alignSelf: "center"}}}>
             <Title>Welcome.</Title>
             <Button onPress={async () => {
-                await GlobalStore.user.login();
-                if (usePrivacyRedirectFrom) navigate(usePrivacyRedirectFrom);
-                else navigate("HomeStack")
+                // await GlobalStore.user.login();
+                // if (usePrivacyRedirectFrom) navigate(usePrivacyRedirectFrom);
+                // else navigate("HomeStack")
             }} mode="contained">Login</Button>
         </ScreenBlankLayout>
     );

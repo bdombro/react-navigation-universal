@@ -28,7 +28,7 @@ class GlobalStateClass {
   @observable
   theme = ThemeConfig.light;
   @action
-  toggleTheme = () => this.theme= this.theme.dark ? ThemeConfig.light : ThemeConfig.dark;
+  toggleTheme = () => this.theme= this.theme.dark ? ThemeConfig.light2 : ThemeConfig.dark;
 
   @observable
   forceRenderCount = 0;

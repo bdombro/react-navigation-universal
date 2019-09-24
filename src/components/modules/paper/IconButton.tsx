@@ -4,7 +4,7 @@
 import React from "react";
 import {Linking} from "expo";
 import {IconButton as PIconButton} from "react-native-paper";
-import {useNavigation} from "react-navigation-hooks";
+// import {useNavigation} from "react-navigation-hooks";
 
 export type IconButtonProps = RequireAtLeastOne<React.ComponentProps<typeof PIconButton> & {
     to?: string,
@@ -12,7 +12,7 @@ export type IconButtonProps = RequireAtLeastOne<React.ComponentProps<typeof PIco
 }, 'to' | 'onPress'>;
 
 export function IconButton ({to, params = {}, onPress, ...props}: IconButtonProps): React.ReactElement {
-    const {navigate} = useNavigation();
+    // const {navigate} = useNavigation();
 
     return (
         <PIconButton
@@ -21,7 +21,7 @@ export function IconButton ({to, params = {}, onPress, ...props}: IconButtonProp
                 if (to) {
                     if (to === '#') void 0;
                     else if (to.startsWith("http")) Linking.openURL(to);
-                    else navigate(to as string, params);
+                    // else navigate(to as string, params);
                 }
             }}
             {...props}
