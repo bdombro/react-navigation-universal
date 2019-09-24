@@ -29,7 +29,7 @@ export const Home = observer(function Home (): React.ReactElement {
             </Paragraph>
 
             <Paragraph>
-                UserId: {GlobalStore.user.id} <Text onPress={GlobalStore.user.logout} to="LoginScreen">Logout</Text>
+                UserId: {GlobalStore.user.id} <Text onPress={GlobalStore.user.logout}>Logout</Text>
             </Paragraph>
 
             <Lorem/>
