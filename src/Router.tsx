@@ -31,8 +31,6 @@ export type RouterProps = {
     theme: typeof ThemeConfig.light
 };
 
-// TODO: Update Expo
-// TODO: MST + Navigation integration
 // TODO: Testing
 // TODO: Storybook
 export function Router({theme}: RouterProps) {

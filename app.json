@@ -4,7 +4,7 @@
     "slug": "react-navigation-universal",
     "description": "A react-navigation demo for native AND web.",
     "privacy": "public",
-    "sdkVersion": "34.0.0",
+    "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
       "android",
