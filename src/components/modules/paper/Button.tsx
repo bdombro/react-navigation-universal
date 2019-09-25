@@ -7,7 +7,8 @@ import {Button as PButton} from "react-native-paper";
 import {useNavigation} from "react-navigation-hooks";
 import {Linking} from "expo";
 import {ViewStyle} from "react-native";
-import {GlobalStore} from "../../../state/global-store";
+import {useSelector} from "react-redux";
+import {StoreState} from "../../../reducers";
 
 export type ButtonProps = RequireAtLeastOne<React.ComponentProps<typeof PButton> & {
     to?: string,
@@ -16,10 +17,11 @@ export type ButtonProps = RequireAtLeastOne<React.ComponentProps<typeof PButton>
 
 export function Button ({to, params = {}, style = {}, onPress, ...props}: ButtonProps): React.ReactElement {
     const {navigate} = useNavigation();
+    const viewportInfo = useSelector((state: StoreState) => state.viewportInfo);
 
     const buttonStyleBase: ViewStyle = {
         marginBottom: 10,
-        ...GlobalStore.viewportInfo.isLarge && {maxWidth: 300},
+        ...viewportInfo.isLarge && {maxWidth: 300},
     };
     const buttonStyle = mergeAll(flatten([buttonStyleBase, style]));
 

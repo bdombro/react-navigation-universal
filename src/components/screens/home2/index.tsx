@@ -2,9 +2,12 @@ import React from "react";
 import {usePrivacy} from "../../../hooks/usePrivacy";
 import {ScreenDefaultLayout} from "../../layouts/ScreenDefault.layout";
 import {Lorem, Title} from "../../modules";
+import {useSelector} from "react-redux";
+import {StoreState} from "../../../reducers";
 
 export function Home2(): React.ReactElement {
     usePrivacy(["identified"]);
+    const viewportInfo = useSelector((state: StoreState) => state.viewportInfo);
     const pageMeta = {
         title: "Home2",
         description: "This is Home2.",
@@ -12,7 +15,7 @@ export function Home2(): React.ReactElement {
 
     return (
         <ScreenDefaultLayout pageMeta={pageMeta}>
-            <Title>{pageMeta.title}</Title>
+            {viewportInfo.isLarge && <Title>{pageMeta.title}</Title>}
             <Lorem/>
         </ScreenDefaultLayout>
     );

@@ -820,6 +820,13 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
+"@babel/runtime@^7.5.5":
+  version "7.6.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.6.2.tgz#c3d6e41b304ef10dcf13777a33e7694ec4a9a6dd"
+  integrity sha512-EXxN64agfUqqIGeEjI5dL5z0Sw0ZwWo1mLTi4mQowCZ42O59b7DRpZAnTC6OqdF28wMBMFKNb/4uFGrVaigSpg==
+  dependencies:
+    regenerator-runtime "^0.13.2"
+
 "@babel/template@^7.0.0", "@babel/template@^7.1.0", "@babel/template@^7.4.4", "@babel/template@^7.6.0":
   version "7.6.0"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.6.0.tgz#7f0159c7f5012230dad64cca42ec9bdb5c9536e6"
@@ -1089,7 +1096,7 @@
   resolved "https://registry.yarnpkg.com/@types/fbemitter/-/fbemitter-2.0.32.tgz#8ed204da0f54e9c8eaec31b1eec91e25132d082c"
   integrity sha1-jtIE2g9U6cjq7DGx7skeJRMtCCw=
 
-"@types/hoist-non-react-statics@^3.3.1":
+"@types/hoist-non-react-statics@^3.3.0", "@types/hoist-non-react-statics@^3.3.1":
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
   integrity sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==
@@ -1165,6 +1172,16 @@
   dependencies:
     "@types/prop-types" "*"
     "@types/react" "*"
+
+"@types/react-redux@^7.1.3":
+  version "7.1.3"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.3.tgz#7efc1e36267e9bf8b24ec89ac30a27a65c94cd25"
+  integrity sha512-coaQFfn6XrHF/4CSF8eBM9rUbi5TX6qVhS+KF89Z2nC9YdTKTckOpJLJyQocYLrXF0IFX+/ZUJwMvbZ0nNmkDg==
+  dependencies:
+    "@types/hoist-non-react-statics" "^3.3.0"
+    "@types/react" "*"
+    hoist-non-react-statics "^3.3.0"
+    redux "^4.0.0"
 
 "@types/react@*", "@types/react@^16.8.23":
   version "16.9.2"
@@ -6161,28 +6178,6 @@ mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@~0.5.1:
   dependencies:
     minimist "0.0.8"
 
-mobx-react-lite@1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-1.4.0.tgz#193beb5fdddf17ae61542f65ff951d84db402351"
-  integrity sha512-5xCuus+QITQpzKOjAOIQ/YxNhOl/En+PlNJF+5QU4Qxn9gnNMJBbweAdEW3HnuVQbfqDYEUnkGs5hmkIIStehg==
-
-mobx-react@^6.1.3:
-  version "6.1.3"
-  resolved "https://registry.yarnpkg.com/mobx-react/-/mobx-react-6.1.3.tgz#ad07880ea60cdcdb2a7e2a0d54e01379710cf00a"
-  integrity sha512-eT/jO9dYIoB1AlZwI2VC3iX0gPOeOIqZsiwg7tDJV1B7Z69h+TZZL3dgOE0UeS2zoHhGeKbP+K+OLeLMnnkGnA==
-  dependencies:
-    mobx-react-lite "1.4.0"
-
-mobx-state-tree@^3.14.1:
-  version "3.14.1"
-  resolved "https://registry.yarnpkg.com/mobx-state-tree/-/mobx-state-tree-3.14.1.tgz#0a523876b87817f5c8553a162e71b38044f0c9da"
-  integrity sha512-cmwO1jvYPgaJTGJtqId0Qod4cDqcJEWWCwSu/Uns7jFT+kWKzLFhzb9jxPub8YM3HSXg7HPGpKiLe970he9FOw==
-
-mobx@^5.13.0:
-  version "5.13.0"
-  resolved "https://registry.yarnpkg.com/mobx/-/mobx-5.13.0.tgz#0fd68f10aa5ff2d146a4ed9e145b53337cfbca59"
-  integrity sha512-eSAntMSMNj0PFL705rgv+aB/z1RjNqDnFEpBe18yQVreXTWiVgIrmBUXzjnJfuba+eo4eAk6zi+/gXQkSUea8A==
-
 morgan@^1.9.0, morgan@^1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.9.1.tgz#0a8d16734a1d9afbc824b99df87e738e58e2da59"
@@ -7565,11 +7560,6 @@ querystringify@^2.1.1:
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.1.tgz#60e5a5fd64a7f8bfa4d2ab2ed6fdf4c85bad154e"
   integrity sha512-w7fLxIRCRT7U8Qu53jQnJyPkYZIaR4n5151KMfcJlO/A9397Wxb1amJvROTK6TOnp7PfoAmg/qXiNHI+08jRfA==
 
-ramda@^0.25.0:
-  version "0.25.0"
-  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.25.0.tgz#8fdf68231cffa90bc2f9460390a0cb74a29b29a9"
-  integrity sha512-GXpfrYVPwx3K7RQ6aYT8KPS8XViSXUVJT1ONhoKPE9VAleW42YE+U+8VEyGWt41EnEQW7gwecYJriTI0pKoecQ==
-
 ramda@^0.26.1:
   version "0.26.1"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.26.1.tgz#8d41351eb8111c55353617fc3bbffad8e4d35d06"
@@ -7701,7 +7691,7 @@ react-hot-loader@^4.12.12:
     shallowequal "^1.1.0"
     source-map "^0.7.3"
 
-react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.6:
+react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.6, react-is@^16.9.0:
   version "16.9.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.9.0.tgz#21ca9561399aad0ff1a7701c01683e8ca981edcb"
   integrity sha512-tJBzzzIgnnRfEm046qRcURvwQnZVXmuCbscxUO5RWrGTXpon2d4c8mI0D8WE6ydVIm29JiLB6+RslkIvym9Rjw==
@@ -7921,6 +7911,18 @@ react-proxy@^1.1.7:
     lodash "^4.6.1"
     react-deep-force-update "^1.0.0"
 
+react-redux@^7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.1.1.tgz#ce6eee1b734a7a76e0788b3309bf78ff6b34fa0a"
+  integrity sha512-QsW0vcmVVdNQzEkrgzh2W3Ksvr8cqpAv5FhEk7tNEft+5pp7rXxAudTz3VOPawRkLIepItpkEIyLcN/VVXzjTg==
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    hoist-non-react-statics "^3.3.0"
+    invariant "^2.2.4"
+    loose-envify "^1.4.0"
+    prop-types "^15.7.2"
+    react-is "^16.9.0"
+
 react-timer-mixin@^0.13.4:
   version "0.13.4"
   resolved "https://registry.yarnpkg.com/react-timer-mixin/-/react-timer-mixin-0.13.4.tgz#75a00c3c94c13abe29b43d63b4c65a88fc8264d3"
@@ -7954,13 +7956,6 @@ reactotron-core-client@2.8.4:
   resolved "https://registry.yarnpkg.com/reactotron-core-client/-/reactotron-core-client-2.8.4.tgz#22ebbb379fa695a558d19747d23bb9af684b0cf2"
   integrity sha512-PIbnuOB4K/tnxACSjrwZn2kAGB9QEbdXwe/a2RgeNBzbTuDeCWSlkZni2cvsDlzsHMrr2H+rHsjBRb8ZUDGL8Q==
 
-reactotron-mst@^3.1.3:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/reactotron-mst/-/reactotron-mst-3.1.3.tgz#110401af04be4e1d8d9185e73f1c9e54e393f204"
-  integrity sha512-mYdg7Ajp0immBrUHifhrFV2bwFEcGu/8mOGOhlbYJ2jDCFB5ZmZ3jY8LuZUnvwpL3zmLZUVfJFeousEZP1XJ5g==
-  dependencies:
-    ramda "^0.25.0"
-
 reactotron-react-js@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/reactotron-react-js/-/reactotron-react-js-3.3.2.tgz#79e53e67d042f07103d27d15a77eaa253851203d"
@@ -7978,6 +7973,11 @@ reactotron-react-native@^4.0.0:
     query-string "6.8.1"
     reactotron-core-client "2.8.4"
     rn-host-detect "1.1.5"
+
+reactotron-redux@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/reactotron-redux/-/reactotron-redux-3.1.2.tgz#37301687d4e2a5548664d21fc7447d1171e08ab2"
+  integrity sha512-2ScTmE2+kxjKPc7+vsYuw+igkhd4tjoftn4ouugVudQCO7B5vXVyQwLkNv/feaFfFoPlCQSVeJVg7PdzDFOsEQ==
 
 read-pkg-up@^2.0.0:
   version "2.0.0"
@@ -8043,6 +8043,19 @@ recursive-readdir@2.2.2:
   integrity sha512-nRCcW9Sj7NuZwa2XvH9co8NPeXUBhZP7CRKJtU+cS6PW9FpCIFoI5ib0NT1ZrbNuPoRy0ylyCaUL8Gih4LSyFg==
   dependencies:
     minimatch "3.0.4"
+
+redux-thunk@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
+  integrity sha512-km6dclyFnmcvxhAcrQV2AkZmPQjzPDjgVlQtR0EQjxZPyJ0BnMf3in1ryuR8A2qU0HldVRfxYXbFSKlI3N7Slw==
+
+redux@^4.0.0, redux@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.4.tgz#4ee1aeb164b63d6a1bcc57ae4aa0b6e6fa7a3796"
+  integrity sha512-vKv4WdiJxOWKxK0yRoaK3Y4pxxB0ilzVx6dszU2W8wLxlb2yikRph4iV/ymtdJ6ZxpBLFbyrxklnT5yBbQSl3Q==
+  dependencies:
+    loose-envify "^1.4.0"
+    symbol-observable "^1.2.0"
 
 regenerate-unicode-properties@^8.1.0:
   version "8.1.0"
@@ -9051,6 +9064,11 @@ svgo@^1.0.0:
     stable "^0.1.8"
     unquote "~1.1.1"
     util.promisify "~1.0.0"
+
+symbol-observable@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
+  integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
 
 tapable@^1.0.0, tapable@^1.1.0:
   version "1.1.3"

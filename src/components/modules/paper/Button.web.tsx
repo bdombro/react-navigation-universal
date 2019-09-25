@@ -5,8 +5,9 @@ import React from "react";
 import {Button as PButton} from "react-native-paper";
 import {ViewStyle} from "react-native";
 import {mergeAll, flatten} from "ramda";
-import {GlobalStore} from "../../../state/global-store";
 import {Link} from "../";
+import {useSelector} from "react-redux";
+import {StoreState} from "../../../reducers";
 
 export type ButtonProps = RequireAtLeastOne<React.ComponentProps<typeof PButton> & {
     to?: string,
@@ -14,9 +15,11 @@ export type ButtonProps = RequireAtLeastOne<React.ComponentProps<typeof PButton>
 }, 'to' | 'onPress'>;
 
 export function Button ({to, params = {}, style = {}, onPress, ...props}: ButtonProps): React.ReactElement {
+    const viewportInfo = useSelector((state: StoreState) => state.viewportInfo);
+
     const buttonStyleBase: ViewStyle = {
         marginBottom: 10,
-        ...GlobalStore.viewportInfo.isLarge && {maxWidth: 300},
+        ...viewportInfo.isLarge && {maxWidth: 300},
     };
     const buttonStyle = mergeAll(flatten([buttonStyleBase, style]));
 

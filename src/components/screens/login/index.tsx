@@ -1,21 +1,24 @@
 import React from "react";
 import {useNavigation} from "react-navigation-hooks";
-import {GlobalStore} from "../../../state/global-store";
+import {useDispatch} from "react-redux";
 import {usePrivacyRedirectFrom} from "../../../hooks/usePrivacy";
 import {Button, Title} from "../../modules";
 import {ScreenBlankLayout} from "../../layouts/ScreenBlank.layout";
+import {setAuth} from "../../../actions";
 
+// TODO: Make a logout route
 export function Login (): React.ReactElement {
     const pageMeta = {
         title: "Login",
     };
     const {navigate} = useNavigation();
+    const dispatch = useDispatch();
 
     return (
         <ScreenBlankLayout pageMeta={pageMeta} scrollViewProps={{style: {paddingTop: 100, maxWidth: 300, alignSelf: "center"}}}>
             <Title>Welcome.</Title>
             <Button onPress={async () => {
-                GlobalStore.userSet({id: "12345", token: "1234567890", roles: ["admin", "identified"]});
+                dispatch(setAuth({userId: "12345", token: "1234567890", roles: ["admin", "identified"]}));
                 if (usePrivacyRedirectFrom) navigate(usePrivacyRedirectFrom);
                 else navigate("HomeStack")
             }} mode="contained">Login</Button>
