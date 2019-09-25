@@ -1,16 +1,17 @@
 import React, {useMemo} from "react";
 import {View} from "react-native";
-import {observer} from "mobx-react-lite";
 import {useNavigation} from "react-navigation-hooks";
+import {useDispatch} from "react-redux";
 import {ThemeConfig} from "../../../config/Theme.config";
-import {GlobalStore} from "../../../state/global-store";
 import {getBreadcrumbsOfActiveRoute} from "../../../lib/getBreadcrumbsOfActiveRoute";
+import {toggleTheme} from "../../../actions/theme";
 import {Text} from "../";
 
-export const SidebarDefault = observer(function SidebarDefault() {
+export function SidebarDefault() {
     const sidebarTheme = ThemeConfig.dark;
     const navigation = useNavigation();
     const breadcrumbs = useMemo(() => getBreadcrumbsOfActiveRoute(navigation.state), [navigation.state]);
+    const dispatch = useDispatch();
 
     function SidebarItem({routeName, params = {}, label}: { routeName: string, params?: any, label: string }): React.ReactElement {
         return (
@@ -32,8 +33,8 @@ export const SidebarDefault = observer(function SidebarDefault() {
             <SidebarItem routeName="Home2Stack" label="Home2"/>
             <SidebarItem routeName="BlankScreen" label="Blank"/>
 
-            <Text onPress={GlobalStore.themeToggle} theme={sidebarTheme}>Toggle Theme</Text>
+            <Text onPress={() => dispatch(toggleTheme())} theme={sidebarTheme}>Toggle Theme</Text>
 
         </View>
     );
-});
+}

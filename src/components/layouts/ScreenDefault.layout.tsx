@@ -12,12 +12,14 @@ import {
     NavigationInjectedProps,
 } from "@react-navigation/core";
 import {SafeAreaView} from "react-navigation";
-import {FooterSection} from "../modules";
+import {connect} from "react-redux";
 import {setWebPageMeta, WebPageMeta} from "../../lib/webPageMeta";
-import {GlobalStore} from "../../state/global-store";
-import {HeaderDefaultSection} from "../modules";
+import {StoreState, Theme, ViewportInfo} from "../../reducers";
+import {FooterSection, HeaderDefaultSection} from "../modules";
 
 class ScreenDefaultLayoutBase extends React.Component<NavigationInjectedProps & {
+    theme: Theme,
+    viewportInfo: ViewportInfo,
     pageMeta: Partial<WebPageMeta>,
     header?: React.ReactNode,
     scrollViewProps?: ScrollViewProps,
@@ -85,7 +87,7 @@ class ScreenDefaultLayoutBase extends React.Component<NavigationInjectedProps & 
         };
 
 
-        return <View style={{backgroundColor: GlobalStore.theme.dark ? "#333" : "white",}}>
+        return <View style={{backgroundColor: this.props.theme.dark ? "#333" : "white",}}>
             {this.props.header
                 ? <this.props.header {...headerProps}/>
                 : <HeaderDefaultSection {...headerProps}/>
@@ -105,7 +107,7 @@ class ScreenDefaultLayoutBase extends React.Component<NavigationInjectedProps & 
                     {this.props.children}
                     <FooterSection/>
                     <View style={{
-                        ...GlobalStore.viewportInfo.isSmall && {paddingBottom: 60}
+                        ...this.props.viewportInfo.isSmall && {paddingBottom: 60}
                     }}/>
                 </ScrollView>
             </SafeAreaView>
@@ -113,5 +115,14 @@ class ScreenDefaultLayoutBase extends React.Component<NavigationInjectedProps & 
     }
 }
 
-export const ScreenDefaultLayout = withNavigation(ScreenDefaultLayoutBase);
+const mapStateToProps = (state: StoreState) => ({
+    theme: state.theme,
+    viewportInfo: state.viewportInfo,
+});
+
+const ScreenDefaultLayoutWithState = connect(
+    mapStateToProps,
+)(ScreenDefaultLayoutBase);
+
+export const ScreenDefaultLayout = withNavigation(ScreenDefaultLayoutWithState);
 

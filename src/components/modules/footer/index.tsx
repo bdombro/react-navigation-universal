@@ -1,19 +1,22 @@
 import React from "react";
 import {View} from "react-native";
-import {observer} from "mobx-react-lite";
 import {Text} from "../index";
-import {GlobalStore} from "../../../state/global-store";
+import {useSelector} from "react-redux";
+import {StoreState} from "../../../reducers";
 
-export const FooterSection = observer(function FooterSection (): React.ReactElement {
-    return GlobalStore.viewportInfo.isLarge && (
+export function FooterSection (): React.ReactElement {
+    const theme = useSelector((state: StoreState) => state.theme);
+    const viewportInfo = useSelector((state: StoreState) => state.viewportInfo);
+
+    return viewportInfo.isLarge && (
         <View
             style={{
                 alignItems: "center",
-                backgroundColor: GlobalStore.theme.dark ? GlobalStore.theme.colors.primaryDark : GlobalStore.theme.colors.primaryLight,
+                backgroundColor: theme.dark ? theme.colors.primaryDark : theme.colors.primaryLight,
                 paddingVertical: 30
             }}
         >
             <Text>Thar be footer!</Text>
         </View>
     );
-});
+}

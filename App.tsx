@@ -1,35 +1,62 @@
-import React from "react";
 import {hot} from 'react-hot-loader';
-import {Platform} from "react-native";
+import React, {useEffect} from "react";
+import {Dimensions, Platform} from "react-native";
 import {Provider as PaperProvider} from 'react-native-paper';
-import {Observer} from "mobx-react-lite";
-import {reaction, toJS} from "mobx";
+import {createStore, applyMiddleware, compose} from 'redux';
+import thunk from 'redux-thunk';
+import {Provider as ReduxProvider, useDispatch, useSelector} from 'react-redux';
 import "./src/lib/filterConsole";
 import {Router} from "./src/Router";
-import {GlobalStore} from "./src/state/global-store";
+import {reducers, StoreState} from "./src/reducers";
+import {getViewportInfo} from "./src/lib/getViewportInfo";
+import {setViewportInfo} from "./src/actions";
+import {Reactotron} from './src/config/Reactotron.config';
 
-if(__DEV__) {
-    import('./src/config/Reactotron.config')
+// Add support for chrome-redux-dev-tools
+// @ts-ignore missing window param
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(reducers, composeEnhancers(
+    applyMiddleware(thunk),
+    // @ts-ignore untyped feature in reactotron
+    Reactotron.createEnhancer(),
+));
+let widthCurrent = Dimensions.get("window").width;
+
+function AppGuts(): React.ReactElement {
+    const theme = useSelector((state: StoreState) => state.theme);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const widthNext = Dimensions.get("window").width;
+            if (widthNext !== widthCurrent) {
+                widthCurrent = widthNext;
+                dispatch(setViewportInfo(getViewportInfo()));
+            }
+        }, 200);
+        return () => clearInterval(interval);
+    }, [false]);
+
+    return (
+        <PaperProvider theme={theme}>
+            <Router theme={theme}/>
+        </PaperProvider>
+    );
 }
+
+let HotAppGuts = AppGuts;
+if (Platform.OS === 'web') HotAppGuts = hot(module)(AppGuts);
 
 class App extends React.PureComponent {
     render() {
         return (
-            <Observer>{() => {
-                reaction(() => GlobalStore.forceRenderCount, count => {
-                    console.log(`Forcing Rerender: Count ${count}`);
-                    this.forceUpdate();
-                });
-                return (
-                    <PaperProvider theme={toJS(GlobalStore.theme)}>
-                        <Router theme={GlobalStore.theme}/>
-                    </PaperProvider>
-                )
-            }}</Observer>
+            <ReduxProvider store={store}>
+                <HotAppGuts/>
+            </ReduxProvider>
         );
     }
 }
 
-let HotApp = App;
-if (Platform.OS === 'web') HotApp = hot(module)(App);
-export default HotApp;
+export default App;
+
