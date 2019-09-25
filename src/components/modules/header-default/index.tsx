@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useMemo, useState} from "react";
 import {observer} from "mobx-react-lite";
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {Animated, View} from "react-native";
 import {NavigationStackProp} from "react-navigation-stack/src/types";
-import {GlobalState} from "../../../GlobalState";
+import {GlobalStore} from "../../../state/global-store";
+import {checkGoBackIsAvailable} from "../../../lib/checkGoBackIsAvailable";
 import {Appbar, Avatar, IconButton, Link} from '../';
 
 export type HeaderDefaultSectionProps = {
@@ -14,35 +15,29 @@ export type HeaderDefaultSectionProps = {
 };
 
 export const HeaderDefaultSection = observer(function HeaderDefaultSection(
-    {
-        navigation,
-        title,
-        scrollOffset,
-        scrollUpOffset,
-    }: HeaderDefaultSectionProps
+    {navigation, title, scrollOffset, scrollUpOffset,}: HeaderDefaultSectionProps
 ): React.ReactElement {
-
+    const goBackIsAvailable = useMemo(() => checkGoBackIsAvailable(navigation), [navigation.state]);
 
     React.useEffect(() => {
-        if (GlobalState.viewportInfo.isSmall) titleOpacity.setValue(1);
+        if (GlobalStore.viewportInfo.isSmall) titleOpacity.setValue(1);
         else titleOpacity.setValue(
-            Math.min(Math.max(scrollOffset/80 - .5, 0), 1)
+            Math.min(Math.max(scrollOffset / 80 - .5, 0), 1)
         );
     }, [scrollOffset]);
 
 
     const [titleOpacity] = useState(new Animated.Value(0));
-    const [menuIsOpen, setMenuIsOpen] = useState(false);
 
     return (
         <Appbar.Header
             style={{
-                backgroundColor: GlobalState.theme.colors.background,
+                backgroundColor: GlobalStore.theme.colors.background,
                 elevation: 0,
-                ...GlobalState.viewportInfo.isLarge && {height: 46}
+                ...GlobalStore.viewportInfo.isLarge && {height: 46}
             }}
         >
-            {!navigation.isFirstRouteInParent() && <Appbar.BackAction onPress={() => navigation.goBack()}/>}
+            {goBackIsAvailable && <Appbar.BackAction onPress={() => navigation.goBack()}/>}
             <Appbar.Content
                 title={
                     <Animated.Text style={{
@@ -52,10 +47,10 @@ export const HeaderDefaultSection = observer(function HeaderDefaultSection(
             />
 
 
-            {GlobalState.viewportInfo.isLarge && <>
-                <IconButton icon="magnify" to="BlankScreen" size={22} color={GlobalState.theme.colors.text}/>
+            {GlobalStore.viewportInfo.isLarge && <>
+                <IconButton icon="magnify" to="BlankScreen" size={22} color={GlobalStore.theme.colors.text}/>
                 <View>
-                    <IconButton icon="bell-outline" to="BlankScreen" size={22} color={GlobalState.theme.colors.text}/>
+                    <IconButton icon="bell-outline" to="BlankScreen" size={22} color={GlobalStore.theme.colors.text}/>
                     {/*{!notificationQuery.loading && !!notificationQuery.data.length && (*/}
                     <MaterialCommunityIcons
                         name="alert-box"
@@ -82,7 +77,7 @@ export const HeaderDefaultSection = observer(function HeaderDefaultSection(
                     icon="dots-vertical"
                     to="BlankScreen"
                     size={22}
-                    color={GlobalState.theme.colors.text}
+                    color={GlobalStore.theme.colors.text}
                     style={{marginLeft: -5, marginRight: -12}}
                 />
             </>}

@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import {NavigationInjectedProps, withNavigation} from "react-navigation";
 import {setWebPageMeta, WebPageMeta} from "../../lib/webPageMeta";
-import {GlobalState} from "../../GlobalState";
+import {GlobalStore} from "../../state/global-store";
 
 export class ScreenBlankLayoutBase extends React.Component<NavigationInjectedProps & {
     pageMeta: Partial<WebPageMeta>,
@@ -35,7 +35,7 @@ export class ScreenBlankLayoutBase extends React.Component<NavigationInjectedPro
     }
 
     render() {
-        return <View style={{backgroundColor: GlobalState.theme.dark ? "#333" : "white",}}>
+        return <View style={{backgroundColor: GlobalStore.theme.dark ? "#333" : "white",}}>
             <ScrollView contentInsetAdjustmentBehavior="automatic"{...this.props.scrollViewProps}>
                 {this.props.children}
             </ScrollView>

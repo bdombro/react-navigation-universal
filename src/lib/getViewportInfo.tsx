@@ -1,7 +1,24 @@
 import { Dimensions, Platform } from 'react-native';
 import Constants from 'expo-constants';
 
-export function getViewportInfo() {
+export type getViewportInfoResponse = {
+  width: number,
+  heightUnsafe: number,
+  heightStatusBar: number,
+  heightBottomSpeaker: number,
+  heightHeader: number,
+  heightFooter: number,
+  height: number,
+  heightBody: number,
+  isSmall: boolean,
+  isSmallWeb: boolean,
+  isSmallNative: boolean,
+  isLarge: boolean,
+  isLargeWeb: boolean,
+  isLargeNative: boolean,
+}
+
+export function getViewportInfo(): getViewportInfoResponse {
   const width = Dimensions.get('window').width;
   const height = Dimensions.get('window').height;
   const isSmall = width < 720;

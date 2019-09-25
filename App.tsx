@@ -6,23 +6,23 @@ import {Observer} from "mobx-react-lite";
 import {reaction, toJS} from "mobx";
 import "./src/lib/filterConsole";
 import {Router} from "./src/Router";
-import {GlobalState} from "./src/GlobalState";
+import {GlobalStore} from "./src/state/global-store";
 
 if(__DEV__) {
-    import('./src/config/Reactotron.config').then(() => console.log('Reactotron Configured'))
+    import('./src/config/Reactotron.config')
 }
 
 class App extends React.PureComponent {
     render() {
         return (
             <Observer>{() => {
-                reaction(() => GlobalState.forceRenderCount, count => {
+                reaction(() => GlobalStore.forceRenderCount, count => {
                     console.log(`Forcing Rerender: Count ${count}`);
                     this.forceUpdate();
                 });
                 return (
-                    <PaperProvider theme={toJS(GlobalState.theme)}>
-                        <Router theme={GlobalState.theme}/>
+                    <PaperProvider theme={toJS(GlobalStore.theme)}>
+                        <Router theme={GlobalStore.theme}/>
                     </PaperProvider>
                 )
             }}</Observer>

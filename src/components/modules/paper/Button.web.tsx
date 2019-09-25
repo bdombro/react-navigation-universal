@@ -5,8 +5,8 @@ import React from "react";
 import {Button as PButton} from "react-native-paper";
 import {ViewStyle} from "react-native";
 import {mergeAll, flatten} from "ramda";
+import {GlobalStore} from "../../../state/global-store";
 import {Link} from "../";
-import {GlobalState} from "../../../GlobalState";
 
 export type ButtonProps = RequireAtLeastOne<React.ComponentProps<typeof PButton> & {
     to?: string,
@@ -16,7 +16,7 @@ export type ButtonProps = RequireAtLeastOne<React.ComponentProps<typeof PButton>
 export function Button ({to, params = {}, style = {}, onPress, ...props}: ButtonProps): React.ReactElement {
     const buttonStyleBase: ViewStyle = {
         marginBottom: 10,
-        ...GlobalState.viewportInfo.isLarge && {maxWidth: 300},
+        ...GlobalStore.viewportInfo.isLarge && {maxWidth: 300},
     };
     const buttonStyle = mergeAll(flatten([buttonStyleBase, style]));
 

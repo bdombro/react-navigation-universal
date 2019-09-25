@@ -11,11 +11,11 @@ import {
     withNavigation,
     NavigationInjectedProps,
 } from "@react-navigation/core";
+import {SafeAreaView} from "react-navigation";
 import {FooterSection} from "../modules";
 import {setWebPageMeta, WebPageMeta} from "../../lib/webPageMeta";
+import {GlobalStore} from "../../state/global-store";
 import {HeaderDefaultSection} from "../modules";
-import {SafeAreaView} from "react-navigation";
-import {GlobalState} from "../../GlobalState";
 
 class ScreenDefaultLayoutBase extends React.Component<NavigationInjectedProps & {
     pageMeta: Partial<WebPageMeta>,
@@ -85,7 +85,7 @@ class ScreenDefaultLayoutBase extends React.Component<NavigationInjectedProps & 
         };
 
 
-        return <View style={{backgroundColor: GlobalState.theme.dark ? "#333" : "white",}}>
+        return <View style={{backgroundColor: GlobalStore.theme.dark ? "#333" : "white",}}>
             {this.props.header
                 ? <this.props.header {...headerProps}/>
                 : <HeaderDefaultSection {...headerProps}/>
@@ -105,7 +105,7 @@ class ScreenDefaultLayoutBase extends React.Component<NavigationInjectedProps & 
                     {this.props.children}
                     <FooterSection/>
                     <View style={{
-                        ...GlobalState.viewportInfo.isSmall && {paddingBottom: 60}
+                        ...GlobalStore.viewportInfo.isSmall && {paddingBottom: 60}
                     }}/>
                 </ScrollView>
             </SafeAreaView>

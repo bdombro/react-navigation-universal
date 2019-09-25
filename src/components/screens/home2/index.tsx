@@ -1,7 +1,7 @@
 import React from "react";
 import {usePrivacy} from "../../../hooks/usePrivacy";
-import {Lorem, Title} from "../../modules";
 import {ScreenDefaultLayout} from "../../layouts/ScreenDefault.layout";
+import {Lorem, Title} from "../../modules";
 
 export function Home2(): React.ReactElement {
     usePrivacy(["identified"]);

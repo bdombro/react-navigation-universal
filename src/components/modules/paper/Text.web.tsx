@@ -6,7 +6,7 @@ import {Text as PText} from "react-native-paper";
 import {Link} from "../";
 import {TextStyle} from "react-native";
 import {flatten, mergeAll} from "ramda";
-import {GlobalState} from "../../../GlobalState";
+import {GlobalStore} from "../../../state/global-store";
 
 export type TextProps = React.ComponentProps<typeof PText> & {
     to?: string,
@@ -16,9 +16,9 @@ export type TextProps = React.ComponentProps<typeof PText> & {
 export function Text ({to, params = {}, onPress, style = {}, ...props}: TextProps): React.ReactElement {
     const textStyleBase: TextStyle = {
         ...(to || onPress) && {
-            color: props.theme && props.theme.colors.link || GlobalState.theme.colors.link,
+            color: props.theme && props.theme.colors.link || GlobalStore.theme.colors.link,
             textDecorationLine: "underline",
-            textDecorationColor: props.theme && props.theme.colors.link || GlobalState.theme.colors.link,
+            textDecorationColor: props.theme && props.theme.colors.link || GlobalStore.theme.colors.link,
         }
     };
     const textStyle = mergeAll(flatten([textStyleBase, style]));

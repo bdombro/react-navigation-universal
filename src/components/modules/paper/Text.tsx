@@ -7,7 +7,7 @@ import {Text as PText} from "react-native-paper";
 import {useNavigation} from "react-navigation-hooks";
 import {Linking} from "expo";
 import {TextStyle} from "react-native";
-import {GlobalState} from "../../../GlobalState";
+import {GlobalStore} from "../../../state/global-store";
 
 export type TextProps = React.ComponentProps<typeof PText> & {
     to?: string,
@@ -19,9 +19,9 @@ export function Text ({to, params = {}, onPress, style = {}, ...props}: TextProp
 
     const textStyleBase: TextStyle = {
         ...(to || onPress) && {
-            color: props.theme && props.theme.colors.link || GlobalState.theme.colors.link,
+            color: props.theme && props.theme.colors.link || GlobalStore.theme.colors.link,
             textDecorationLine: "underline",
-            textDecorationColor: props.theme && props.theme.colors.link || GlobalState.theme.colors.link,
+            textDecorationColor: props.theme && props.theme.colors.link || GlobalStore.theme.colors.link,
         }
     };
     const textStyle = mergeAll(flatten([textStyleBase, style]));

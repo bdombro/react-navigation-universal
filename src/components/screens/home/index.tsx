@@ -1,12 +1,10 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {observer} from "mobx-react-lite";
-import {GlobalState} from "../../../GlobalState";
-import {ScreenDefaultLayout} from "../../layouts/ScreenDefault.layout";
-import {Button, Paragraph, Text, Title} from "../../modules";
-import {HeaderHomeSection} from "./header";
 import {GlobalStore} from "../../../state/global-store";
 import {usePrivacy} from "../../../hooks/usePrivacy";
-import {Lorem} from "../../modules";
+import {Button, Lorem, Paragraph, Text, Title} from "../../modules";
+import {ScreenDefaultLayout} from "../../layouts/ScreenDefault.layout";
+import {HeaderHomeSection} from "./header";
 
 export const Home = observer(function Home (): React.ReactElement {
     usePrivacy(["identified"]);
@@ -19,17 +17,17 @@ export const Home = observer(function Home (): React.ReactElement {
             header={HeaderHomeSection} pageMeta={pageMeta}
             scrollViewProps={{
                 style: {
-                    ...GlobalState.viewportInfo.isSmall && {'paddingTop': 54},
+                    ...GlobalStore.viewportInfo.isSmall && {'paddingTop': 54},
                 }
             }}
         >
-            {GlobalState.viewportInfo.isLarge && <Title>RNav Universal</Title>}
+            {GlobalStore.viewportInfo.isLarge && <Title>RNav Universal</Title>}
             <Paragraph>
-                Click <Text onPress={GlobalState.toggleTheme}>here</Text> to toggle theme.
+                Click <Text onPress={GlobalStore.themeToggle}>here</Text> to toggle theme.
             </Paragraph>
 
             <Paragraph>
-                UserId: {GlobalStore.user.id} <Text onPress={GlobalStore.user.logout}>Logout</Text>
+                UserId: {GlobalStore.user.id} <Text onPress={GlobalStore.userReset}>Logout</Text>
             </Paragraph>
 
             <Lorem/>

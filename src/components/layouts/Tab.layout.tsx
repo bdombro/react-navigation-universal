@@ -1,9 +1,9 @@
+import React from "react";
 import {Dimensions, View} from "react-native";
 import {SceneView} from "react-navigation";
-import React from "react";
-import {SidebarDefault} from "../modules/sidebar-default";
-import {GlobalState} from "../../GlobalState";
 import {observer} from "mobx-react-lite";
+import {SidebarDefault} from "../modules/sidebar-default";
+import {GlobalStore} from "../../state/global-store";
 
 const isLarge = Dimensions.get('window').width > 720;
 
@@ -25,7 +25,7 @@ export const TabLayout = observer(function TabLayout({descriptors, navigation}: 
                     // @ts-ignore: ignore untyped position fixed
                     style={{
                         position: "fixed", top: 0, left: 0, bottom: 0, width: 200, zIndex: 9999,
-                        backgroundColor: GlobalState.theme.dark ? "#242424" : GlobalState.theme.colors.primaryDark,
+                        backgroundColor: GlobalStore.theme.dark ? "#242424" : GlobalStore.theme.colors.primaryDark,
                     }}
                 >
                     <SidebarDefault/>

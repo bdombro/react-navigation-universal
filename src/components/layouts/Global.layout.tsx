@@ -1,6 +1,6 @@
+import React from "react";
 import {View} from "react-native";
 import {SceneView} from "react-navigation";
-import React from "react";
 import {observer} from "mobx-react-lite";
 
 export const GlobalLayout = observer(function GlobalLayout({descriptors, navigation}: any): React.ReactElement {

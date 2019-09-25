@@ -22,8 +22,8 @@ import {HomeScreen} from "./components/screens/home";
 import {Home2Screen} from "./components/screens/home2";
 import {HomeInnerScreen} from "./components/screens/home-inner";
 import {BlankScreen} from "./components/screens/blank";
-import {GlobalState} from "./GlobalState";
 import {ThemeConfig} from "./config/Theme.config";
+import {GlobalStore} from "./state/global-store";
 
 const createAppContainer = Platform.OS === 'web' ? createAppContainerWeb : createAppContainerNative;
 
@@ -37,7 +37,7 @@ export type RouterProps = {
 // TODO: Storybook
 export function Router({theme}: RouterProps) {
     const stackConfigDefault: NavigationStackConfig = {
-        ...GlobalState.viewportInfo.isLarge && {transitionConfig: () => fadeIn()},
+        ...GlobalStore.viewportInfo.isLarge && {transitionConfig: () => fadeIn()},
         headerMode: "none",
     };
 
@@ -80,7 +80,7 @@ export function Router({theme}: RouterProps) {
                                     shifting: false,
                                     barStyle: {backgroundColor: theme.colors.background},
                                     defaultNavigationOptions: {
-                                        ...GlobalState.viewportInfo.isLarge && {'tabBarVisible': false},
+                                        ...GlobalStore.viewportInfo.isLarge && {'tabBarVisible': false},
                                     },
                                 }),
                             },

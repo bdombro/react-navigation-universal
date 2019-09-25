@@ -1,40 +1,41 @@
-import {onSnapshot, types} from "mobx-state-tree"
+import {Dimensions} from "react-native";
+import {types} from "mobx-state-tree"
 import {Reactotron} from "../config/Reactotron.config";
-import {sleep} from "../lib/sleep";
-import {set} from "mobx";
+import {ThemeConfig} from "../config/Theme.config";
+import {getViewportInfo, getViewportInfoResponse} from "../lib/getViewportInfo";
 
-const UserModel = types
-    .model("User", {
-        id: types.string,
-        token: types.string,
-        // roles: types.array(types.enumeration("roles", ["admin", "identified", "unidentified"])),
-        // roles: types.string,
-        roles: types.frozen(),
-    })
-    .actions(self => ({
-        async login() {
-            // self.id = "12345";
-            // self.token = "1234567890";
-            // self.roles = ["admin","identified"];
-            set(self, {
-                id: "12345",
-                token: "1234567890",
-                roles: ["admin", "identified"],
-            });
-        },
-        async logout() {
-            set(self, {id: "", token: "", roles: []});
-        }
-    }));
+interface User {id: string, token: string, roles: string[]};
 
 const GlobalStoreModel = types
     .model("GlobalStore", {
-        user: UserModel,
-    });
+        forceRenderCount: types.number,
+        theme: types.frozen<typeof ThemeConfig.light>(),
+        viewportInfo: types.frozen<getViewportInfoResponse>(),
+        sidebarToggled: types.boolean,
+        user: types.frozen<User>(),
+    })
+    .actions(self => ({
+        themeToggle() {
+            self.theme = self.theme.dark ? ThemeConfig.light : ThemeConfig.dark;
+        },
+        viewportInfoRefresh() {
+            self.viewportInfo = getViewportInfo();
+        },
+        userSet(userNext: User) {
+            self.user = userNext;
+        },
+        userReset() {
+            self.user = {id: "", token: "", roles: []};
+        }
+    }));
 
 // create an instance from a snapshot
 export const GlobalStore = GlobalStoreModel.create({
-    user: {id: "", token: "", roles: []}
+    forceRenderCount: 0,
+    theme: ThemeConfig.light,
+    viewportInfo: getViewportInfo(),
+    sidebarToggled: getViewportInfo().isLarge,
+    user: {id: "", token: "", roles: []},
 });
 
 // @ts-ignore: Reactotron.trackMstNode exists but untyped.
@@ -44,3 +45,10 @@ Reactotron.trackMstNode(GlobalStore);
 // onSnapshot(GlobalStore, snapshot => {
 //     console.dir(snapshot)
 // });
+
+setInterval(() => {
+    const width = Dimensions.get('window').width;
+    const height = Dimensions.get('window').height;
+    if (width != GlobalStore.viewportInfo.width || height != GlobalStore.viewportInfo.height)
+        GlobalStore.viewportInfoRefresh();
+}, 200);

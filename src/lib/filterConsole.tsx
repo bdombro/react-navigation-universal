@@ -6,7 +6,11 @@
 const originalWarn = console.warn;
 console.warn = function warn(...args) {
     if (args.length > 0 && typeof args[0] === 'string' && (
-            /^Require cycle: /.test(args[0])
+        /^Require cycle: /.test(args[0])
+        || /^Warning: componentWillMount has been renamed/.test(args[0])
+        || /^Warning: componentWillReceiveProps has been renamed/.test(args[0])
+        || /^Animated: `useNativeDriver` is not supported because the native animated module is missing/.test(args[0])
+        || /^PanGestureHandler is not yet supported on web/.test(args[0])
     )) {
         return;
     }

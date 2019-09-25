@@ -1,10 +1,9 @@
 import React, {useState} from "react";
 import {observer} from "mobx-react-lite";
-import {Appbar, IconButton, Title} from '../../modules';
 import {NavigationStackProp} from "react-navigation-stack/src/types";
 import {Animated} from "react-native";
-import {GlobalState} from "../../../GlobalState";
-import {HeaderDefaultSection} from "../../modules";
+import {GlobalStore} from "../../../state/global-store";
+import {Appbar, HeaderDefaultSection, IconButton, Title} from '../../modules';
 
 export type HeaderHomeSectionProps = {
     navigation: NavigationStackProp,
@@ -31,7 +30,7 @@ export const HeaderHomeSection = observer(function HeaderHomeSection(
         ));
     }, [scrollOffset]);
 
-    if (GlobalState.viewportInfo.isLarge)
+    if (GlobalStore.viewportInfo.isLarge)
         return <HeaderDefaultSection {...{navigation, title, scrollOffset, scrollUpOffset}}/>;
 
     return (
@@ -48,9 +47,9 @@ export const HeaderHomeSection = observer(function HeaderHomeSection(
         >
             <Appbar.Header
                 style={{
-                    backgroundColor: GlobalState.theme.colors.background,
+                    backgroundColor: GlobalStore.theme.colors.background,
                     elevation: 0,
-                    ...GlobalState.viewportInfo.isLarge && {height: 46}
+                    ...GlobalStore.viewportInfo.isLarge && {height: 46}
                 }}
             >
                 <Animated.View
@@ -74,7 +73,7 @@ export const HeaderHomeSection = observer(function HeaderHomeSection(
                         }),
                     }}
                 >
-                    <IconButton icon="magnify" to="Blank" size={22} color={GlobalState.theme.colors.text}/>
+                    <IconButton icon="magnify" to="Blank" size={22} color={GlobalStore.theme.colors.text}/>
                 </Animated.View>
             </Appbar.Header>
         </Animated.View>
