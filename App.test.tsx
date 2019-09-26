@@ -1,9 +1,9 @@
 import 'react-native';
 import * as React from 'react';
 import NavigationTestUtils from 'react-navigation/NavigationTestUtils';
-import renderer from 'react-test-renderer';
+import * as renderer from 'react-test-renderer';
 
-import App from "./App.tsx";
+import App from "./App";
 
 describe('App', () => {
   jest.useFakeTimers();
