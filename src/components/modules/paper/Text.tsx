@@ -1,7 +1,7 @@
 /**
  * Text has been extended to support nav linking
  */
-import React from "react";
+import * as React from "react";
 import {flatten, mergeAll} from "ramda";
 import {Text as PText} from "react-native-paper";
 import {useNavigation} from "react-navigation-hooks";
@@ -30,6 +30,7 @@ export function Text ({to, params = {}, onPress, style = {}, ...props}: TextProp
 
     return (
         <PText
+            testID="Text"
             onPress={async e => {
                 if (onPress) await onPress(e);
                 if (to) {

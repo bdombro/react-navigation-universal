@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import * as React from "react";
 import {useNavigation} from "react-navigation-hooks";
 import {Platform} from "react-native";
 import {usePrivacy} from "../../../hooks/usePrivacy";
@@ -9,7 +9,7 @@ export function HomeInner (): React.ReactElement {
     usePrivacy(["identified"]);
     const {getParam, setParams} = useNavigation();
     const slug = getParam('slug');
-    const [state, setState] = useState({
+    const [state, setState] =React.useState({
         seo: {
             title: "",
             description: "",
@@ -21,8 +21,8 @@ export function HomeInner (): React.ReactElement {
         if(Platform.OS !== 'web') setParams({title: slug});
     };
 
-    useEffect(fetchData, []);
-    useEffect(fetchData, [slug]);
+   React.useEffect(fetchData, []);
+   React.useEffect(fetchData, [slug]);
 
     return (
         <ScreenDefaultLayout

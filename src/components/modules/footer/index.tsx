@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import {View} from "react-native";
 import {Text} from "../index";
 import {useSelector} from "react-redux";
@@ -10,6 +10,7 @@ export function FooterSection (): React.ReactElement {
 
     return viewportInfo.isLarge && (
         <View
+            testID="FooterSection"
             style={{
                 alignItems: "center",
                 backgroundColor: theme.dark ? theme.colors.primaryDark : theme.colors.primaryLight,

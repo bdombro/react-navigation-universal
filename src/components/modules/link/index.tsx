@@ -1,7 +1,7 @@
 /**
  * Link allows us to easily make elements clickable and nav link
  */
-import React from "react";
+import * as React from "react";
 import {TouchableRipple} from "react-native-paper";
 import {useNavigation} from "react-navigation-hooks";
 import {Linking} from "expo";

@@ -1,7 +1,7 @@
 /**
  * Button has been extended to support nav linking and default styles
  */
-import React from "react";
+import * as React from "react";
 import {Button as PButton} from "react-native-paper";
 import {ViewStyle} from "react-native";
 import {mergeAll, flatten} from "ramda";
@@ -26,6 +26,7 @@ export function Button ({to, params = {}, style = {}, onPress, ...props}: Button
     if (to) return (
         <Link to={to} params={params} onPress={onPress}>
             <PButton
+                testID="Button"
                 style={buttonStyle}
                 {...props}
             />
@@ -33,6 +34,7 @@ export function Button ({to, params = {}, style = {}, onPress, ...props}: Button
     );
     else return (
         <PButton
+            testID="Button"
             onPress={onPress}
             style={buttonStyle}
             {...props}

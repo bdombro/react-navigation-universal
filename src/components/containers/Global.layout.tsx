@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import {View} from "react-native";
 import {SceneView} from "react-navigation";
 import {useSelector} from "react-redux";
@@ -10,7 +10,7 @@ export function GlobalLayout({descriptors, navigation}: any): React.ReactElement
     const theme = useSelector((state: StoreState) => state.theme);
 
     return (
-        <View style={{flex: 1, width: '100%', overflow: 'hidden', backgroundColor: theme.colors.background}}>
+        <View testID="GlobalLayout" style={{flex: 1, width: '100%', overflow: 'hidden', backgroundColor: theme.colors.background}}>
             <SceneView navigation={descriptor.navigation} component={descriptor.getComponent()}
                        screenProps={{}}/>
         </View>

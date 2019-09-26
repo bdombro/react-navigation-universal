@@ -5,7 +5,7 @@
  * changes, you need to clear the cache by uncommenting a line in
  * loadNavigationState
  */
-import React from "react";
+import * as React from "react";
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {Platform} from "react-native";
 import {createBrowserApp as createAppContainerWeb} from '@react-navigation/web';
@@ -14,7 +14,6 @@ import {createNavigator, SwitchRouter} from "react-navigation";
 import {createStackNavigator, NavigationStackConfig} from 'react-navigation-stack';
 import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
 import {fadeIn} from "react-navigation-transitions";
-import {TabLayout} from "./components/containers/Tab.layout";
 import {GlobalLayout} from "./Global.layout";
 import {IndexScreen} from "../screens/index";
 import {LoginScreen} from "../screens/login";

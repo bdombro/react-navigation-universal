@@ -1,7 +1,7 @@
 /**
  * Button has been extended to support nav linking and default styles
  */
-import React from "react";
+import * as React from "react";
 import {flatten, mergeAll} from "ramda";
 import {Button as PButton} from "react-native-paper";
 import {useNavigation} from "react-navigation-hooks";
@@ -27,6 +27,7 @@ export function Button ({to, params = {}, style = {}, onPress, ...props}: Button
 
     return (
         <PButton
+            testID="Button"
             style={buttonStyle}
             onPress={async e => {
                 if (onPress) await onPress(e);

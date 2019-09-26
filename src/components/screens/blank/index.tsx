@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import {usePrivacy} from "../../../hooks/usePrivacy";
 import {ScreenBlankLayout} from "../../containers/ScreenBlank.layout";
 import {Button, Lorem, Title} from "../../modules";

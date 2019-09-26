@@ -1,7 +1,7 @@
 /**
  * Link allows us to easily make elements clickable and nav link
  */
-import React from "react";
+import * as React from "react";
 import {Link as RNLink} from '@react-navigation/web';
 
 export type LinkProps = {

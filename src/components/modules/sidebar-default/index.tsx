@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import * as React from "react";
 import {View} from "react-native";
 import {useNavigation} from "react-navigation-hooks";
 import {useDispatch} from "react-redux";
@@ -10,7 +10,7 @@ import {Text} from "../";
 export function SidebarDefault() {
     const sidebarTheme = ThemeConfig.dark;
     const navigation = useNavigation();
-    const breadcrumbs = useMemo(() => getBreadcrumbsOfActiveRoute(navigation.state), [navigation.state]);
+    const breadcrumbs =React.useMemo(() => getBreadcrumbsOfActiveRoute(navigation.state), [navigation.state]);
     const dispatch = useDispatch();
 
     function SidebarItem({routeName, params = {}, label}: { routeName: string, params?: any, label: string }): React.ReactElement {
@@ -27,7 +27,7 @@ export function SidebarDefault() {
     }
 
     return (
-        <View>
+        <View testID="SidebarDefault">
             <Text theme={sidebarTheme} style={{fontWeight: "bold", marginTop: 10, marginBottom: 8}}>Desktop Sidebar</Text>
             <SidebarItem routeName="HomeStack" label="Home"/>
             <SidebarItem routeName="Home2Stack" label="Home2"/>

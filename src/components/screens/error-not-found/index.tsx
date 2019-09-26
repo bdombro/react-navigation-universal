@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import {Button, Paragraph, Title} from "../../modules";
 import {ScreenBlankLayout} from "../../containers/ScreenBlank.layout";
 

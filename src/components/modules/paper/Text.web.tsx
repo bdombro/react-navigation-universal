@@ -1,7 +1,7 @@
 /**
  * Text has been extended to support nav linking
  */
-import React from "react";
+import * as React from "react";
 import {Text as PText} from "react-native-paper";
 import {Link} from "../";
 import {TextStyle} from "react-native";
@@ -33,6 +33,7 @@ export function Text ({to, params = {}, onPress, style = {}, ...props}: TextProp
             onPress={onPress}
         >
             <PText
+                testID="Text"
                 style={textStyle}
                 {...props}
             />
@@ -40,6 +41,7 @@ export function Text ({to, params = {}, onPress, style = {}, ...props}: TextProp
     );
     else if(onPress) return (
         <PText
+            testID="Text"
             onPress={onPress}
             style={textStyle}
             {...props}

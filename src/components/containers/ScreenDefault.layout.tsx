@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useState} from 'react'
+import * as React from 'react'
 import {
     ScrollView,
     ScrollViewProps,
@@ -151,15 +151,15 @@ export function ScreenDefaultLayout(
     const theme = useSelector((state: StoreState) => state.theme);
     const navigation = useNavigation();
     const viewportInfo = useSelector((state: StoreState) => state.viewportInfo);
-    const [scrollOffsets, setScrollOffsets] = useState({absolute: 0, up: 0});
+    const [scrollOffsets, setScrollOffsets] =React.useState({absolute: 0, up: 0});
 
-    useLayoutEffect(() => {
+    React.useLayoutEffect(() => {
         if (isFocusing || isFocused)
             setWebPageMeta(pageMeta);
     }, [isFocusing, isFocused]);
 
     return (
-        <View style={{backgroundColor: theme.dark ? "#333" : "white",}}>
+        <View testID="ScreenDefaultLayout" style={{backgroundColor: theme.dark ? "#333" : "white",}}>
             <SidebarLayout>
                 <Header
                     navigation={navigation}
@@ -170,6 +170,7 @@ export function ScreenDefaultLayout(
 
                 <SafeAreaView>
                     <ScrollView
+                        testID="ScreenDefaultLayoutScrollView"
                         contentInsetAdjustmentBehavior="automatic"
                         scrollEventThrottle={100}
                         onScroll={onScroll}
@@ -182,7 +183,7 @@ export function ScreenDefaultLayout(
                     >
                         {children}
                         <FooterSection/>
-                        <View style={{
+                        <View testID="ScreenDefaultLayoutPaddingBottom" style={{
                             ...viewportInfo.isSmall && {paddingBottom: 60}
                         }}/>
                     </ScrollView>

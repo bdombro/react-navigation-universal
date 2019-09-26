@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import * as React from "react";
 import {Animated} from "react-native";
 import {NavigationScreenProp} from "react-navigation";
 import {useSelector} from "react-redux";
@@ -22,7 +22,7 @@ export function HeaderHomeSection(
 ) {
     const theme = useSelector((state: StoreState) => state.theme);
     const viewportInfo = useSelector((state: StoreState) => state.viewportInfo);
-    const [translateY] = useState(new Animated.Value(0));
+    const [translateY] =React.useState(new Animated.Value(0));
     React.useEffect(() => {
         translateY.setValue(Math.max(
             // When scrolling down. Max with zero b/c scrollOffset can be negative when dragging

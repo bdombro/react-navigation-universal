@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import {useNavigation} from "react-navigation-hooks";
 import {useDispatch} from "react-redux";
 import {usePrivacyRedirectFrom} from "../../../hooks/usePrivacy";

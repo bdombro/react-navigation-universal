@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from "react";
+import * as React from "react";
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {Animated, View} from "react-native";
 import {NavigationScreenProp} from "react-navigation";
@@ -15,7 +15,7 @@ export type HeaderDefaultSectionProps = {
 };
 
 export function HeaderDefaultSection({navigation, title, scrollOffset}: HeaderDefaultSectionProps): React.ReactElement {
-    const goBackIsAvailable = useMemo(() => checkGoBackIsAvailable(navigation), [navigation.state]);
+    const goBackIsAvailable =React.useMemo(() => checkGoBackIsAvailable(navigation), [navigation.state]);
     const theme = useSelector((state: StoreState) => state.theme);
     const viewportInfo = useSelector((state: StoreState) => state.viewportInfo);
 
@@ -27,10 +27,11 @@ export function HeaderDefaultSection({navigation, title, scrollOffset}: HeaderDe
     }, [scrollOffset]);
 
 
-    const [titleOpacity] = useState(new Animated.Value(0));
+    const [titleOpacity] =React.useState(new Animated.Value(0));
 
     return (
         <Appbar.Header
+            testID="HeaderDefault"
             style={{
                 backgroundColor: theme.colors.background,
                 elevation: 0,
@@ -48,7 +49,8 @@ export function HeaderDefaultSection({navigation, title, scrollOffset}: HeaderDe
 
 
             {viewportInfo.isLarge && <>
-                <IconButton icon="magnify" to="BlankScreen" size={22} color={theme.colors.text}/>
+                <IconButton icon="magnify" to="BlankScreen" size={22}
+                            color={theme.colors.text}/>
                 <View>
                     <IconButton icon="bell-outline" to="BlankScreen" size={22} color={theme.colors.text}/>
                     {/*{!notificationQuery.loading && !!notificationQuery.data.length && (*/}

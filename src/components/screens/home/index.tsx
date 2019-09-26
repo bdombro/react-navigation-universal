@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {usePrivacy} from "../../../hooks/usePrivacy";
 import {StoreState} from "../../../reducers";

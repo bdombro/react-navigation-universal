@@ -1,7 +1,7 @@
 /**
  * IconButton has been extended to support nav linking
  */
-import React from "react";
+import * as React from "react";
 import {Linking} from "expo";
 import {IconButton as PIconButton} from "react-native-paper";
 import {useNavigation} from "react-navigation-hooks";
@@ -16,6 +16,7 @@ export function IconButton ({to, params = {}, onPress, ...props}: IconButtonProp
 
     return (
         <PIconButton
+            testID="IconButton"
             onPress={async e => {
                 if (onPress) await onPress(e);
                 if (to) {

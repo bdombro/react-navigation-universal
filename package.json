@@ -7,6 +7,7 @@
     "postinstall": "patch-package",
     "clean": "rimraf .env .env.json web-build",
     "build": "yarn clean && BUILD_ENV=production expo build:web",
+    "test": "jest",
     "start": "node server.js",
     "native-debugger": "open -g 'rndebugger://set-debugger-loc?port=19001'",
     "android": "expo start --android",
@@ -14,9 +15,27 @@
     "web": "expo start --web",
     "eject": "expo eject"
   },
+  "jest": {
+    "preset": "jest-expo",
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/react-native/jest/preprocessor.js",
+      "^.+\\.(ts|tsx)?$": "ts-jest"
+    },
+    "//testMatch": [
+      "**/__tests__/**/*.ts?(x)",
+      "**/?(*.)+(spec|test).ts?(x)"
+    ],
+    "moduleFileExtensions": ["js", "jsx", "ts", "tsx"],
+    "globals": {
+      "ts-jest": {
+        "tsConfig": {
+          "jsx": "react"
+        }
+      }
+    }
+  },
   "dependencies": {
     "@react-navigation/web": "https://github.com/bdombro/web.git",
-    "@types/react-redux": "^7.1.3",
     "expo": "^35.0.0",
     "patch-package": "^6.1.4",
     "query-string": "^6.8.3",
@@ -53,14 +72,19 @@
     "@types/ramda": "^0.26.22",
     "@types/react": "^16.8.23",
     "@types/react-native": "^0.57.65",
+    "@types/jest": "^24.0.18",
+    "@types/react-redux": "^7.1.3",
     "@types/styled-jsx": "^2.2.8",
     "babel-preset-expo": "^6.0.0",
     "copy-webpack-plugin": "^5.0.4",
     "express": "^4.17.1",
+    "jest-expo": "^35.0.0",
     "morgan": "^1.9.1",
+    "react-test-renderer": "16.8.6",
     "reactotron-react-js": "^3.3.2",
     "reactotron-react-native": "^4.0.0",
     "shrink-ray-current": "^4.0.0",
+    "ts-jest": "^24.1.0",
     "typescript": "^3.4.1",
     "webpack-bundle-analyzer": "^3.4.1"
   }

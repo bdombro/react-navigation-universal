@@ -1,6 +1,6 @@
 import "./src/lib/filterConsole";
 import {hot} from 'react-hot-loader';
-import React from "react";
+import * as React from "react";
 import {Platform} from "react-native";
 import {Provider as PaperProvider} from 'react-native-paper';
 import {useSelector} from 'react-redux';
