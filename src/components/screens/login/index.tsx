@@ -15,7 +15,7 @@ export function Login (): React.ReactElement {
     const dispatch = useDispatch();
 
     return (
-        <ScreenBlankLayout pageMeta={pageMeta} scrollViewProps={{style: {paddingTop: 100, maxWidth: 300, alignSelf: "center"}}}>
+        <ScreenBlankLayout pageMeta={pageMeta} scrollViewProps={{style: {paddingVertical: 100, maxWidth: 300, alignSelf: "center"}}}>
             <Title>Welcome.</Title>
             <Button onPress={async () => {
                 dispatch(setAuth({userId: "12345", token: "1234567890", roles: ["admin", "identified"]}));

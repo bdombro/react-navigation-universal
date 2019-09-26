@@ -12,6 +12,9 @@ import {getViewportInfo} from "./src/lib/getViewportInfo";
 import {setViewportInfo} from "./src/actions";
 import {Reactotron} from './src/config/Reactotron.config';
 
+// TODO: Testing
+// TODO: Persist state to AsyncStorage
+
 // Add support for chrome-redux-dev-tools
 // @ts-ignore missing window param
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -21,6 +24,7 @@ const store = createStore(reducers, composeEnhancers(
     // @ts-ignore untyped feature in reactotron
     Reactotron.createEnhancer(),
 ));
+
 let widthCurrent = Dimensions.get("window").width;
 
 function AppGuts(): React.ReactElement {

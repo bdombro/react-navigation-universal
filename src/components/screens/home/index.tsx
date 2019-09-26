@@ -2,7 +2,7 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {usePrivacy} from "../../../hooks/usePrivacy";
 import {StoreState} from "../../../reducers";
-import {resetAuth, toggleTheme} from "../../../actions";
+import {toggleTheme} from "../../../actions";
 import {ScreenDefaultLayout} from "../../layouts/ScreenDefault.layout";
 import {Button, Lorem, Paragraph, Text, Title} from "../../modules";
 import {HeaderHomeSection} from "./header";
@@ -31,7 +31,7 @@ export function Home (): React.ReactElement {
             </Paragraph>
 
             <Paragraph>
-                UserId: {userId} <Text onPress={() => dispatch(resetAuth())}>Logout</Text>
+                UserId: {userId} <Text to="LogoutScreen">Logout</Text>
             </Paragraph>
 
             <Lorem/>

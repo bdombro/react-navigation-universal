@@ -18,6 +18,7 @@ import {TabLayout} from "./components/layouts/Tab.layout";
 import {GlobalLayout} from "./components/layouts/Global.layout";
 import {IndexScreen} from "./components/screens/index";
 import {LoginScreen} from "./components/screens/login";
+import {LogoutScreen} from "./components/screens/logout";
 import {HomeScreen} from "./components/screens/home";
 import {Home2Screen} from "./components/screens/home2";
 import {HomeInnerScreen} from "./components/screens/home-inner";
@@ -89,6 +90,7 @@ export function Router({theme}: RouterProps) {
 
                 BlankScreen: {path: "blank", screen: BlankScreen},
                 LoginScreen: {path: "login", screen: LoginScreen},
+                LogoutScreen: {path: "logout", screen: LogoutScreen},
             }),
             {}
         ),

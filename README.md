@@ -1,1 +1,1 @@
-This is a demonstration of using react-navigation on web.
+This is a demonstration of using react-navigation on native + web.

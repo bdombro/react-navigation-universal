@@ -37,8 +37,8 @@ export class ScreenBlankLayoutBase extends React.Component<NavigationInjectedPro
     }
 
     render() {
-        return <View style={{backgroundColor: this.props.theme.dark ? "#333" : "white",}}>
-            <ScrollView contentInsetAdjustmentBehavior="automatic"{...this.props.scrollViewProps}>
+        return <View style={{flex: 1, width: '100%', backgroundColor: this.props.theme.dark ? "#333" : "white",}}>
+            <ScrollView contentInsetAdjustmentBehavior="automatic" {...this.props.scrollViewProps}>
                 {this.props.children}
             </ScrollView>
         </View>;
