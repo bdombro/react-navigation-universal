@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useNavigation} from "react-navigation-hooks";
 import {Platform} from "react-native";
 import {usePrivacy} from "../../../hooks/usePrivacy";
-import {ScreenDefaultLayout} from "../../layouts/ScreenDefault.layout";
+import {ScreenDefaultLayout} from "../../containers/ScreenDefault.layout";
 import {Lorem, Title} from "../../modules";
 
 export function HomeInner (): React.ReactElement {
@@ -25,7 +25,14 @@ export function HomeInner (): React.ReactElement {
     useEffect(fetchData, [slug]);
 
     return (
-        <ScreenDefaultLayout pageMeta={state.seo}>
+        <ScreenDefaultLayout
+            pageMeta={state.seo}
+            scrollViewProps={{
+                style: {
+                    padding: 10,
+                }
+            }}
+        >
             <Title>URL Param: {slug}</Title>
             <Lorem/>
         </ScreenDefaultLayout>

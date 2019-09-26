@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import {NavigationStackProp} from "react-navigation-stack/src/types";
 import {Animated} from "react-native";
+import {NavigationScreenProp} from "react-navigation";
 import {useSelector} from "react-redux";
 import {StoreState} from "../../../reducers";
 import {Appbar, HeaderDefaultSection, IconButton, Title} from '../../modules';
 
 export type HeaderHomeSectionProps = {
-    navigation: NavigationStackProp,
+    navigation: NavigationScreenProp<any>,
     title: string,
     scrollOffset: number,
     scrollUpOffset: number,

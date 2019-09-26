@@ -1,27 +1,21 @@
 import React from "react";
-import {Dimensions, View} from "react-native";
-import {SceneView} from "react-navigation";
+import {View} from "react-native";
 import {useSelector} from "react-redux";
 import {StoreState} from "../../reducers";
 import {SidebarDefault} from "../modules/sidebar-default";
 
-const isLarge = Dimensions.get('window').width > 720;
-
-export function TabLayout({descriptors, navigation}: any): React.ReactElement {
+export function SidebarLayout({children}: {children: React.ReactNode}): React.ReactElement {
     const theme = useSelector((state: StoreState) => state.theme);
-    const activeKey = navigation.state.routes[navigation.state.index].key;
-    const descriptor = descriptors[activeKey];
+    const viewportInfo = useSelector((state: StoreState) => state.viewportInfo);
 
     return <>
             <View style={{flex: 1, flexDirection: "row"}}>
-                <View style={{width: isLarge ? 200 : 0}}/>
+                <View style={{width: viewportInfo.isLarge ? 200 : 0}}/>
                 <View style={{flex: 1}}>
-
-                    <SceneView navigation={descriptor.navigation} component={descriptor.getComponent()}
-                               screenProps={{}}/>
+                    {children}
                 </View>
             </View>
-            {isLarge && (
+            {viewportInfo.isLarge && (
                 <View
                     // @ts-ignore: ignore untyped position fixed
                     style={{
@@ -33,4 +27,4 @@ export function TabLayout({descriptors, navigation}: any): React.ReactElement {
                 </View>
             )}
     </>;
-};
+}

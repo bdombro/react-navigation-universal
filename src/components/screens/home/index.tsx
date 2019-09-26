@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {usePrivacy} from "../../../hooks/usePrivacy";
 import {StoreState} from "../../../reducers";
 import {toggleTheme} from "../../../actions";
-import {ScreenDefaultLayout} from "../../layouts/ScreenDefault.layout";
+import {ScreenDefaultLayout} from "../../containers/ScreenDefault.layout";
 import {Button, Lorem, Paragraph, Text, Title} from "../../modules";
 import {HeaderHomeSection} from "./header";
 
@@ -18,14 +18,22 @@ export function Home (): React.ReactElement {
 
     return (
         <ScreenDefaultLayout
-            header={HeaderHomeSection} pageMeta={pageMeta}
+            Header={HeaderHomeSection} pageMeta={pageMeta}
             scrollViewProps={{
                 style: {
-                    ...viewportInfo.isSmall && {'paddingTop': 54},
+                    padding: 10,
+                    ...viewportInfo.isSmall && {'paddingTop': 54 + 10},
                 }
             }}
         >
             {viewportInfo.isLarge && <Title>RNav Universal</Title>}
+
+            <Paragraph>
+                This is a demonstration of how one can use react-navigation@4 + react-redux@7 on Native + Web using expo@33+.
+            </Paragraph>
+            <Paragraph>
+                Note: The header on this page animates on mobile, which works well on-device but not-so-much on simulator.
+            </Paragraph>
             <Paragraph>
                 Click <Text onPress={() => dispatch(toggleTheme())}>here</Text> to toggle theme.
             </Paragraph>

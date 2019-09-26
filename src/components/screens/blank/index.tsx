@@ -1,6 +1,6 @@
 import React from "react";
 import {usePrivacy} from "../../../hooks/usePrivacy";
-import {ScreenBlankLayout} from "../../layouts/ScreenBlank.layout";
+import {ScreenBlankLayout} from "../../containers/ScreenBlank.layout";
 import {Button, Lorem, Title} from "../../modules";
 
 export function Blank (): React.ReactElement {
@@ -11,7 +11,14 @@ export function Blank (): React.ReactElement {
     };
 
     return (
-        <ScreenBlankLayout pageMeta={pageMeta}>
+        <ScreenBlankLayout
+            pageMeta={pageMeta}
+            scrollViewProps={{
+                style: {
+                    padding: 10,
+                }
+            }}
+        >
             <Title>{pageMeta.title}</Title>
             <Button to="Home" mode="contained">Go Home</Button>
             <Lorem/>

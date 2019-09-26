@@ -11,6 +11,7 @@ console.warn = function warn(...args) {
         || /^Warning: componentWillReceiveProps has been renamed/.test(args[0])
         || /^Animated: `useNativeDriver` is not supported because the native animated module is missing/.test(args[0])
         || /^PanGestureHandler is not yet supported on web/.test(args[0])
+        || /^Warning: Async Storage has been extracted from react-native core/.test(args[0])
     )) {
         return;
     }

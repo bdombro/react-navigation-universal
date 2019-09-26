@@ -1,6 +1,6 @@
 import React from "react";
 import {usePrivacy} from "../../../hooks/usePrivacy";
-import {ScreenDefaultLayout} from "../../layouts/ScreenDefault.layout";
+import {ScreenDefaultLayout} from "../../containers/ScreenDefault.layout";
 import {Lorem, Title} from "../../modules";
 import {useSelector} from "react-redux";
 import {StoreState} from "../../../reducers";
@@ -14,7 +14,14 @@ export function Home2(): React.ReactElement {
     };
 
     return (
-        <ScreenDefaultLayout pageMeta={pageMeta}>
+        <ScreenDefaultLayout
+            pageMeta={pageMeta}
+            scrollViewProps={{
+                style: {
+                    padding: 10,
+                }
+            }}
+        >
             {viewportInfo.isLarge && <Title>{pageMeta.title}</Title>}
             <Lorem/>
         </ScreenDefaultLayout>

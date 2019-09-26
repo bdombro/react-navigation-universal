@@ -1,22 +1,20 @@
 import React, {useMemo, useState} from "react";
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {Animated, View} from "react-native";
-import {NavigationStackProp} from "react-navigation-stack/src/types";
+import {NavigationScreenProp} from "react-navigation";
 import {useSelector} from "react-redux";
 import {checkGoBackIsAvailable} from "../../../lib/checkGoBackIsAvailable";
 import {StoreState} from "../../../reducers";
 import {Appbar, Avatar, IconButton, Link} from '../';
 
 export type HeaderDefaultSectionProps = {
-    navigation: NavigationStackProp,
+    navigation: NavigationScreenProp<any>,
     title: string,
     scrollOffset: number,
     scrollUpOffset: number,
 };
 
-export function HeaderDefaultSection(
-    {navigation, title, scrollOffset, scrollUpOffset,}: HeaderDefaultSectionProps
-): React.ReactElement {
+export function HeaderDefaultSection({navigation, title, scrollOffset}: HeaderDefaultSectionProps): React.ReactElement {
     const goBackIsAvailable = useMemo(() => checkGoBackIsAvailable(navigation), [navigation.state]);
     const theme = useSelector((state: StoreState) => state.theme);
     const viewportInfo = useSelector((state: StoreState) => state.viewportInfo);

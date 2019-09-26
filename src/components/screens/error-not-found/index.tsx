@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Paragraph, Title} from "../../modules";
-import {ScreenBlankLayout} from "../../layouts/ScreenBlank.layout";
+import {ScreenBlankLayout} from "../../containers/ScreenBlank.layout";
 
 export function ErrorNotFound (): React.ReactElement {
     const pageMeta = {
@@ -9,7 +9,12 @@ export function ErrorNotFound (): React.ReactElement {
     };
 
     return (
-        <ScreenBlankLayout pageMeta={pageMeta} scrollViewProps={{style: {paddingTop: 100, maxWidth: 300, alignSelf: "center"}}}>
+        <ScreenBlankLayout
+            pageMeta={pageMeta}
+            scrollViewProps={{
+                style: {paddingTop: 100, maxWidth: 300, alignSelf: "center"}
+            }}
+        >
             <Title>{pageMeta.title}</Title>
             <Paragraph>{pageMeta.description}</Paragraph>
             <Button to="Home" mode="contained">Go Home</Button>
