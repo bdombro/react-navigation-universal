@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`actions should create an action to toggle the theme 1`] = `
-Object {
-  "type": 2,
-}
-`;

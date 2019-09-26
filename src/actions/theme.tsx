@@ -1,9 +1,9 @@
 import {ActionTypes} from "./actionTypes";
-import {Theme} from "../reducers";
+// import {Theme} from "../reducers";
 
 export interface ToggleThemeAction {
     type: ActionTypes.toggleTheme;
-    payload: Theme;
+    // payload: Theme
 }
 
 export const toggleTheme = () => ({

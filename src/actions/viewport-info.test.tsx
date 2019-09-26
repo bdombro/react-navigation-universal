@@ -1,7 +1,7 @@
 import {setViewportInfo} from "./viewport-info";
 import {ActionTypes} from './ActionTypes'
 
-describe('actions', () => {
+describe('viewport-info actions', () => {
     it('should create an action to set viewport', () => {
         const payload = {
             width: 0,

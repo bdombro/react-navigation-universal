@@ -1,7 +1,7 @@
 import {setAuth, resetAuth} from "./auth";
 import {ActionTypes} from './ActionTypes'
 
-describe('actions', () => {
+describe('auth actions', () => {
     it('should create an action to set auth', () => {
         const payload = {userId: "12345", token: "1234567890", roles: ["admin", "identified"]};
         const expectedAction = {

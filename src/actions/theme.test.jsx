@@ -1,7 +1,8 @@
 import {toggleTheme} from "./theme";
+import {ActionTypes} from "./actionTypes";
 
-describe('actions', () => {
+describe('theme actions', () => {
     it('should create an action to toggle the theme', () => {
-        expect(toggleTheme()).toMatchSnapshot();
+        expect(toggleTheme()).toEqual({type: ActionTypes.toggleTheme});
     });
 });
