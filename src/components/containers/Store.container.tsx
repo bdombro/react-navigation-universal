@@ -14,11 +14,12 @@ const persistedReducers = persistReducer({key: 'root', storage: AsyncStorage}, r
 // @ts-ignore missing window param
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export const store = createStore(persistedReducers, composeEnhancers(
-    applyMiddleware(thunk),
-    // @ts-ignore untyped feature in reactotron
-    // ...__DEV__ && [Reactotron.createEnhancer()],
-));
+let enhancers = [applyMiddleware(thunk)];
+// if (__DEV__ && NodeEnv !== 'test') {
+//     // @ts-ignore untyped feature in reactotron
+//     enhancers.push(Reactotron.createEnhancer());
+// }
+export const store = createStore(persistedReducers, composeEnhancers(...enhancers));
 export const persistor = persistStore(store);
 
 export function StoreContainer ({children}: {children: React.ReactNode}): React.ReactElement {

@@ -1,8 +1,9 @@
 import Reactotron from 'reactotron-react-js';
 import {reactotronRedux} from "reactotron-redux";
+import {NodeEnv} from "./App.config";
 
 // in dev, we attach Reactotron, in prod we attach a interface-compatible mock.
-if (__DEV__) {
+if (__DEV__ && NodeEnv !== 'test') {
     // @ts-ignore new console prototype
     console.tron = Reactotron; // attach reactotron to `console.tron`
     const loggerOrig = console.log;
@@ -30,6 +31,13 @@ if (__DEV__) {
         errorLoggerOrig.apply(console, args);
         Reactotron.warn(args);
     };
+
+    Reactotron
+        .configure() // controls connection & communication settings
+        .use(reactotronRedux())
+        .connect(); // let's connect!
+    // .clear();
+
 } else {
     // attach a mock so if things sneaky by our __DEV__ guards, we won't crash.
     const noop = () => undefined;
@@ -56,11 +64,5 @@ if (__DEV__) {
         warn: noop,
     }
 }
-
-Reactotron
-    .configure() // controls connection & communication settings
-    .use(reactotronRedux())
-    .connect(); // let's connect!
-    // .clear();
 
 export {Reactotron};

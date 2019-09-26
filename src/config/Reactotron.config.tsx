@@ -1,9 +1,10 @@
 import {AsyncStorage} from "react-native";
 import Reactotron from 'reactotron-react-native';
 import {reactotronRedux} from 'reactotron-redux'
+import {NodeEnv} from "./App.config";
 
 // Monkeypatch logging
-if (__DEV__) {
+if (__DEV__ && NodeEnv !== 'test') {
     // @ts-ignore new console prototype
     console.tron = Reactotron; // attach reactotron to `console.tron`
     const loggerOrig = console.log;
@@ -31,6 +32,14 @@ if (__DEV__) {
         errorLoggerOrig.apply(console, args);
         Reactotron.warn(args);
     };
+
+    Reactotron
+        .setAsyncStorageHandler(AsyncStorage) // AsyncStorage would either come from `react-native` or `@react-native-community/async-storage` depending on where you get it from
+        .configure() // controls connection & communication settings
+        .useReactNative() // add all built-in react native plugins
+        .use(reactotronRedux())
+        .connect(); // let's connect!
+    // .clear();
 } else {
     // attach a mock so if things sneaky by our __DEV__ guards, we won't crash.
     const noop = () => undefined;
@@ -57,13 +66,5 @@ if (__DEV__) {
         warn: noop,
     }
 }
-
-Reactotron
-    .setAsyncStorageHandler(AsyncStorage) // AsyncStorage would either come from `react-native` or `@react-native-community/async-storage` depending on where you get it from
-    .configure() // controls connection & communication settings
-    .useReactNative() // add all built-in react native plugins
-    .use(reactotronRedux())
-    .connect(); // let's connect!
-    // .clear();
 
 export {Reactotron};
