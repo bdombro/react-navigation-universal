@@ -11,7 +11,7 @@ import {useSelector} from "react-redux";
 import {StoreState} from "../../../reducers";
 import {ThemeConfig} from "../../../config/Theme.config";
 
-export type TextProps = Omit<React.ComponentProps<typeof PText>, 'theme'> & {
+export type TextProps = React.ComponentProps<typeof PText> & {
     to?: string,
     params?: any,
     theme?: typeof ThemeConfig.light

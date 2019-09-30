@@ -4,7 +4,7 @@ import * as React from "react";
 import {Platform} from "react-native";
 import {Provider as PaperProvider} from './src/components/modules';
 import {useSelector} from 'react-redux';
-import {RouterContainer} from "./src/components/containers/Router.container";
+import {Navigation} from "./src/components/modules/navigation";
 import {StoreState} from "./src/reducers";
 import {StoreContainer} from "./src/components/containers/Store.container";
 import {watchViewport} from "./src/hooks/watchViewport";
@@ -16,7 +16,7 @@ function AppGuts(): React.ReactElement {
     const theme = useSelector((state: StoreState) => state.theme);
     return (
         <PaperProvider theme={theme}>
-            <RouterContainer theme={theme}/>
+            <Navigation theme={theme}/>
         </PaperProvider>
     );
 }

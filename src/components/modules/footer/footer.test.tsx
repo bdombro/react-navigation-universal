@@ -1,37 +1,73 @@
 import * as React from "react";
-import {render, waitForElement} from 'react-native-testing-library';
+import {Platform} from "react-native";
+
+const originalError = global.console.error;
+global.console.error = function error(...args) {
+    if (args.length > 0 && typeof args[0] === 'string' && (
+        /is using incorrect casing/.test(args[0])
+        || /useLayoutEffect does nothing on the server/.test(args[0])
+        || /React does not recognize the .* prop on a DOM element/.test(args[0])
+        || /Received .* for a non-boolean attribute/.test(args[0])
+    )) {
+        return;
+    }
+    originalError.apply(console, args);
+};
+
+
 import {FooterSection} from "./";
-// import {Provider as PaperProvider} from "react-native-paper";
 import {Provider as PaperProvider} from "../paper";
 import {ThemeConfig} from "../../../config/Theme.config";
 import {StoreContainer} from "../../containers/Store.container";
-import * as renderer from "react-test-renderer";
-import {sleep} from "../../../lib/sleep";
-import {Text} from "react-native";
 
-// Cannot get PaperProvider to work inside jest. Something todo with privider:17 and portal.
+
+
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
+configure({ adapter: new Adapter() });
+
+
+
+import NavigationTestUtils from 'react-navigation/NavigationTestUtils';
+import {createAppContainer, createNavigator, SwitchRouter} from "react-navigation";
+import {GlobalLayout} from "../../containers/Global.layout";
+
 
 const AllTheProviders = ({children}) => {
+    const RouterApp = createAppContainer(
+        createNavigator(
+            GlobalLayout,
+            SwitchRouter({
+                IndexScreen: {screen: () => <>{children}</>, path: ''},
+            }, {}),
+            {},
+        )
+    );
+
     return (
         <StoreContainer>
             <PaperProvider theme={ThemeConfig.light}>
-                {children}
+                <RouterApp/>
             </PaperProvider>
         </StoreContainer>
     )
 };
 
+
+
 describe('Footer', () => {
-    // it('should be hidden at mobile width', async () => {
-    //     const {toJSON, getByText, getByTestId} = render(<FooterSection/>, {wrapper: AllTheProviders});
-    //     await waitForElement(() => getByTestId('FooterSection'));
-    //     // let textElement = getByTestId('FooterSection');
-    //     // expect(textElement).toBeTruthy();
-    // });
+    jest.useFakeTimers();
+
+    beforeEach(() => {
+        NavigationTestUtils.resetInternalState();
+    });
 
     it('should be hidden at mobile width', async () => {
-        const tree = renderer.create(<AllTheProviders><Text>Hello</Text></AllTheProviders>).toJSON();
-        await sleep(3000);
-        console.dir(tree);
+        const wrapper = shallow(<AllTheProviders><FooterSection/></AllTheProviders>);
+        // console.dir(wrapper.html());
+        console.dir(wrapper.html().includes("Thar be footer!"));
+        expect(wrapper.html().includes("Thar be footer!")).toBeTruthy();
+
     });
 });

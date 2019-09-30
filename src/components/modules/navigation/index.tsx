@@ -14,16 +14,16 @@ import {createNavigator, SwitchRouter} from "react-navigation";
 import {createStackNavigator, NavigationStackConfig} from 'react-navigation-stack';
 import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
 import {fadeIn} from "react-navigation-transitions";
-import {GlobalLayout} from "./Global.layout";
-import {IndexScreen} from "../screens/index";
-import {LoginScreen} from "../screens/login";
-import {LogoutScreen} from "../screens/logout";
-import {HomeScreen} from "../screens/home";
-import {Home2Screen} from "../screens/home2";
-import {HomeInnerScreen} from "../screens/home-inner";
-import {BlankScreen} from "../screens/blank";
-import {ThemeConfig} from "../../config/Theme.config";
-import {getViewportInfo} from "../../lib/getViewportInfo";
+import {GlobalLayout} from "../../containers/Global.layout";
+import {IndexScreen} from "../../screens/index";
+import {LoginScreen} from "../../screens/login";
+import {LogoutScreen} from "../../screens/logout";
+import {HomeScreen} from "../../screens/home";
+import {Home2Screen} from "../../screens/home2";
+import {HomeInnerScreen} from "../../screens/home-inner";
+import {BlankScreen} from "../../screens/blank";
+import {ThemeConfig} from "../../../config/Theme.config";
+import {getViewportInfo} from "../../../lib/getViewportInfo";
 
 const createAppContainer = Platform.OS === 'web' ? createAppContainerWeb : createAppContainerNative;
 
@@ -31,7 +31,7 @@ export type RouterProps = {
     theme: typeof ThemeConfig.light
 };
 
-export function RouterContainer({theme}: RouterProps) {
+export function Navigation({theme}: RouterProps) {
     const viewportInfo = getViewportInfo();
 
     const stackConfigDefault: NavigationStackConfig = {
