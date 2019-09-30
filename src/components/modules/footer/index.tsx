@@ -1,6 +1,6 @@
 import * as React from "react";
-import {View} from "react-native";
-import {Text} from "../index";
+import {Text, View} from "react-native";
+// import {Text} from "../";
 // import {Text} from 'react-native';
 import {useSelector} from "react-redux";
 import {StoreState} from "../../../reducers";

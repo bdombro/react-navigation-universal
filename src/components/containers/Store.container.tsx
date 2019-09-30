@@ -1,14 +1,13 @@
+import * as React from "react";
 import {persistReducer, persistStore} from "redux-persist";
 import {AsyncStorage} from "react-native";
-import {reducers} from "../../reducers";
+import {Provider as ReduxProvider} from "react-redux";
 import {applyMiddleware, compose, createStore} from "redux";
 import thunk from "redux-thunk";
-// import {Reactotron} from "../../config/Reactotron.config";
 import {PersistGate} from "redux-persist/integration/react";
-import {Provider as ReduxProvider} from "react-redux";
-import * as React from "react";
-
-const persistedReducers = persistReducer({key: 'root', storage: AsyncStorage}, reducers);
+// import {Reactotron} from "../../config/Reactotron.config";
+import {reducers} from "../../reducers";
+import {NodeEnv} from "../../config/App.config";
 
 // Add support for chrome-redux-dev-tools
 // @ts-ignore missing window param
@@ -19,15 +18,24 @@ let enhancers = [applyMiddleware(thunk)];
 //     // @ts-ignore untyped feature in reactotron
 //     enhancers.push(Reactotron.createEnhancer());
 // }
+
+
+const persistedReducers = persistReducer({key: 'root', storage: AsyncStorage}, reducers);
 export const store = createStore(persistedReducers, composeEnhancers(...enhancers));
 export const persistor = persistStore(store);
 
-export function StoreContainer ({children}: {children: React.ReactNode}): React.ReactElement {
+
+export function StoreContainer({children}: { children: React.ReactNode }): React.ReactElement {
     return (
         <ReduxProvider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                {children}
-            </PersistGate>
+            {NodeEnv !== 'test'
+                ? (
+                    <PersistGate loading={null} persistor={persistor}>
+                        {children}
+                    </PersistGate>
+                )
+                : <>{children}</>
+            }
         </ReduxProvider>
     )
 }

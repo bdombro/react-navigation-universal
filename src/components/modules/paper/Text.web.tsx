@@ -8,10 +8,12 @@ import {TextStyle} from "react-native";
 import {flatten, mergeAll} from "ramda";
 import {useSelector} from "react-redux";
 import {StoreState} from "../../../reducers";
+import {ThemeConfig} from "../../../config/Theme.config";
 
-export type TextProps = React.ComponentProps<typeof PText> & {
+export type TextProps = Omit<React.ComponentProps<typeof PText>, 'theme'> & {
     to?: string,
     params?: any,
+    theme?: typeof ThemeConfig.light
 };
 
 export function Text ({to, params = {}, onPress, style = {}, ...props}: TextProps): React.ReactElement {

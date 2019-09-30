@@ -2,7 +2,7 @@ import "./src/lib/filterConsole";
 import {hot} from 'react-hot-loader';
 import * as React from "react";
 import {Platform} from "react-native";
-import {Provider as PaperProvider} from 'react-native-paper';
+import {Provider as PaperProvider} from './src/components/modules';
 import {useSelector} from 'react-redux';
 import {RouterContainer} from "./src/components/containers/Router.container";
 import {StoreState} from "./src/reducers";
