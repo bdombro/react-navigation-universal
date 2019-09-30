@@ -1,14 +1,13 @@
 {
   "name": "react-navigation-universal",
   "description": "A react-navigation demo for native AND web.",
-  "version": "34.0.1",
+  "version": "0.0.64",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "postinstall": "patch-package",
     "clean": "rimraf .env .env.json web-build",
     "build": "yarn clean && BUILD_ENV=production expo build:web",
     "test": "jest",
-    "test:paper": "jest --watchAll src/components/modules/footer/footer.test.tsx",
     "start": "node server.js",
     "native-debugger": "open -g 'rndebugger://set-debugger-loc?port=19001'",
     "android": "expo start --android",
@@ -20,7 +19,8 @@
   "jest": {
     "preset": "jest-expo",
     "clearMocks": true,
-    "coverageDirectory": "coverage"
+    "coverageDirectory": "coverage",
+    "setupFilesAfterEnv": ["<rootDir>utils/jest-setup.js"]
   },
   "dependencies": {
     "@react-navigation/web": "https://github.com/bdombro/web.git",

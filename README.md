@@ -1,1 +1,1 @@
-This is a demonstration of using react-navigation on native + web.
+A react-navigation demo for native + web using Expo 33+ and react-native-web.

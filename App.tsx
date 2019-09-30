@@ -9,9 +9,7 @@ import {StoreState} from "./src/reducers";
 import {StoreContainer} from "./src/components/containers/Store.container";
 import {watchViewport} from "./src/hooks/watchViewport";
 
-// TODO: Testing
-
-function AppGuts(): React.ReactElement {
+export function AppGuts(): React.ReactElement {
     watchViewport();
     const theme = useSelector((state: StoreState) => state.theme);
     return (
