@@ -16,6 +16,12 @@
     "web": "expo start --web",
     "eject": "expo eject"
   },
+
+  "jest": {
+    "preset": "jest-expo",
+    "clearMocks": true,
+    "coverageDirectory": "coverage"
+  },
   "dependencies": {
     "@react-navigation/web": "https://github.com/bdombro/web.git",
     "@types/react-test-renderer": "^16.9.0",
