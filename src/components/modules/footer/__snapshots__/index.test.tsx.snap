@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`FooterModule should be hidden at mobile width 1`] = `"<View style=\\"flex:1\\"><View testID=\\"GlobalLayout\\" style=\\"flex:1;width:100%;overflow:hidden;background-color:hsl(219,23%,90%)\\"><View testID=\\"FooterSection\\" style=\\"align-items:center;background-color:hsl(219,23%,60%);padding-vertical:30px\\"><Text testID=\\"Text\\" style=\\"0:[object Object];1:[object Object]\\">Thar be footer!</Text></View></View></View>"`;

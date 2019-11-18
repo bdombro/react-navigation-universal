@@ -9,7 +9,7 @@ export function SidebarLayout({children}: {children: React.ReactNode}): React.Re
     const viewportInfo = useSelector((state: StoreState) => state.viewportInfo);
 
     return <>
-            <View testID="SidebarLayout" style={{flex: 1, flexDirection: "row"}}>
+            <View testID="SidebarLayout" style={{display: "flex", flexDirection: "row"}}>
                 <View style={{width: viewportInfo.isLarge ? 200 : 0}}/>
                 <View style={{flex: 1}}>
                     {children}
