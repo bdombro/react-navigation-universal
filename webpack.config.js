@@ -19,10 +19,7 @@ module.exports = async function(env, argv) {
 
   const config = await expoConfig(env, argv);
 
-  // TODO: Install https://github.com/firede/ts-transform-graphql-tag
-
-  // config.entry.server = __dirname + "/server.ts";
-  // config.entry.ssr = __dirname + '/ssr-test.js';
+  // FIXME: Install https://github.com/firede/ts-transform-graphql-tag
 
   // for (let key in config.module.rules[1]) {
   //   console.dir(config.module.rules[1][key]);

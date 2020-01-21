@@ -7,9 +7,14 @@ import {FooterSection} from "./";
 describe('FooterModule', () => {
 
     it('should be hidden at mobile width', async () => {
+        // TODO: Get shallow working. Has issue with paper.
+        // const wrapper = shallow(<FooterSection/>, {wrappingComponent: TestProvidersContainer});
+        // expect(wrapper).toMatchSnapshot();
+
         const wrapper = shallow(<TestProvidersContainer><FooterSection/></TestProvidersContainer>);
-        // console.dir(wrapper.html());
+        console.dir(wrapper.html());
         expect(wrapper.html()).toMatchSnapshot();
+
 
     });
 });

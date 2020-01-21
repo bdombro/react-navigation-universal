@@ -15,32 +15,37 @@
     "web": "expo start --web",
     "eject": "expo eject"
   },
-
   "jest": {
     "preset": "jest-expo",
     "clearMocks": true,
     "coverageDirectory": "coverage",
-    "setupFilesAfterEnv": ["<rootDir>utils/jest-setup.js"]
+    "setupFilesAfterEnv": [
+      "<rootDir>utils/jest-setup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   },
   "dependencies": {
     "@react-navigation/web": "https://github.com/bdombro/web.git",
     "@types/react-test-renderer": "^16.9.0",
-    "expo": "^35.0.0",
+    "core-js": "^3.2.1",
+    "expo": "^36.0.0",
     "patch-package": "^6.1.4",
     "query-string": "^6.8.3",
     "ramda": "^0.26.1",
-    "react": "16.8.6",
-    "react-dom": "npm:@hot-loader/react-dom",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
     "react-hot-loader": "^4.12.12",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.1.tar.gz",
     "react-native-animatable": "^1.3.2",
-    "react-native-gesture-handler": "~1.3.0",
+    "react-native-gesture-handler": "~1.5.0",
     "react-native-hooks": "^0.9.0",
     "react-native-paper": "^3.0.0-alpha.5",
-    "react-native-reanimated": "~1.2.0",
-    "react-native-safe-area-context": "^0.3.6",
-    "react-native-screens": "~1.0.0-alpha.23",
-    "react-native-web": "^0.11.4",
+    "react-native-reanimated": "~1.4.0",
+    "react-native-safe-area-context": "0.6.0",
+    "react-native-screens": "2.0.0-alpha.12",
+    "react-native-web": "^0.11.7",
     "react-navigation": "^4.0.5",
     "react-navigation-drawer": "^2.1.1",
     "react-navigation-fluid-transitions": "^0.3.2",
@@ -57,27 +62,28 @@
     "styled-jsx": "^3.2.2"
   },
   "devDependencies": {
-    "@expo/webpack-config": "^0.7.4",
+    "@expo/webpack-config": "^0.10.11",
     "@types/enzyme": "^3.10.3",
     "@types/jest": "^24.0.18",
     "@types/ramda": "^0.26.22",
-    "@types/react": "^16.8.23",
-    "@types/react-native": "^0.57.65",
+    "@types/react": "^16.9.0",
+    "@types/react-native": "^0.60.15",
     "@types/react-redux": "^7.1.3",
     "@types/styled-jsx": "^2.2.8",
     "babel-jest": "^24.9.0",
-    "babel-preset-expo": "^6.0.0",
-    "copy-webpack-plugin": "^5.0.4",
+    "babel-preset-expo": "^8.0.0",
+    "copy-webpack-plugin": "^5.1.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.4.0",
     "express": "^4.17.1",
-    "jest-expo": "^35.0.0",
+    "jest-expo": "^36.0.0",
     "morgan": "^1.9.1",
     "react-test-renderer": "16.8.6",
     "reactotron-react-js": "^3.3.2",
     "reactotron-react-native": "^4.0.0",
     "shrink-ray-current": "^4.0.0",
-    "typescript": "^3.4.1",
+    "typescript": "^3.7.2",
     "webpack-bundle-analyzer": "^3.4.1"
   }
 }

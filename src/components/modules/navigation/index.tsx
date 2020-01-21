@@ -34,6 +34,7 @@ export type RouterProps = {
 export function Navigation({theme}: RouterProps) {
     const viewportInfo = getViewportInfo();
 
+
     const stackConfigDefault: NavigationStackConfig = {
         ...viewportInfo.isLarge && {transitionConfig: () => fadeIn()},
         headerMode: "none",

@@ -16,7 +16,7 @@ export const ThemeConfig = {
             primaryDark: `hsl(${primaryHue},93%,14%)`,
             primaryDarker: `hsl(${primaryHue},93%,8%)`,
             // accent: '#f1c40f',
-            background: `hsl(${primaryHue},23%,90%)`,
+            background: `hsl(${primaryHue},93%,40%)`,
             link: `hsl(${primaryHue},93%,40%)`,
         }
     },

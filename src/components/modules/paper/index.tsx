@@ -3,16 +3,16 @@
  */
 
 export {
-    Appbar, AppbarProps,
+    Appbar,
     Avatar,
-    Divider, DividerProps,
-    Menu, MenuProps,
+    Divider,
+    Menu,
     Paragraph,
     Provider,
     Title,
     withTheme
 } from "react-native-paper";
 
-export {Button, ButtonProps} from "./Button";
-export {IconButton, IconButtonProps} from "./IconButton";
-export {Text, TextProps} from "./Text";
+export {Button} from "./Button";
+export {IconButton} from "./IconButton";
+export {Text} from "./Text";
