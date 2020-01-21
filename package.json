@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "patch-package",
     "clean": "rimraf .env .env.json web-build",
-    "build": "yarn clean && BUILD_ENV=production expo build:web",
+    "build": "yarn clean && expo build:web",
     "test": "jest",
     "start": "node server.js",
     "native-debugger": "open -g 'rndebugger://set-debugger-loc?port=19001'",
